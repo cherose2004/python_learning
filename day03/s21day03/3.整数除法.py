@@ -4,3 +4,5 @@ from __future__ import division
 
 v = 9 /2
 print(v)
+
+print(v)
