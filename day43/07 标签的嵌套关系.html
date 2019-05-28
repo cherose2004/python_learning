@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            width: 200px;
+            height: 200px;
+            background-color: yellow;
+            /*display: inline;*/
+        }
+        a{
+            width: 100px;
+            height: 40px;
+            background-color: red;
+            /*显示方式： block 显示块，inline 显示行内  inline-block 行内块*/
+            display: inline-block;
+            /*文本排列方式：left center right*/
+            text-align: center;
+            /*行高：一行的高度。当行高=盒子模型的高度 实现垂直居中*/
+            line-height: 40px;
+            /*文本修饰：none 无修饰，underline:下划线 line-through*/
+            text-decoration: underline;
+            color: #333333;
+        }
+        input{
+            width: 100px;
+            height: 40px;
+        }
+        a{
+            width: 200px;
+            height: 250px;
+        }
+        img{
+            width: 200px;
+            height: 250px;
+        }
+    </style>
+</head>
+<body>
+<!--块级标签：1.独占一行  2.可以设置宽高，如果不设置宽，默认是父标签的100%宽度-->
+<!--行内标签：1.在一行内显示 2.不可以设置宽高，如果不设置宽高，默认是字体的大小
+        行内块标签： 1.在一行内显示 2.可以设置宽高
+        
+   在网页中：
+   行内转块和行内块是非常使用   
+   
+   display:
+            inline
+            inline-block
+            block
+
+    嵌套关系：
+    块级标签可以嵌套块级和行内以及行内块
+    p标签不要嵌套div，也不要嵌套p
+       放置： a  img  表单控件
+    行内标签尽量不要嵌套块级
+-->
+    <del>aaaaa</del>
+    <div class="box">mjj</div>
+    <p class="box">wusir</p>
+<a href="">百度一下</a>
+<span>女神</span>
+<input type="text">
+<input type="text">
+
+<a href="">
+    <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1559621214&di=70dbb499b72e9bfa9607122cc6052ac1&imgtype=jpg&er=1&src=http%3A%2F%2Fimg.pconline.com.cn%2Fimages%2Fupload%2Fupc%2Ftx%2Fphotoblog%2F1711%2F05%2Fc6%2F65757905_1509876555056_mthumb.jpg" alt="">
+</a>
+<p>
+    mjj
+    <div>wusir</div>
+</p>
+
+</body>
+</html>
