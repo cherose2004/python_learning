@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/myIconfont.css">
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        input{
+            border: 0;
+            outline: 0;
+        }
+        .header{
+            width: 100%;
+            height: 100px;
+            /*background-color: #ff0000;*/
+        }
+        .container{
+            width: 1226px;
+            height: 100px;
+            /*background-color: #000;*/
+            margin: 0 auto;
+        }
+        .header form{
+            float: right;
+            margin-top: 20px;
+            width: 296px;
+            height: 50px;
+            position: relative;
+
+        }
+        .header form input[type='text']{
+            /*245px*/
+            width: 223px;
+            padding: 0 10px;
+            height: 48px;
+            border: 1px solid #e0e0e0;
+            font-size: 18px;
+
+        }
+        .header form input[type='submit']{
+            width: 48px;
+            height: 50px;
+            border: 1px solid #e0e0e0;
+            background-color: #fff;
+            margin-left: -1px;
+            font-size: 20px;
+            vertical-align: -2px;
+        }
+        .header form:hover input{
+            border: 1px solid lightgray;
+        }
+        .header form .tag{
+            position: absolute;
+            top: 14px;
+            left: 100px;
+
+        }
+        .header form .tag span{
+            font-size: 12px;
+            background-color: #ddd;
+            padding: 0 5px;
+            color: #e0e0e0;
+        }
+        .header form .tag span:hover{
+            background-color: #ff6700;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+
+            <form action="">
+                <input type="text"><input type="submit" class="iconfont" value="&#xe61f;">
+                <div class="tag">
+                    <span>小米9</span>
+                    <span>小米 9SE</span>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
