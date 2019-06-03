@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    function fn() {
+        switch (arguments.length) {
+            case 2:
+                console.log('2个参数')
+                break;
+            case 3:
+                console.log('3个参数')
+                break;
+            default:
+                break;
+        }
+
+
+    }
+
+    fn(2, 3);
+    fn(2, 3, 4)
+
+</script>
+</body>
+</html>
