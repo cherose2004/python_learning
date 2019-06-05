@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			button.active{
+				color: red;
+			}
+			p{
+				display: none;
+			}
+			p.active{
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<ul>
+			<li>
+				<a href=""></a>
+			</li>
+			<li>
+				<a href=""></a>
+			</li>
+		</ul>
+		<button class="active"><a href="">热门</a></button>
+		<button>电视影音</button>
+		<button>电脑</button>
+		<button>家具</button>
+		<p class="active">
+			<a href="#">家电</a>
+		</p>
+		<p>电视影音</p>
+		<p>电脑</p>
+		<p>家具</p>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$('button').click(function(){
+				// 链式编程
+				//第二个按钮 索引1
+				console.log($(this).addClass('active'));
+				$(this).addClass('active').siblings('button').removeClass('active');
+				// 获取当前点击的元素的索引
+				console.log($(this).index());
+				$('p').eq($(this).index()).addClass('active').siblings('p').removeClass('active');
+			})
+		</script>
+	</body>
+</html>

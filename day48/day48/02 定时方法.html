@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 1.在5秒之后 执行相应的操作,可以做异步行为
+			/* window.setTimeout(function(){
+				console.log('111');
+			},2000);
+			console.log('2222'); */
+			
+			// 2.周期性定时器
+			var num = 0;
+			var timer = null;
+			// 开启定时器
+			timer = window.setInterval(function(){
+				num++;
+				if(num === 10){
+					// 清除定时器
+					clearInterval(timer);
+				}
+				console.log(num);
+			},1000);
+		</script>
+	</body>
+</html>
