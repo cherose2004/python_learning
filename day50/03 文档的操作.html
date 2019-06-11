@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="box">
+			
+			
+			<h4>太白</h4>
+		</div>
+		
+		<button id="btn">按钮</button>
+		
+		
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				var oH3 = document.createElement('h3');
+				oH3.innerText = '女神';
+				// 父.append(子)
+				$('#box').append('mjj');
+				$('#box').append('<h2>wusir</h2>');//*****
+				$('#box').append(oH3);
+				// append()如果参数是jq对象,那么相当于移动操作
+				$('#box').append($('h4'));
+				
+				$('h2').css('color','red');
+				
+				// 子.appendTo(父)
+				$('<a href="#">百度一下</a>').appendTo('#box').css('color','yellow');//*****
+				
+				
+				// 前置追加
+				$('#box').prepend('<p>hello world</p>');
+				// 子.prependTo(父)
+				
+				
+				
+				$('h2').before('mjj2');
+				
+				$('<h3>女神</h3>').insertBefore('h2');
+				
+				$('h3').replaceWith('000000');
+				
+				$('#btn').click(function(){
+					alert(1);
+					// 即移除标签,事件也跟着移除
+					/* $(this).remove();//****
+					// console.log($(this).remove());
+					$('#box').after($(this).remove()); */
+					
+					
+					// $(this).detach();
+					
+					// $('#box').after($(this).detach());
+					
+					// $('#box').html(' ');
+					$('#box').empty();
+				})
+			})
+		</script>
+	</body>
+</html>

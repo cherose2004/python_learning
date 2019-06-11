@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			#box{
+				width: 100px;
+				height: 40px;
+				background-color: red;
+				position: relative;
+			}
+			#child{
+				width: 400px;
+				height: 100px;
+				background-color: #000;
+				position: absolute;
+				top: 40px;
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<div id="child"></div>
+		</div>
+		<input type="text">
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+	
+		<script type="text/javascript">
+			// mouseover 鼠标穿过父级元素和子元素都会调用方法
+			/* $('#box').mouseover(function(){
+				console.log('移入进来了');
+				
+				$('#child').slideDown(1000);
+			})
+			$('#box').mouseout(function(){
+				console.log('移除了');
+				
+				$('#child').slideUp(1000);
+			}) */
+			
+			/* $('#box').mouseenter(function(){
+				console.log('进来了');
+				
+				$('#child').stop().slideDown(1000);
+			})
+			$('#box').mouseleave(function(){
+				console.log('离开了');
+				
+				$('#child').stop().slideUp(1000);
+			}) */
+			
+			$('#box').hover(function(){
+				$('#child').stop().slideDown(1000);
+			},function(){
+				$('#child').stop().slideUp(1000);
+			})
+			//默认加载页面聚焦行为
+		/* 	$('input[type=text]').focus();
+			$('input[type=text]').focus(function(){
+				//聚焦
+				console.log('聚焦了');
+			})
+			$('input[type=text]').blur(function(){
+				//聚焦
+				console.log('失去焦点了');
+			})
+			 */
+			
+			$('input[type=text]').keydown(function(e){
+				console.log(e.keyCode);
+				switch (e.keyCode){
+					case 8:
+						$(this).val(' ')
+						break;
+					default:
+						break;
+				}	
+			})
+			
+			
+			
+		</script>
+	</body>
+</html>
