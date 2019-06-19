@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+</head>
+<body>
+
+{##}
+{#{{ string }}#}
+{#{{ age }}#}
+{#{{ hobby.1 }}#}
+{#{{ dic.keys }}#}
+{#{{ dic.values }}#}
+{#{{ dic.items }}#}
+{##}
+{#<br>#}
+{#{{ person_obj }}#}
+{#{{ person_obj.name }}#}
+{#{{ person_obj.age }}#}
+{#{{ person_obj.talk }}#}
+{##}
+{#<br>#}
+{#{{ dic.keys }}#}
+{##}
+{#<br>#}
+{#{{ kong }}#}
+{#<br>#}
+{#{{ kong|default:'nothing' }}#}
+{#<br>#}
+{#{{ filesize|filesizeformat }}#}
+{#<br>#}
+{#{{ hobby|add:hobby }}#}
+{##}
+{##}
+{#<br>#}
+{#{{ long_str }}#}
+{#<br>#}
+{#{{ long_str|truncatewords:4 }}#}
+{#<br>#}
+{#{{ long }}#}
+{##}
+{#<br>#}
+{#{{ now|date:'Y-m-d H:i:s' }}#}
+{#{{ now }}#}
+{#<br>#}
+{#{{ a_html|safe }}#}
+{##}
+{##}
+{#{{ js|safe }}#}
+{##}
+{#<br>#}
+
+{#{% load my_tags %}#}
+{#{{ 'alex'|add_xx:'dasb' }}#}
+{##}
+{#{{ string|ljust:"50" }}#}
+{##}
+{#{{ a|add:b }}#}
+{#{{ a|multiply:b }}#}
+{##}
+{#{{ 'http://www.baidu.com'|show_a:'百度' }}#}
+{#<ul>#}
+{#    {% for hobby in hobby_list %}#}
+{##}
+{#        <li> {{ forloop }}-{{ hobby }} </li>#}
+{##}
+{#    {% endfor %}#}
+{#</ul>#}
+
+
+{#<table border="1">#}
+{#    <tbody>#}
+{#    {% for hobby_list1 in hobby_list2 %}#}
+{#        <tr>#}
+{#            {% for hobby in hobby_list1 %}#}
+{#                {% if forloop.counter|divisibleby:2 and  forloop.parentloop.counter|divisibleby:2 %}#}
+{#                    <td style="color: red"> {{ hobby }}</td>#}
+{#                {% else %}#}
+{#                    <td> {{ hobby }}</td>#}
+{##}
+{#                {% endif %}#}
+{##}
+{##}
+{##}
+{#            {% endfor %}#}
+{##}
+{##}
+{#        </tr>#}
+{##}
+{#    {% endfor %}#}
+{##}
+{#    </tbody>#}
+{##}
+{#</table>#}
+
+
+{#{% if  person_obj.age < 73 %}#}
+{#    暂时还没有到坎的年纪#}
+{#{% elif  person_obj.age == 73 %}#}
+{#    当坎之年#}
+{#{% elif  person_obj.age < 84 %}#}
+{#    向第二个坎迈进#}
+{#{% endif %}#}
+
+
+{#{% if 10 > 5 == 1 %}#}
+{#    真#}
+{#{% else %}#}
+{#    假#}
+{##}
+{#{% endif %}#}
+{##}
+{#{% if 1|add:2 == 3 %}#}
+{#aaa#}
+{#{% endif %}#}
+
+{#{% with lanqiu=hobby_list2.2.3 %}#}
+{##}
+{#    {{ lanqiu }}#}
+{#    {{ lanqiu }}#}
+{#    {{ lanqiu }}#}
+{#    {{ lanqiu }}#}
+{#    {{ lanqiu }}#}
+{#{% endwith %}#}
+{#<!--   {{ string }}   -->#}
+
+
+
+
+
+
+{% load my_tags %}
+{% join_str '1' '2' k1='3' k2='4' %}
+
+
+
+
+</body>
+</html>
