@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+</head>
+<body>
+
+{% csrf_token %}
+
+
+<input type="text" name="i1">+
+<input type="text" name="i2">=
+<input type="text" name="i3">
+<button id="b1">计算</button>
+<br>
+<input type="text" name="ii1">+
+<input type="text" name="ii2">=
+<input type="text" name="ii3">
+<button id="b2">计算</button>
+
+<br>
+<button id="b3">参数</button>
+
+
+<script src="/static/jquery.js"></script>
+<script>
+    $("#b1").click(function () {
+        // 发ajax请求
+        $.ajax({
+            url: '/calc/',
+            type: 'post',
+            data: {
+                'csrfmiddlewaretoken': $('[name="csrfmiddlewaretoken"]').val(),
+                a: $("[name='i1']").val(),
+                b: $("[name='i2']").val(),
+            },
+            success: function (res) {
+                $("[name='i3']").val(res)
+            },
+        })
+    });
+
+    $("#b2").click(function () {
+        // 发ajax请求
+        $.ajax({
+            url: '/calc2/',
+            type: 'post',
+            headers: {
+                'x-csrftoken':$('[name="csrfmiddlewaretoken"]').val(),
+                {#'asd': $('[name="csrfmiddlewaretoken"]').val(),#}
+            },
+            data: {
+                a: $("[name='ii1']").val(),
+                b: $("[name='ii2']").val(),
+            },
+            success: function (res) {
+                $("[name='ii3']").val(res)
+            },
+        })
+    })
+
+
+    $("#b3").click(function () {
+        // 发ajax请求
+        $.ajax({
+            url: '/test/',
+            type: 'post',
+            data: {
+                name: 'alex',
+                age: 73,
+                hobby: JSON.stringify(['唱', '跳', 'rap']),
+            },
+            success: function (res) {
+                console.log(res)
+            },
+        })
+    })
+
+</script>
+
+<script src="/static/js/ajax_setup.js"></script>
+
+</body>
+</html>
