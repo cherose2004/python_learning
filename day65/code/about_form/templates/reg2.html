@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+</head>
+<body>
+
+<form action="" method="post" novalidate>
+    {% csrf_token %}
+    <p>
+        <label for="{{ form_obj.username.id_for_label }}">{{ form_obj.username.label }}</label>
+        {{ form_obj.username }}
+        {{ form_obj.username.errors }}
+    </p>
+
+    <p>
+        <label for="{{ form_obj.pwd.id_for_label }}">{{ form_obj.pwd.label }}</label>
+        {{ form_obj.pwd }}
+        {{ form_obj.pwd.errors.0 }}
+    </p>
+
+    <p>
+        <label for="{{ form_obj.re_pwd.id_for_label }}">{{ form_obj.re_pwd.label }}</label>
+        {{ form_obj.re_pwd }}
+        {{ form_obj.re_pwd.errors.0 }}
+    </p>
+{##}
+{#    <p>#}
+{#        <label for="{{ form_obj.gender.id_for_label }}">{{ form_obj.gender.label }}</label>#}
+{#        {{ form_obj.gender }}#}
+{#        {{ form_obj.gender.errors.0 }}#}
+{#    </p>#}
+{##}
+{#    <p>#}
+{#        <label for="{{ form_obj.hobby.id_for_label }}">{{ form_obj.hobby.label }}</label>#}
+{#        {{ form_obj.hobby }}#}
+{#        {{ form_obj.hobby.errors.0 }}#}
+{#    </p>#}
+{##}
+{#    <p>#}
+{#        <label for="{{ form_obj.phone.id_for_label }}">{{ form_obj.phone.label }}</label>#}
+{#        {{ form_obj.phone }}#}
+{#        {{ form_obj.phone.errors.0 }}#}
+{#    </p>#}
+
+
+    {{ form_obj.errors }}
+
+    <button>注册</button>
+
+</form>
+
+
+</body>
+</html>
