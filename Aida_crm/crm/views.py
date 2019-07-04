@@ -41,4 +41,33 @@ def index(request):
 
 def customer_list(request):
     all_customer = models.Customer.objects.all()
-    return render(request, 'customer_list.html',{'all_customer':all_customer})
+    return render(request, 'customer_list.html', {'all_customer': all_customer})
+
+
+users = [{'name': 'alex-{}'.format(i), 'pwd': 'alexdsb'} for i in range(1, 453)]
+
+
+def user_list(request):
+    try:
+        page = int(request.GET.get('page', 1))
+        if page <= 0:
+            page = 1
+    except Exception:
+        page = 1
+
+    # 总的数据量
+    all_count = len(users)
+
+    # 每页显示的数据量  10
+    per_num = 10
+    # 总的页码数
+    total_num, more = divmod(all_count, per_num)
+    if more:
+        total_num += 1
+    print(total_num)
+    #   1  0  10
+    #   2  10  20
+    start = (page - 1) * per_num
+    end = page * per_num
+
+    return render(request, 'user_list.html', {'users': users[start:end], 'total_num': range(1, total_num + 1)})
