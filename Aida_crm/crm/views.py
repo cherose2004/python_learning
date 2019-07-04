@@ -57,7 +57,6 @@ def user_list(request):
 
     # 总的数据量
     all_count = len(users)
-
     # 每页显示的数据量  10
     per_num = 10
     # 总的页码数
@@ -65,9 +64,17 @@ def user_list(request):
     if more:
         total_num += 1
     print(total_num)
+    # 要显示的页码数
+    max_show = 15
+    half_show = max_show // 2
+    # 页码的起始值
+    page_start = page - half_show
+    # 页码的终止值
+    page_end = page + half_show
+
     #   1  0  10
     #   2  10  20
     start = (page - 1) * per_num
     end = page * per_num
 
-    return render(request, 'user_list.html', {'users': users[start:end], 'total_num': range(1, total_num + 1)})
+    return render(request, 'user_list.html', {'users': users[start:end], 'total_num': range(page_start, page_end + 1)})
