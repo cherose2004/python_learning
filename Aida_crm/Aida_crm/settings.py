@@ -75,11 +75,11 @@ WSGI_APPLICATION = 'Aida_crm.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME':'crm',
-        'HOST':'127.0.0.1',
-        'PORT':3306,
-        'USER':'root',
-        'PASSWORD':'123',
+        'NAME': 'crm',
+        'HOST': '127.0.0.1',
+        'PORT': 3306,
+        'USER': 'root',
+        'PASSWORD': '123',
     }
 }
 
@@ -110,10 +110,12 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = False
 
 USE_TZ = True
 
+DATE_FORMAT = 'Y-m-d'
+DATETIME_FORMAT = 'Y-m-d H:i:s'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 

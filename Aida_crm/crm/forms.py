@@ -3,6 +3,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 import hashlib
 
+
 class RegForm(forms.ModelForm):
     password = forms.CharField(min_length=6,
                                widget=forms.PasswordInput(attrs={'placeholder': '您的密码', 'autocomplete': 'off'}))
@@ -13,8 +14,11 @@ class RegForm(forms.ModelForm):
         model = models.UserProfile
         fields = '__all__'  # ['username']
         exclude = ['is_active']
+        labels = {
+            'username': '用户名'
+        }
         widgets = {
-            'username': forms.EmailInput(attrs={'placeholder': '您的用户名', 'autocomplete': 'off',}),
+            'username': forms.EmailInput(attrs={'placeholder': '您的用户名', 'autocomplete': 'off', }),
             # 'password':forms.PasswordInput(attrs={'placeholder':'您的密码','autocomplete':'off'}),
             'mobile': forms.TextInput(attrs={'placeholder': '您的手机号', 'autocomplete': 'off'}),
             'name': forms.TextInput(attrs={'placeholder': '您的真实姓名', 'autocomplete': 'off'})
@@ -27,8 +31,9 @@ class RegForm(forms.ModelForm):
         }
 
     def clean(self):
-        password = self.cleaned_data.get('password')
-        re_password = self.cleaned_data.get('re_password')
+        self._validate_unique = True
+        password = self.cleaned_data.get('password', '')
+        re_password = self.cleaned_data.get('re_password', '')
         if password == re_password:
             # 对密码进行加密
             md5 = hashlib.md5()

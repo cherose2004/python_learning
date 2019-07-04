@@ -27,8 +27,9 @@ def reg(request):
         # 对提交的数据进行校验
         if form_obj.is_valid():
             # 校验成功  把数据插入数据中
+            # form_obj.cleaned_data.pop('re_password')
             # models.UserProfile.objects.create(**form_obj.cleaned_data)
-            form_obj.save()
+            obj = form_obj.save()
             return redirect(reverse('login'))
         print(form_obj.errors)
     return render(request, 'reg.html', {'form_obj': form_obj})
@@ -36,3 +37,8 @@ def reg(request):
 
 def index(request):
     return render(request, 'index.html')
+
+
+def customer_list(request):
+    all_customer = models.Customer.objects.all()
+    return render(request, 'customer_list.html',{'all_customer':all_customer})

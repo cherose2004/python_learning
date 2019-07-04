@@ -1,5 +1,6 @@
 from django.db import models
 from multiselectfield import MultiSelectField
+from django.utils.safestring import mark_safe
 
 course_choices = (('Linux', 'Linux中高级'),
                   ('PythonFullStack', 'Python高级全栈开发'),)
@@ -61,6 +62,7 @@ class Department(models.Model):
     def __str__(self):
         return self.name
 
+
 class UserProfile(models.Model):
     """
     用户表
@@ -74,6 +76,8 @@ class UserProfile(models.Model):
     date_joined = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
 
+    def __str__(self):
+        return self.name
 
 
 class Customer(models.Model):
@@ -97,7 +101,21 @@ class Customer(models.Model):
     last_consult_date = models.DateField("最后跟进日期", auto_now_add=True)
     next_date = models.DateField("预计再次跟进时间", blank=True, null=True)
     consultant = models.ForeignKey('UserProfile', verbose_name="销售", related_name='customers', blank=True, null=True, )
-    class_list = models.ManyToManyField('ClassList', verbose_name="已报班级", )
+    class_list = models.ManyToManyField('ClassList', verbose_name="已报班级", blank=True)
+
+    def show_class(self):
+        return ' '.join([str(i) for i in self.class_list.all()])
+
+    def show_status(self):
+        color_dict = {
+            'signed': "green",
+            'unregistered': 'red',
+            'studying': 'blue',
+            'paid_in_full': 'gold'
+        }
+
+        return mark_safe(
+            '<span style="color: white;background: {};padding: 5px" >{}</span>'.format(color_dict.get(self.status),self.get_status_display()))
 
 
 class Campus(models.Model):
@@ -125,6 +143,9 @@ class ClassList(models.Model):
 
     class Meta:
         unique_together = ("course", "semester", 'campuses')
+
+    def __str__(self):
+        return "{}-{}".format(self.get_course_display(), self.semester)
 
 
 class ConsultRecord(models.Model):
@@ -197,8 +218,8 @@ class CourseRecord(models.Model):
     homework_memo = models.TextField('作业描述', max_length=500, blank=True, null=True)
     scoring_point = models.TextField('得分点', max_length=300, blank=True, null=True)
     re_class = models.ForeignKey('ClassList', verbose_name="班级")
-    teacher = models.ForeignKey('UserProfile', related_name='t_course_record',verbose_name="讲师")
-    recorder = models.ForeignKey('UserProfile',related_name='r_course_record', verbose_name="记录者")
+    teacher = models.ForeignKey('UserProfile', related_name='t_course_record', verbose_name="讲师")
+    recorder = models.ForeignKey('UserProfile', related_name='r_course_record', verbose_name="记录者")
 
     class Meta:
         unique_together = ('re_class', 'day_num')
