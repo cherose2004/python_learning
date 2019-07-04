@@ -24,20 +24,15 @@
 
     <nav aria-label="Page navigation">
         <ul class="pagination">
-            <li>
-                <a href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            {% for num in total_num %}
-                <li><a href="?page={{ num }}">{{ num }}</a></li>
-            {% endfor %}
-            <li>
-                <a href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
+
+            {{ page_html|safe }}
         </ul>
     </nav>
+
+{#    <form action="">#}
+{#        <input type="number" name="page">#}
+{#        <button>跳转</button>#}
+{#    </form>#}
+
 
 {% endblock %}
