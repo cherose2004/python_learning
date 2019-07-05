@@ -13,6 +13,9 @@ def login(request):
 
         obj = models.UserProfile.objects.filter(username=username, password=md5.hexdigest(), is_active=True).first()
         if obj:
+            # 登录成功
+            request.session['is_login'] = True
+            request.session['user_id'] = obj.pk
             return redirect(reverse('index'))
             # return redirect('index')
         else:
@@ -40,7 +43,11 @@ def index(request):
 
 
 def customer_list(request):
-    all_customer = models.Customer.objects.all()
+    if request.path_info == reverse('customer_list'):
+        all_customer = models.Customer.objects.filter(consultant__isnull=True)
+    else:
+        all_customer = models.Customer.objects.filter(consultant_id=request.session.get('user_id'))
+
     return render(request, 'customer_list.html', {'all_customer': all_customer})
 
 
@@ -69,6 +76,19 @@ def edit_customer(request, pk):
             form_obj.save()
             return redirect(reverse('customer_list'))
     return render(request, 'edit_customer.html', {'form_obj': form_obj})
+
+
+def customer_change(request, pk=None):
+    obj = models.Customer.objects.filter(pk=pk).first()
+
+    form_obj = CustomerForm(instance=obj)
+    if request.method == 'POST':
+        form_obj = CustomerForm(data=request.POST, instance=obj)
+        if form_obj.is_valid():
+            form_obj.save()
+            return redirect(reverse('customer_list'))
+    title = '编辑客户' if pk else '新增客户'
+    return render(request, 'customer_form.html', {'form_obj': form_obj, 'title': title})
 
 
 users = [{'name': 'alex-{}'.format(i), 'pwd': 'alexdsb'} for i in range(1, 453)]
