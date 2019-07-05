@@ -3,56 +3,69 @@
 
 {% block content %}
 
-    <table class="table table-bordered table-hover">
-        <thead>
-        <tr>
-            <th>序号</th>
-            <th>ID</th>
-            <th>qq</th>
-            <th>姓名</th>
-            <th>性别</th>
-            <th>手机号</th>
-            <th>客户来源</th>
-            <th>咨询课程</th>
-            <th>班级类型</th>
-            <th>状态</th>
-            <th>下次跟进时间</th>
-            <th>销售</th>
-            <th>已报班级</th>
-            <th>操作</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for customer in all_customer %}
-            <tr>
-                <td>{{ forloop.counter }}</td>
-                <td>{{ customer.pk }}</td>
-                <td>{{ customer.qq }}</td>
-                <td>{{ customer.name|default:'无' }}</td>
-                <td>{{ customer.get_sex_display }}</td>
-                <td>{{ customer.phone }}</td>
-                <td>{{ customer.get_source_display }}</td>
-                <td>{{ customer.course }}</td>
-                <td>{{ customer.get_class_type_display }}</td>
-                <td>{{ customer.show_status }}</td>
-                <td>{{ customer.next_date }}</td>
-                <td>{{ customer.consultant.name }}</td>
-                <td>
-                    {{ customer.show_class }}
-{#                    {% for classes in customer.class_list.all %}#}
-{#                        {{ classes.get_course_display }} - {{ classes.semester }}#}
-{#                    {% endfor %}#}
-{#                    #}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">客户列表</h3>
+        </div>
+        <div class="panel-body">
 
-                </td>
-                <td><a href=""></a></td>
+            <a href="{% url 'add_customer' %}" class="btn btn-primary">新增</a>
 
-            </tr>
-        {% endfor %}
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>ID</th>
+                    <th>qq</th>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>手机号</th>
+                    <th>客户来源</th>
+                    <th>咨询课程</th>
+                    <th>班级类型</th>
+                    <th>状态</th>
+                    <th>下次跟进时间</th>
+                    <th>销售</th>
+                    <th>已报班级</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for customer in all_customer %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ customer.pk }}</td>
+                        <td>{{ customer.qq }}</td>
+                        <td>{{ customer.name|default:'无' }}</td>
+                        <td>{{ customer.get_sex_display }}</td>
+                        <td>{{ customer.phone }}</td>
+                        <td>{{ customer.get_source_display }}</td>
+                        <td>{{ customer.course }}</td>
+                        <td>{{ customer.get_class_type_display }}</td>
+                        <td>{{ customer.show_status }}</td>
+                        <td>{{ customer.next_date }}</td>
+                        <td>{{ customer.consultant.name }}</td>
+                        <td>
+                            {{ customer.show_class }}
+                            {#                    {% for classes in customer.class_list.all %}#}
+                            {#                        {{ classes.get_course_display }} - {{ classes.semester }}#}
+                            {#                    {% endfor %}#}
+                            {#                    #}
+
+                        </td>
+                        <td><a href=""></a></td>
+
+                    </tr>
+                {% endfor %}
 
 
-        </tbody>
-    </table>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
 
 
 {% endblock %}

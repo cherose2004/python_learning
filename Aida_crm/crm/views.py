@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, reverse
 from crm import models
 import hashlib
-from crm.forms import RegForm
+from crm.forms import RegForm,CustomerForm
 
 
 def login(request):
@@ -44,11 +44,26 @@ def customer_list(request):
     return render(request, 'customer_list.html', {'all_customer': all_customer})
 
 
+def add_customer(request):
+    # form_obj 没有数据
+    form_obj = CustomerForm()
+    if request.method == 'POST':
+        # form_obj 包含提交的数据
+        form_obj = CustomerForm(request.POST)
+        if form_obj.is_valid():
+            # 校验成功
+            form_obj.save()
+            return redirect(reverse('customer_list'))
+
+    return render(request,'add_customer.html',{'form_obj':form_obj})
+
+
+
 users = [{'name': 'alex-{}'.format(i), 'pwd': 'alexdsb'} for i in range(1, 453)]
 
 from utils.pagination import Pagination
 
 
 def user_list(request):
-    page = Pagination(request.GET.get('page', 1), len(users),20,15)
+    page = Pagination(request.GET.get('page', 1), len(users), 20, 15)
     return render(request, 'user_list.html', {'users': users[page.start:page.end], 'page_html': page.page_html})

@@ -2,7 +2,7 @@ from crm import models
 from django import forms
 from django.core.exceptions import ValidationError
 import hashlib
-
+from multiselectfield.forms.fields import MultiSelectFormField
 
 class RegForm(forms.ModelForm):
     password = forms.CharField(min_length=6,
@@ -43,3 +43,24 @@ class RegForm(forms.ModelForm):
         else:
             self.add_error('re_password', '两次密码不一致')
             raise ValidationError('两次密码不一致!!')
+
+
+class CustomerForm(forms.ModelForm):
+
+
+    class Meta:
+        model = models.Customer
+        fields = "__all__"
+
+        # widgets = {
+            # 'qq': forms.TextInput(attrs={'class': 'form-control'}),
+        # }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for filed in self.fields.values():
+
+
+            if isinstance(filed,MultiSelectFormField):
+                continue
+            filed.widget.attrs['class'] = 'form-control'
