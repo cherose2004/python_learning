@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, reverse
 from crm import models
 import hashlib
-from crm.forms import RegForm,CustomerForm
+from crm.forms import RegForm, CustomerForm
 
 
 def login(request):
@@ -55,8 +55,20 @@ def add_customer(request):
             form_obj.save()
             return redirect(reverse('customer_list'))
 
-    return render(request,'add_customer.html',{'form_obj':form_obj})
+    return render(request, 'add_customer.html', {'form_obj': form_obj})
 
+
+def edit_customer(request, pk):
+    obj = models.Customer.objects.filter(pk=pk).first()
+    # form_obj 包含原始的数据
+    form_obj = CustomerForm(instance=obj)  # 实例  对象
+
+    if request.method == 'POST':
+        form_obj = CustomerForm(data=request.POST, instance=obj)
+        if form_obj.is_valid():
+            form_obj.save()
+            return redirect(reverse('customer_list'))
+    return render(request, 'edit_customer.html', {'form_obj': form_obj})
 
 
 users = [{'name': 'alex-{}'.format(i), 'pwd': 'alexdsb'} for i in range(1, 453)]

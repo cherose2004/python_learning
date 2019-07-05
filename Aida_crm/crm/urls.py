@@ -7,6 +7,7 @@ urlpatterns = [
     url(r'^index/', views.index, name='index'),
     url(r'^customer_list/', views.customer_list, name='customer_list'),
     url(r'^add_customer/', views.add_customer, name='add_customer'),
+    url(r'^edit_customer/(\d+)/', views.edit_customer, name='edit_customer'),
 
 
 
