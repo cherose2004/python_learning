@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, HttpResponse
 from crm import models
 import hashlib
 from crm.forms import RegForm, CustomerForm
@@ -46,9 +46,46 @@ def customer_list(request):
     if request.path_info == reverse('customer_list'):
         all_customer = models.Customer.objects.filter(consultant__isnull=True)
     else:
-        all_customer = models.Customer.objects.filter(consultant_id=request.session.get('user_id'))
+        all_customer = models.Customer.objects.filter(consultant=request.user_obj)
 
     return render(request, 'customer_list.html', {'all_customer': all_customer})
+
+
+from django.views import View
+
+
+class CustomerList(View):
+
+    def get(self, request, *args, **kwargs):
+        if request.path_info == reverse('customer_list'):
+            all_customer = models.Customer.objects.filter(consultant__isnull=True)
+        else:
+            all_customer = models.Customer.objects.filter(consultant=request.user_obj)
+
+        return render(request, 'customer_list.html', {'all_customer': all_customer})
+
+    def post(self, request, *args, **kwargs):
+        action = request.POST.get('action')
+        if not hasattr(self, action):
+            return HttpResponse('非法操作')
+        getattr(self, action)()
+        return self.get(request, *args, **kwargs)
+
+    def multi_apply(self):
+        # 公户转私户
+        pk = self.request.POST.getlist('pk')
+        # 方法一
+        models.Customer.objects.filter(pk__in=pk).update(consultant=self.request.user_obj)
+        # 方法二
+        # self.request.user_obj.customers.add(*models.Customer.objects.filter(pk__in=pk))
+
+    def multi_pub(self):
+        # 私户转公户
+        pk = self.request.POST.getlist('pk')
+        # 方法一
+        models.Customer.objects.filter(pk__in=pk).update(consultant=None)
+        # 方法二
+        # self.request.user_obj.customers.remove(*models.Customer.objects.filter(pk__in=pk))
 
 
 def add_customer(request):

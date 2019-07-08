@@ -51,6 +51,10 @@ class CustomerForm(forms.ModelForm):
     class Meta:
         model = models.Customer
         fields = "__all__"
+        exclude = []
+        labels = {
+
+        }
 
         # widgets = {
             # 'qq': forms.TextInput(attrs={'class': 'form-control'}),
@@ -59,8 +63,6 @@ class CustomerForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for filed in self.fields.values():
-
-
             if isinstance(filed,MultiSelectFormField):
                 continue
             filed.widget.attrs['class'] = 'form-control'
