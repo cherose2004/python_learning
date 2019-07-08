@@ -56,6 +56,8 @@ from django.db.models import Q
 from utils.pagination import Pagination
 
 from django.http.request import QueryDict
+
+
 class CustomerList(View):
 
     def get(self, request, *args, **kwargs):
@@ -73,7 +75,7 @@ class CustomerList(View):
         else:
             all_customer = models.Customer.objects.filter(q, consultant=request.user_obj)
 
-        page = Pagination(request.GET.get('page', 1), all_customer.count(),request.GET.copy(), 2)
+        page = Pagination(request.GET.get('page', 1), all_customer.count(), request.GET.copy(), 2)
 
         return render(request, 'customer_list.html',
                       {'all_customer': all_customer[page.start:page.end], 'page_html': page.page_html})
@@ -148,6 +150,10 @@ def customer_change(request, pk=None):
         form_obj = CustomerForm(data=request.POST, instance=obj)
         if form_obj.is_valid():
             form_obj.save()
+            next = request.GET.get('next')
+            print(next)
+            if next:
+                return redirect(next)
             return redirect(reverse('customer_list'))
     title = '编辑客户' if pk else '新增客户'
     return render(request, 'customer_form.html', {'form_obj': form_obj, 'title': title})

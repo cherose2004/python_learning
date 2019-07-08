@@ -3,6 +3,8 @@
 
 {% block content %}
 
+    {% load my_tags %}
+
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">客户列表</h3>
@@ -10,7 +12,7 @@
         <div class="panel-body">
 
             <div>
-                <a href="{% url 'add_customer' %}" class="btn btn-primary">新增</a>
+                <a href="{% url  'add_customer' %}" class="btn btn-primary">新增</a>
             </div>
 
             <form action="" class="form-inline pull-right">
@@ -80,7 +82,8 @@
                                 {#                    #}
 
                             </td>
-                            <td><a href="{% url 'edit_customer' customer.pk %}" class="btn btn-primary btn-sm">编辑</a>
+{#                            <td><a href="{% url 'edit_customer' customer.pk %}" class="btn btn-primary btn-sm">编辑</a>#}
+                            <td><a href="{% reverse_url  request  'edit_customer' customer.pk %}" class="btn btn-primary btn-sm">编辑</a>
                             </td>
 
                         </tr>
