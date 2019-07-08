@@ -1,3 +1,7 @@
+from django.utils.safestring import mark_safe
+from django.http.request import QueryDict
+
+
 class Pagination:
     """
     page: 当前的页码数
@@ -6,14 +10,17 @@ class Pagination:
     max_show：  最多显示的页码数
     """
 
-    def __init__(self, page, all_count, per_num=10, max_show=11):
+    def __init__(self, page, all_count, params=None, per_num=10, max_show=11):
         try:
             self.page = int(page)
             if self.page <= 0:
                 self.page = 1
         except Exception:
             self.page = 1
-
+        # 查询条件
+        self.params = params
+        if not self.params:
+            self.params = QueryDict(mutable=True)
         # 总的数据量
         all_count = all_count
         # 每页显示的数据量  10
@@ -58,22 +65,25 @@ class Pagination:
             li_list.append(
                 '<li class="disabled"><a aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a></li>')
         else:
+            self.params['page'] = self.page -1   # { query:13 ,page : 1 }
             li_list.append(
-                '<li><a href="?page={}" aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a></li>'.format(
-                    self.page - 1))
+                '<li><a href="?{}" aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a></li>'.format(
+                    self.params.urlencode()))   #  ?query=13&page=1
 
         for i in range(self.page_start, self.page_end + 1):
+            self.params['page'] = i  # { query:13 ,page : i}
             if i == self.page:
-                li_list.append('<li class="active"><a href="?page={}">{}</a></li>'.format(i, i))
+                li_list.append('<li class="active"><a href="?{}">{}</a></li>'.format(self.params.urlencode(), i))
             else:
-                li_list.append('<li><a href="?page={}">{}</a></li>'.format(i, i))
+                li_list.append('<li><a href="?{}">{}</a></li>'.format(self.params.urlencode(), i))
 
         if self.page == self.total_num:
             li_list.append(
                 '<li class="disabled"><a aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>')
         else:
+            self.params['page'] = self.page + 1
             li_list.append(
-                '<li><a href="?page={}" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>'.format(
-                    self.page + 1))
+                '<li><a href="?{}" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>'.format(
+                    self.params.urlencode()))
 
-        return ''.join(li_list)
+        return mark_safe(''.join(li_list))

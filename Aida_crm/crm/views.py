@@ -53,21 +53,30 @@ def customer_list(request):
 
 from django.views import View
 from django.db.models import Q
+from utils.pagination import Pagination
 
-
+from django.http.request import QueryDict
 class CustomerList(View):
 
     def get(self, request, *args, **kwargs):
 
-        q = self.search(['qq', 'name', 'phone','consultant__name'])
+        # print(request.GET,type(request.GET))
+        # print(request.GET.urlencode())
+        # request.GET._mutable = True  # 可编辑
+        # request.GET['page'] = 1
+        # print(request.GET.urlencode())
+
+        q = self.search(['qq', 'name', 'phone', 'consultant__name'])
 
         if request.path_info == reverse('customer_list'):
             all_customer = models.Customer.objects.filter(q, consultant__isnull=True)
         else:
             all_customer = models.Customer.objects.filter(q, consultant=request.user_obj)
 
+        page = Pagination(request.GET.get('page', 1), all_customer.count(),request.GET.copy(), 2)
 
-        return render(request, 'customer_list.html', {'all_customer': all_customer})
+        return render(request, 'customer_list.html',
+                      {'all_customer': all_customer[page.start:page.end], 'page_html': page.page_html})
 
     def post(self, request, *args, **kwargs):
         action = request.POST.get('action')
