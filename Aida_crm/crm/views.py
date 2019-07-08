@@ -52,15 +52,20 @@ def customer_list(request):
 
 
 from django.views import View
+from django.db.models import Q
 
 
 class CustomerList(View):
 
     def get(self, request, *args, **kwargs):
+
+        q = self.search(['qq', 'name', 'phone','consultant__name'])
+
         if request.path_info == reverse('customer_list'):
-            all_customer = models.Customer.objects.filter(consultant__isnull=True)
+            all_customer = models.Customer.objects.filter(q, consultant__isnull=True)
         else:
-            all_customer = models.Customer.objects.filter(consultant=request.user_obj)
+            all_customer = models.Customer.objects.filter(q, consultant=request.user_obj)
+
 
         return render(request, 'customer_list.html', {'all_customer': all_customer})
 
@@ -86,6 +91,17 @@ class CustomerList(View):
         models.Customer.objects.filter(pk__in=pk).update(consultant=None)
         # 方法二
         # self.request.user_obj.customers.remove(*models.Customer.objects.filter(pk__in=pk))
+
+    def search(self, field_list):
+        # 构建Q对象
+        # Q(Q(qq__contains=query) | Q(name__contains=query) | Q(phone__contains=query))
+
+        query = self.request.GET.get('query', '')
+        q = Q()
+        q.connector = 'OR'
+        for field in field_list:
+            q.children.append(Q(('{}__contains'.format(field), query)))
+        return q
 
 
 def add_customer(request):

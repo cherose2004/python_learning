@@ -9,7 +9,15 @@
         </div>
         <div class="panel-body">
 
-            <a href="{% url 'add_customer' %}" class="btn btn-primary">新增</a>
+            <div>
+                <a href="{% url 'add_customer' %}" class="btn btn-primary">新增</a>
+            </div>
+
+            <form action="" class="form-inline pull-right">
+                <input type="text"  name="query" class="form-control">
+                <button class="btn btn-sm btn-success">搜索</button>
+            </form>
+
             <form action="" method="post" class="form-inline">
                 {% csrf_token %}
                 <select name="action" id="" class="form-control">
