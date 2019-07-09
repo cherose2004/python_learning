@@ -74,15 +74,33 @@ class ConsultRecordForm(BSModelForm):
         model = models.ConsultRecord
         fields = '__all__'
 
-
-    def __init__(self,request,*args,**kwargs):
-        super().__init__(*args,**kwargs)
+    def __init__(self, request, customer_id, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         # print(list(self.fields['customer'].choices))
         # self.fields['customer'].choices = [('', '---------'), (1, '121312321321 - mjj')]
         # self.fields['customer'].choices = request.user_obj.customers.all().values_list('pk','name')
+        print(customer_id)
         # 限制咨询客户为当前销售的私户
-        self.fields['customer'].choices = [('', '---------'),] + [ (i.pk,str(i))  for i in request.user_obj.customers.all()]
-
+        if customer_id and customer_id != '0':
+            self.fields['customer'].choices = [(i.pk, str(i)) for i in models.Customer.objects.filter(pk=customer_id)]
+        else:
+            self.fields['customer'].choices = [('', '---------'), ] + [(i.pk, str(i)) for i in
+                                                                       request.user_obj.customers.all()]
 
         # 限制跟进人为当前销售
-        self.fields['consultant'].choices = [(request.user_obj.pk,request.user_obj)]
+        self.fields['consultant'].choices = [(request.user_obj.pk, request.user_obj)]
+
+
+class EnrollmentForm(BSModelForm):
+    class Meta:
+        model = models.Enrollment
+        fields = "__all__"
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # 限制客户为当前销售的私户
+
+        # self.instance  # models.Enrollment(customer_id=customer_id)
+        self.fields['customer'].choices = [(self.instance.customer.pk, self.instance.customer)]
+
+        self.fields['enrolment_class'].choices = [(i.pk, str(i)) for i in self.instance.customer.class_list.all()]

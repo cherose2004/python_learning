@@ -130,6 +130,8 @@ class Campus(models.Model):
     name = models.CharField(verbose_name='校区', max_length=64)
     address = models.CharField(verbose_name='详细地址', max_length=512, blank=True, null=True)
 
+    def __str__(self):
+        return self.name
 
 class ClassList(models.Model):
     """

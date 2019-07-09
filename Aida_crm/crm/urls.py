@@ -19,9 +19,20 @@ urlpatterns = [
     url(r'^consult_list/$', views.ConsultList.as_view(), name='consult_list'),
     url(r'^consult_list/(\d+)/$', views.ConsultList.as_view(), name='one_consult_list'),
 
-    url(r'^add_consult/$', views.consult_change, name='add_consult'),
+    url(r'^add_consult/(?P<customer_id>\d+)/$', views.consult_change, name='add_consult'),
     url(r'^edit_consult/(\d+)/$', views.consult_change, name='edit_consult'),
 
     # url(r'^user_list/', views.user_list, name='user_list'),
+
+    # 展示一个销售填写报名记录
+    url(r'^enrollment_list/$', views.EnrollmentList.as_view(), name='enrollment_list'),
+    # 展示一个客户报名记录
+    url(r'^enrollment_list/(?P<customer_id>\d+)/$', views.EnrollmentList.as_view(), name='one_enrollment_list'),
+
+    # 添加报名表
+    url(r'^add_enrollment/(?P<customer_id>\d+)$', views.enrollment_change, name='add_enrollment'),
+    # 编辑报名表
+    url(r'^edit_enrollment/(\d+)/$', views.enrollment_change, name='edit_enrollment'),
+
 
 ]

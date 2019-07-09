@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, reverse, HttpResponse
 from crm import models
 import hashlib
-from crm.forms import RegForm, CustomerForm, ConsultRecordForm
+from crm.forms import RegForm, CustomerForm, ConsultRecordForm, EnrollmentForm
 
 
 def login(request):
@@ -172,24 +172,53 @@ def user_list(request):
 
 class ConsultList(View):
 
-    def get(self, request, customer_id=None, *args, **kwargs):
+    def get(self, request, customer_id=0, *args, **kwargs):
         if not customer_id:
             # 展示当前销售的所有的跟进记录
             all_consult = models.ConsultRecord.objects.filter(consultant=request.user_obj, delete_status=False)
         else:
             # 某一个客户的所有的跟进记录
             all_consult = models.ConsultRecord.objects.filter(customer_id=customer_id, delete_status=False)
-        return render(request, 'consult_list.html', {'all_consult': all_consult.order_by('-date')})
+        return render(request, 'consult_list.html',
+                      {'all_consult': all_consult.order_by('-date'), 'customer_id': customer_id})
 
 
-def consult_change(request, pk=None):
+def consult_change(request, pk=None, customer_id=None):
     obj = models.ConsultRecord.objects.filter(pk=pk).first()
-    form_obj = ConsultRecordForm(request,instance=obj)
+
+    models.ConsultRecord(customer_id=customer_id,consultant=request.user_obj)
+    form_obj = ConsultRecordForm(request, customer_id, instance=obj)
     if request.method == 'POST':
-        form_obj = ConsultRecordForm(request,request.POST, instance=obj)
+        form_obj = ConsultRecordForm(request, customer_id, request.POST, instance=obj)
         if form_obj.is_valid():
             form_obj.save()
             return redirect(reverse('consult_list'))
 
     title = '编辑跟进' if pk else '新增跟进'
+    return render(request, 'form.html', {'form_obj': form_obj, 'title': title})
+
+
+class EnrollmentList(View):
+
+    def get(self, request, *args, customer_id=None, **kwargs):
+        if not customer_id:
+            # 展示一个销售填写报名记录
+            all_enrollment = models.Enrollment.objects.filter(customer__in=request.user_obj.customers.all(),
+                                                              delete_status=False)
+        else:
+            # 某一个客户的报名记录
+            all_enrollment = models.Enrollment.objects.filter(customer_id=customer_id, delete_status=False)
+        return render(request, 'enrollment_list.html', {'all_enrollment': all_enrollment.order_by('-enrolled_date'), })
+
+
+def enrollment_change(request, pk=None,customer_id=None):
+    obj = models.Enrollment(customer_id=customer_id) if customer_id else models.Enrollment.objects.filter(pk=pk).first()
+    form_obj = EnrollmentForm(instance=obj)
+    if request.method == 'POST':
+        form_obj = EnrollmentForm(request.POST, instance=obj)
+        if form_obj.is_valid():
+            form_obj.save()
+            return redirect(reverse('enrollment_list'))
+
+    title = '编辑报名表' if pk else '新增报名表'
     return render(request, 'form.html', {'form_obj': form_obj, 'title': title})

@@ -91,6 +91,8 @@
                             <td>
                                 <a href="{% reverse_url request 'edit_customer' customer.pk %}" class="btn btn-primary btn-sm">编辑</a>
                                 <a href="{% reverse_url request 'one_consult_list' customer.pk %}" class="btn btn-primary btn-sm">查看跟进</a>
+                                <a href="{% reverse_url request 'one_enrollment_list' customer.pk %}" class="btn btn-primary btn-sm">查看报名表</a>
+                                <a href="{% url  'add_enrollment' customer.pk %}" class="btn btn-primary btn-sm">添加报名表</a>
                             </td>
 
                         </tr>
