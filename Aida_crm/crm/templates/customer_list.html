@@ -17,6 +17,11 @@
 
             <form action="" class="form-inline pull-right">
                 <input type="text" name="query" class="form-control">
+{#                <select name="field" id="">#}
+{#                    <option value="name"> 姓名</option>#}
+{#                    <option value="qq"> qq</option>#}
+{#                    <option> 手机号</option>#}
+                </select>
                 <button class="btn btn-sm btn-success">搜索</button>
             </form>
 
@@ -82,8 +87,10 @@
                                 {#                    #}
 
                             </td>
-{#                            <td><a href="{% url 'edit_customer' customer.pk %}" class="btn btn-primary btn-sm">编辑</a>#}
-                            <td><a href="{% reverse_url  request  'edit_customer' customer.pk %}" class="btn btn-primary btn-sm">编辑</a>
+                            {#                            <td><a href="{% url 'edit_customer' customer.pk %}" class="btn btn-primary btn-sm">编辑</a>#}
+                            <td>
+                                <a href="{% reverse_url request 'edit_customer' customer.pk %}" class="btn btn-primary btn-sm">编辑</a>
+                                <a href="{% reverse_url request 'one_consult_list' customer.pk %}" class="btn btn-primary btn-sm">查看跟进</a>
                             </td>
 
                         </tr>
@@ -102,6 +109,11 @@
 
                 </ul>
             </nav>
+{#            <form action="" method="post">#}
+{#                {% csrf_token %}#}
+{#                <input type="text" name="page">#}
+{#                <button>跳转</button>#}
+{#            </form>#}
         </div>
     </div>
 

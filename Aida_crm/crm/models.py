@@ -115,7 +115,12 @@ class Customer(models.Model):
         }
 
         return mark_safe(
-            '<span style="color: white;background: {};padding: 5px" >{}</span>'.format(color_dict.get(self.status),self.get_status_display()))
+            '<span style="color: white;background: {};padding: 5px" >{}</span>'.format(color_dict.get(self.status),
+                                                                                       self.get_status_display()))
+
+    def __str__(self):
+        return "{} - {}".format(self.qq, self.name)
+        # return self.name if self.name else '暂无'
 
 
 class Campus(models.Model):

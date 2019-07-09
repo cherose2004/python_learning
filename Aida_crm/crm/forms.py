@@ -4,6 +4,16 @@ from django.core.exceptions import ValidationError
 import hashlib
 from multiselectfield.forms.fields import MultiSelectFormField
 
+
+class BSModelForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for filed in self.fields.values():
+            if isinstance(filed, (MultiSelectFormField, forms.BooleanField)):
+                continue
+            filed.widget.attrs['class'] = 'form-control'
+
+
 class RegForm(forms.ModelForm):
     password = forms.CharField(min_length=6,
                                widget=forms.PasswordInput(attrs={'placeholder': '您的密码', 'autocomplete': 'off'}))
@@ -45,9 +55,7 @@ class RegForm(forms.ModelForm):
             raise ValidationError('两次密码不一致!!')
 
 
-class CustomerForm(forms.ModelForm):
-
-
+class CustomerForm(BSModelForm):
     class Meta:
         model = models.Customer
         fields = "__all__"
@@ -57,12 +65,24 @@ class CustomerForm(forms.ModelForm):
         }
 
         # widgets = {
-            # 'qq': forms.TextInput(attrs={'class': 'form-control'}),
+        # 'qq': forms.TextInput(attrs={'class': 'form-control'}),
         # }
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for filed in self.fields.values():
-            if isinstance(filed,MultiSelectFormField):
-                continue
-            filed.widget.attrs['class'] = 'form-control'
+
+class ConsultRecordForm(BSModelForm):
+    class Meta:
+        model = models.ConsultRecord
+        fields = '__all__'
+
+
+    def __init__(self,request,*args,**kwargs):
+        super().__init__(*args,**kwargs)
+        # print(list(self.fields['customer'].choices))
+        # self.fields['customer'].choices = [('', '---------'), (1, '121312321321 - mjj')]
+        # self.fields['customer'].choices = request.user_obj.customers.all().values_list('pk','name')
+        # 限制咨询客户为当前销售的私户
+        self.fields['customer'].choices = [('', '---------'),] + [ (i.pk,str(i))  for i in request.user_obj.customers.all()]
+
+
+        # 限制跟进人为当前销售
+        self.fields['consultant'].choices = [(request.user_obj.pk,request.user_obj)]

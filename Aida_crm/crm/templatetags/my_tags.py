@@ -8,7 +8,6 @@ register = template.Library()
 def reverse_url(request, name, *args, **kwargs):
     # 获取当前的访问的路径
     next = request.get_full_path()
-    print(next)
     url = reverse(name, args=args, kwargs=kwargs)
 
     qd = QueryDict(mutable=True)

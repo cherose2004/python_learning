@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, reverse, HttpResponse
 from crm import models
 import hashlib
-from crm.forms import RegForm, CustomerForm
+from crm.forms import RegForm, CustomerForm, ConsultRecordForm
 
 
 def login(request):
@@ -81,6 +81,7 @@ class CustomerList(View):
                       {'all_customer': all_customer[page.start:page.end], 'page_html': page.page_html})
 
     def post(self, request, *args, **kwargs):
+
         action = request.POST.get('action')
         if not hasattr(self, action):
             return HttpResponse('非法操作')
@@ -156,7 +157,7 @@ def customer_change(request, pk=None):
                 return redirect(next)
             return redirect(reverse('customer_list'))
     title = '编辑客户' if pk else '新增客户'
-    return render(request, 'customer_form.html', {'form_obj': form_obj, 'title': title})
+    return render(request, 'form.html', {'form_obj': form_obj, 'title': title})
 
 
 users = [{'name': 'alex-{}'.format(i), 'pwd': 'alexdsb'} for i in range(1, 453)]
@@ -167,3 +168,28 @@ from utils.pagination import Pagination
 def user_list(request):
     page = Pagination(request.GET.get('page', 1), len(users), 20, 15)
     return render(request, 'user_list.html', {'users': users[page.start:page.end], 'page_html': page.page_html})
+
+
+class ConsultList(View):
+
+    def get(self, request, customer_id=None, *args, **kwargs):
+        if not customer_id:
+            # 展示当前销售的所有的跟进记录
+            all_consult = models.ConsultRecord.objects.filter(consultant=request.user_obj, delete_status=False)
+        else:
+            # 某一个客户的所有的跟进记录
+            all_consult = models.ConsultRecord.objects.filter(customer_id=customer_id, delete_status=False)
+        return render(request, 'consult_list.html', {'all_consult': all_consult.order_by('-date')})
+
+
+def consult_change(request, pk=None):
+    obj = models.ConsultRecord.objects.filter(pk=pk).first()
+    form_obj = ConsultRecordForm(request,instance=obj)
+    if request.method == 'POST':
+        form_obj = ConsultRecordForm(request,request.POST, instance=obj)
+        if form_obj.is_valid():
+            form_obj.save()
+            return redirect(reverse('consult_list'))
+
+    title = '编辑跟进' if pk else '新增跟进'
+    return render(request, 'form.html', {'form_obj': form_obj, 'title': title})
