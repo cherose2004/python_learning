@@ -124,3 +124,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+
+MAX_CUSTOMER_NUM = 3  # 配置写大写

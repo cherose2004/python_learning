@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect, reverse, HttpResponse
 from crm import models
 import hashlib
 from crm.forms import RegForm, CustomerForm, ConsultRecordForm, EnrollmentForm
+from django.db import transaction
+from Aida_crm.settings import MAX_CUSTOMER_NUM
+from django.conf import global_settings, settings
 
 
 def login(request):
@@ -85,16 +88,31 @@ class CustomerList(View):
         action = request.POST.get('action')
         if not hasattr(self, action):
             return HttpResponse('非法操作')
-        getattr(self, action)()
+        ret = getattr(self, action)()
+        if ret:
+            return ret
         return self.get(request, *args, **kwargs)
 
     def multi_apply(self):
         # 公户转私户
-        pk = self.request.POST.getlist('pk')
-        # 方法一
-        models.Customer.objects.filter(pk__in=pk).update(consultant=self.request.user_obj)
-        # 方法二
-        # self.request.user_obj.customers.add(*models.Customer.objects.filter(pk__in=pk))
+        pk = self.request.POST.getlist('pk')  # [5,6]
+
+        if models.Customer.objects.filter(consultant=self.request.user_obj).count() + len(pk) > settings.MAX_CUSTOMER_NUM:
+            return HttpResponse('做人不能太贪心，给别人留一点。')
+        try:
+            with transaction.atomic():
+
+                # 方法一
+                queryset = models.Customer.objects.filter(pk__in=pk, consultant=None).select_for_update()
+                if len(pk) == queryset.count():
+                    queryset.update(consultant=self.request.user_obj)
+                else:
+                    return HttpResponse('手速太慢，客户已经被别人抢走了！')
+
+                # 方法二
+                # self.request.user_obj.customers.add(*models.Customer.objects.filter(pk__in=pk))
+        except Exception as e:
+            print(e)
 
     def multi_pub(self):
         # 私户转公户
@@ -186,7 +204,7 @@ class ConsultList(View):
 def consult_change(request, pk=None, customer_id=None):
     obj = models.ConsultRecord.objects.filter(pk=pk).first()
 
-    models.ConsultRecord(customer_id=customer_id,consultant=request.user_obj)
+    models.ConsultRecord(customer_id=customer_id, consultant=request.user_obj)
     form_obj = ConsultRecordForm(request, customer_id, instance=obj)
     if request.method == 'POST':
         form_obj = ConsultRecordForm(request, customer_id, request.POST, instance=obj)
@@ -211,7 +229,7 @@ class EnrollmentList(View):
         return render(request, 'enrollment_list.html', {'all_enrollment': all_enrollment.order_by('-enrolled_date'), })
 
 
-def enrollment_change(request, pk=None,customer_id=None):
+def enrollment_change(request, pk=None, customer_id=None):
     obj = models.Enrollment(customer_id=customer_id) if customer_id else models.Enrollment.objects.filter(pk=pk).first()
     form_obj = EnrollmentForm(instance=obj)
     if request.method == 'POST':
