@@ -1,44 +1,11 @@
 from django.shortcuts import render, redirect, reverse, HttpResponse
 from crm import models
-import hashlib
 from crm.forms import RegForm, CustomerForm, ConsultRecordForm, EnrollmentForm
 from django.db import transaction
 from Aida_crm.settings import MAX_CUSTOMER_NUM
 from django.conf import global_settings, settings
 
 
-def login(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        md5 = hashlib.md5()
-        md5.update(password.encode('utf-8'))
-
-        obj = models.UserProfile.objects.filter(username=username, password=md5.hexdigest(), is_active=True).first()
-        if obj:
-            # 登录成功
-            request.session['is_login'] = True
-            request.session['user_id'] = obj.pk
-            return redirect(reverse('index'))
-            # return redirect('index')
-        else:
-            return render(request, 'login.html', {'error': '用户名或密码错误'})
-    return render(request, 'login.html')
-
-
-def reg(request):
-    form_obj = RegForm()
-    if request.method == 'POST':
-        form_obj = RegForm(request.POST)
-        # 对提交的数据进行校验
-        if form_obj.is_valid():
-            # 校验成功  把数据插入数据中
-            # form_obj.cleaned_data.pop('re_password')
-            # models.UserProfile.objects.create(**form_obj.cleaned_data)
-            obj = form_obj.save()
-            return redirect(reverse('login'))
-        print(form_obj.errors)
-    return render(request, 'reg.html', {'form_obj': form_obj})
 
 
 def index(request):
@@ -51,7 +18,7 @@ def customer_list(request):
     else:
         all_customer = models.Customer.objects.filter(consultant=request.user_obj)
 
-    return render(request, 'customer_list.html', {'all_customer': all_customer})
+    return render(request, 'consultant/customer_list.html', {'all_customer': all_customer})
 
 
 from django.views import View
@@ -80,7 +47,7 @@ class CustomerList(View):
 
         page = Pagination(request.GET.get('page', 1), all_customer.count(), request.GET.copy(), 2)
 
-        return render(request, 'customer_list.html',
+        return render(request, 'consultant/customer_list.html',
                       {'all_customer': all_customer[page.start:page.end], 'page_html': page.page_html})
 
     def post(self, request, *args, **kwargs):
@@ -145,7 +112,7 @@ def add_customer(request):
             form_obj.save()
             return redirect(reverse('customer_list'))
 
-    return render(request, 'add_customer.html', {'form_obj': form_obj})
+    return render(request, 'consultant/add_customer.html', {'form_obj': form_obj})
 
 
 def edit_customer(request, pk):
@@ -158,7 +125,7 @@ def edit_customer(request, pk):
         if form_obj.is_valid():
             form_obj.save()
             return redirect(reverse('customer_list'))
-    return render(request, 'edit_customer.html', {'form_obj': form_obj})
+    return render(request, 'consultant/edit_customer.html', {'form_obj': form_obj})
 
 
 def customer_change(request, pk=None):
@@ -197,7 +164,7 @@ class ConsultList(View):
         else:
             # 某一个客户的所有的跟进记录
             all_consult = models.ConsultRecord.objects.filter(customer_id=customer_id, delete_status=False)
-        return render(request, 'consult_list.html',
+        return render(request, 'consultant/consult_list.html',
                       {'all_consult': all_consult.order_by('-date'), 'customer_id': customer_id})
 
 
@@ -226,7 +193,7 @@ class EnrollmentList(View):
         else:
             # 某一个客户的报名记录
             all_enrollment = models.Enrollment.objects.filter(customer_id=customer_id, delete_status=False)
-        return render(request, 'enrollment_list.html', {'all_enrollment': all_enrollment.order_by('-enrolled_date'), })
+        return render(request, 'consultant/enrollment_list.html', {'all_enrollment': all_enrollment.order_by('-enrolled_date'), })
 
 
 def enrollment_change(request, pk=None, customer_id=None):

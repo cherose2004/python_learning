@@ -104,3 +104,27 @@ class EnrollmentForm(BSModelForm):
         self.fields['customer'].choices = [(self.instance.customer.pk, self.instance.customer)]
 
         self.fields['enrolment_class'].choices = [(i.pk, str(i)) for i in self.instance.customer.class_list.all()]
+
+
+class ClassListForm(BSModelForm):
+    class Meta:
+        model = models.ClassList
+        fields = "__all__"
+
+
+class CourseRecordForm(BSModelForm):
+    class Meta:
+        model = models.CourseRecord
+        fields = "__all__"
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # 限制班级为当前的班级
+        self.fields['re_class'].choices = [(self.instance.re_class_id, self.instance.re_class)]
+
+        # 限制记录者为当前的用户
+        self.fields['recorder'].choices = [(self.instance.recorder_id, self.instance.recorder)]
+
+        #  限制讲师为当前的班级的讲师
+        self.fields['teacher'].choices = [(i.pk, str(i)) for i in self.instance.re_class.teachers.all()]

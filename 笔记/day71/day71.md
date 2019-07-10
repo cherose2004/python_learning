@@ -169,3 +169,62 @@
     - 限制客户为当前用户的私户    
 
 4.报名表的管理    
+
+## 今日内容
+
+1.公户变私户
+
+行级锁
+
+数据库
+
+```sql
+begin； 开启事务
+
+select * from t6 where f1 = 23.46 for update;   加行级锁
+
+commit； 结束事务
+```
+
+django：
+
+```python
+from django.db import transaction
+
+try:
+    with transaction.atomic():
+
+        # 方法一
+        queryset = models.Customer.objects.filter(pk__in=pk, consultant=None).select_for_update()
+
+        queryset.update(consultant=self.request.user_obj)
+   
+except Exception as e:
+	print(e)
+
+
+
+```
+
+2.私户的上限
+
+settings：
+
+```python
+MAX_CUSTOMER_NUM = 3  # 配置写大写
+```
+
+views：
+
+```python
+from Aida_crm.settings import MAX_CUSTOMER_NUM
+from django.conf import global_settings, settings
+settings.MAX_CUSTOMER_NUM
+
+```
+
+3.班主任
+
+- 班级的管理
+- 课程记录的管理
+- 学习记录（上课记录）的管理

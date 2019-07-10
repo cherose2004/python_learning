@@ -144,7 +144,7 @@ class ClassList(models.Model):
     memo = models.CharField('说明', blank=True, null=True, max_length=100)
     start_date = models.DateField("开班日期")
     graduate_date = models.DateField("结业日期", blank=True, null=True)
-    teachers = models.ManyToManyField('UserProfile', verbose_name="老师")
+    teachers = models.ManyToManyField('UserProfile', verbose_name="老师",blank=True,)
     class_type = models.CharField(choices=class_type_choices, max_length=64, verbose_name='班额及类型', blank=True,
                                   null=True)
 
@@ -154,6 +154,8 @@ class ClassList(models.Model):
     def __str__(self):
         return "{}-{}".format(self.get_course_display(), self.semester)
 
+    def show_teachers(self):
+        return  '|'.join([ str(i) for i in self.teachers.all()])
 
 class ConsultRecord(models.Model):
     """
@@ -230,6 +232,10 @@ class CourseRecord(models.Model):
 
     class Meta:
         unique_together = ('re_class', 'day_num')
+
+
+    def __str__(self):
+        return " {} - ({})" .format(str(self.re_class),self.day_num)
 
 
 class StudyRecord(models.Model):
