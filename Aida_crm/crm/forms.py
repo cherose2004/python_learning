@@ -128,3 +128,9 @@ class CourseRecordForm(BSModelForm):
 
         #  限制讲师为当前的班级的讲师
         self.fields['teacher'].choices = [(i.pk, str(i)) for i in self.instance.re_class.teachers.all()]
+
+
+class StudyRecordForm(BSModelForm):
+    class Meta:
+        model = models.StudyRecord
+        fields = "__all__"

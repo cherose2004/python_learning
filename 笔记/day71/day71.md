@@ -220,11 +220,56 @@ views：
 from Aida_crm.settings import MAX_CUSTOMER_NUM
 from django.conf import global_settings, settings
 settings.MAX_CUSTOMER_NUM
-
 ```
 
 3.班主任
 
 - 班级的管理
+
 - 课程记录的管理
+
 - 学习记录（上课记录）的管理
+
+  批量插入
+
+  ```python
+  study_record_list = [] 
+  for student in students:
+      	study_record_list.append(models.StudyRecord(course_record=course_record,student=student))
+      
+  models.StudyRecord.objects.bulk_create(study_record_list)
+  ```
+
+
+
+form
+
+modelform
+
+modelformset
+
+```python 
+from django.forms import modelformset_factory
+ModelFormSet = modelformset_factory(models.StudyRecord, StudyRecordForm, extra=0)
+    form_set_obj = ModelFormSet(queryset=models.StudyRecord.objects.filter(course_record_id=course_record_id))
+    
+
+
+{{ form.instance  }}     StudyRecord对象
+{{ form.attendance }}    _>  input select框
+
+编辑
+{{ form_set_obj.management_form }}
+{{ form.id }}
+
+ModelFormSet = modelformset_factory(models.StudyRecord, StudyRecordForm, extra=0)
+    form_set_obj = ModelFormSet(queryset=models.StudyRecord.objects.filter(course_record_id=course_record_id),data=request.POST)
+    
+    
+form_set_obj.is_valid()  对提交的数据进行校验
+form_set_obj.save()  	保存修改
+
+```
+
+
+

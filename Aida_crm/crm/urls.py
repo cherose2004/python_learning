@@ -48,6 +48,7 @@ urlpatterns = [
     url(r'^add_course_record/(?P<class_id>\d+)$', teacher.course_record_change, name='add_course_record'),
     # 编辑课程记录
     url(r'^edit_course_record/(?P<pk>\d+)$', teacher.course_record_change, name='edit_course_record'),
-
+    # 展示学习记录
+    url(r'^study_record/(?P<course_record_id>\d+)$', teacher.study_record_list, name='study_record'),
 
 ]
