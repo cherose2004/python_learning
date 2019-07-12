@@ -1,12 +1,21 @@
 from django.db import models
 
 
+class Menu(models.Model):
+    title = models.CharField(max_length=32, verbose_name="菜单名")
+    icon = models.CharField('图标', max_length=50)
+
+    def __str__(self):
+        return self.title
+
 class Permission(models.Model):
-    """权限表"""
+    """权限表
+    有menu_id      二级菜单
+    没有menu_id   普通的权限
+    """
     url = models.CharField('url地址', max_length=100)
     title = models.CharField('标题', max_length=32)
-    is_menu = models.BooleanField(default=False, verbose_name='是否是菜单')
-    icon = models.CharField('图标', max_length=50)
+    menu = models.ForeignKey('Menu', blank=True, null=True)
 
     def __str__(self):
         return self.title
