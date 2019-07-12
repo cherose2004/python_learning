@@ -36,7 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'web.apps.WebConfig',
-    'rbac.apps.RbacConfig'
+    'rbac.apps.RbacConfig',
+
 ]
 
 MIDDLEWARE = [
@@ -47,7 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'web.middlewares.middleware.AuthMiddleWare'
+    'rbac.middlewares.middleware.AuthMiddleWare'
 ]
 
 ROOT_URLCONF = 'luffy_permission.urls'
@@ -116,6 +117,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
 
 #  白名单
 WHITE_LIST = [

@@ -4,7 +4,7 @@ import re
 register = template.Library()
 
 
-@register.inclusion_tag('menu.html')
+@register.inclusion_tag('rbac/menu.html')
 def menu(request):
     menu_list = request.session.get(settings.MENU_SESSION_KEY)
     url = request.path_info
