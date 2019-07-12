@@ -59,4 +59,3 @@ def customer_del(request, cid):
     """
     models.Customer.objects.filter(id=cid).delete()
     return redirect('/customer/list/')
-

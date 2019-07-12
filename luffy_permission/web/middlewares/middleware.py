@@ -22,9 +22,10 @@ class AuthMiddleWare(MiddlewareMixin):
             if re.match(url, path):
                 return
         # 获取权限信息
-        permissions = request.session.get('permissions')
+        permissions = request.session.get(settings.PERMISSION_SESSION_KEY)
+
         # 权限的校验
-        for permission in permissions:
-            if re.match(permission['permissions__url'], path):
+        for i in permissions:
+            if re.match(r"{}$".format(i['url']), path):
                 return
         return HttpResponse('没有访问权限,请联系管理员')

@@ -129,3 +129,9 @@ NO_PERMISSION_LIST = [
     r'/index/'
 
 ]
+
+# 权限的session的key
+PERMISSION_SESSION_KEY = 'permission'
+
+# 菜单的session的key
+MENU_SESSION_KEY = 'menu'
