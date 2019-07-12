@@ -1,7 +1,4 @@
 {% for menu in menu_list %}
-    <a href="{{ menu.url }}"  class="{{ menu.class }}">
-
-
-
+    <a href="{{ menu.url }}" class="  {% if menu.url == url %}active{% endif %}">
         <span class="icon-wrap"><i class="fa {{ menu.icon }}"></i></span> {{ menu.title }}</a>
 {% endfor %}

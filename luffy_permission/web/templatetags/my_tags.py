@@ -13,5 +13,4 @@ def menu(request):
             i['class'] = 'active'
             break
 
-
-    return {'menu_list': menu_list,}
+    return {'menu_list': menu_list,'url':url}
