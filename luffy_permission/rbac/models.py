@@ -4,9 +4,11 @@ from django.db import models
 class Menu(models.Model):
     title = models.CharField(max_length=32, verbose_name="菜单名")
     icon = models.CharField('图标', max_length=50)
+    weight = models.IntegerField(default=1)
 
     def __str__(self):
         return self.title
+
 
 class Permission(models.Model):
     """权限表

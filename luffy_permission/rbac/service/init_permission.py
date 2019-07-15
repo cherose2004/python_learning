@@ -8,12 +8,13 @@ def init_permission(request, obj):
         'permissions__title',
         'permissions__menu__title',
         'permissions__menu__icon',
+        'permissions__menu__weight',
         'permissions__menu_id',
     ).distinct()
 
     # 权限信息的列表
     permission_list = []
-    # 菜单信息的列表
+    # 菜单信息的字典
     menu_dict = {}
 
     for i in permissions:  # {  'permissions__url', }
@@ -27,14 +28,16 @@ def init_permission(request, obj):
             menu_dict[menu_id] = {
                 'title': i.get('permissions__menu__title'),
                 'icon': i.get('permissions__menu__icon'),
+                'weight': i.get('permissions__menu__weight'),
                 'children': [
                     {'title': i.get('permissions__title'), 'url': i.get('permissions__url')}
                 ]
             }
         else:
-            menu_dict[menu_id]['children'].append({'title': i.get('permissions__title'), 'url': i.get('permissions__url')})
+            menu_dict[menu_id]['children'].append(
+                {'title': i.get('permissions__title'), 'url': i.get('permissions__url')})
 
-
+    print(menu_dict)
     # 保存到session中
     request.session[settings.PERMISSION_SESSION_KEY] = permission_list  # json序列化
     request.session[settings.MENU_SESSION_KEY] = menu_dict  # json序列化
