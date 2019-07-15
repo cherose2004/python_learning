@@ -18,6 +18,7 @@ class Permission(models.Model):
     url = models.CharField('url地址', max_length=100)
     title = models.CharField('标题', max_length=32)
     menu = models.ForeignKey('Menu', blank=True, null=True)
+    parent = models.ForeignKey('self', blank=True, null=True)
 
     def __str__(self):
         return self.title

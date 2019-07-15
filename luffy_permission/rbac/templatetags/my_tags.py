@@ -9,7 +9,7 @@ from collections import OrderedDict
 @register.inclusion_tag('rbac/menu.html')
 def menu(request):
     menu_dict = request.session.get(settings.MENU_SESSION_KEY)
-    url = request.path_info
+    # url = request.path_info
     od = OrderedDict()
     keys_list = sorted(menu_dict, key=lambda x: menu_dict[x]['weight'], reverse=True)
 
@@ -19,9 +19,13 @@ def menu(request):
     for i in menu_dict.values():
         i['class'] = 'hide'
         for m in i['children']:
-            if re.match(r'{}$'.format(m['url']), url):
+            if request.current_menu_id == m['id']:
                 m['class'] = 'active'
                 i['class'] = ''
-
-    print(od.values())
     return {'menu_list': od.values()}
+
+
+@register.inclusion_tag('rbac/breadcrumb.html')
+def breadcrumb(request):
+    breadcrumb_list = request.breadcrumb_list
+    return {'breadcrumb_list': breadcrumb_list}
