@@ -16,6 +16,7 @@ class Permission(models.Model):
     没有menu_id   普通的权限
     """
     url = models.CharField('url地址', max_length=100)
+    name = models.CharField('url别名', max_length=50,unique=True)
     title = models.CharField('标题', max_length=32)
     menu = models.ForeignKey('Menu', blank=True, null=True)
     parent = models.ForeignKey('self', blank=True, null=True)

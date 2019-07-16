@@ -11,6 +11,8 @@ def init_permission(request, obj):
         'permissions__menu__weight',
         'permissions__menu_id',
         'permissions__id',
+        'permissions__name',
+        'permissions__parent__name',
         'permissions__parent_id',
     ).distinct()
 
@@ -19,9 +21,15 @@ def init_permission(request, obj):
     # 菜单信息的字典
     menu_dict = {}
 
+
     for i in permissions:  # {  'permissions__url', }
-        permission_dict[i['permissions__id']] = {'url': i['permissions__url'], 'id': i['permissions__id'],
-                                                 'pid': i['permissions__parent_id'], 'title': i['permissions__title']}
+        permission_dict[i['permissions__name']] = {
+            'url': i['permissions__url'],
+            'id': i['permissions__id'],
+            'pid': i['permissions__parent_id'],
+            'pname': i['permissions__parent__name'],
+            'title': i['permissions__title']
+        }
 
         menu_id = i.get('permissions__menu_id')
         if not menu_id:

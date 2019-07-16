@@ -39,7 +39,8 @@ class AuthMiddleWare(MiddlewareMixin):
                 if pid:
                     # 当前访问的是一个子权限
                     request.current_menu_id = pid
-                    p_permission = permissions_dict[str(pid)]
+                    # p_permission = permissions_dict[str(pid)]
+                    p_permission = permissions_dict[i['pname']]
 
                     request.breadcrumb_list.append({'url': p_permission['url'], 'title': p_permission['title']})
                     request.breadcrumb_list.append({'url': i['url'], 'title': i['title']})
