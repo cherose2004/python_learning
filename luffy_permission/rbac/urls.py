@@ -18,4 +18,6 @@ urlpatterns = [
 
     url(r'^multi/permissions/$', views.multi_permissions, name='multi_permissions'),
 
+    url(r'^distribute/permissions/$', views.distribute_permissions, name='distribute_permissions'),
+
 ]

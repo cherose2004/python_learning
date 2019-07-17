@@ -437,6 +437,8 @@ rbac
      - name  in  permission_dict    在返回True
      - {% if   request|has_permission: name   %}    { % endif %}
 
+## 今日内容
+
 1. 单个权限的新增编辑删除
 
 2. 批量操作权限

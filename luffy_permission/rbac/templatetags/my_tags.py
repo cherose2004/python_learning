@@ -30,8 +30,16 @@ def breadcrumb(request):
     breadcrumb_list = request.breadcrumb_list
     return {'breadcrumb_list': breadcrumb_list}
 
+
 @register.filter
 def has_permission(request, name):
     permission_dict = request.session.get(settings.PERMISSION_SESSION_KEY)
     if name in permission_dict:
         return True
+
+
+@register.simple_tag
+def gen_role_url(request, rid):
+    params = request.GET.copy()
+    params['rid'] = rid
+    return params.urlencode()

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, HttpResponse
 from rbac import models
 from rbac.forms import RoleForm, MenuForm, PermissionForm, MultiPermissionForm
 from rbac.service.routes import get_all_url_dict
@@ -150,5 +150,134 @@ def multi_permissions(request):
             'del_formset': del_formset,
             'update_formset': update_formset,
             'add_formset': add_formset,
+        }
+    )
+
+
+def distribute_permissions(request):
+    """
+    分配权限
+    :param request:
+    :return:
+    """
+    # 用户的id
+    uid = request.GET.get('uid')
+    rid = request.GET.get('rid')
+
+    if request.method == 'POST' and request.POST.get('postType') == 'role':
+        user = models.User.objects.filter(id=uid).first()
+        if not user:
+            return HttpResponse('用户不存在')
+        user.roles.set(request.POST.getlist('roles'))
+
+    if request.method == 'POST' and request.POST.get('postType') == 'permission' and rid:
+        role = models.Role.objects.filter(id=rid).first()
+        if not role:
+            return HttpResponse('角色不存在')
+        role.permissions.set(request.POST.getlist('permissions'))
+
+
+    # 所有的用户
+    user_list = models.User.objects.all()
+    # 用户所拥有角色id
+    user_has_roles = models.User.objects.filter(id=uid).values('id', 'roles')
+    # 用户所拥有角色id的字典
+    user_has_roles_dict = {item['roles']: None for item in user_has_roles}
+    # 所有的角色
+    role_list = models.Role.objects.all()
+
+    if rid:
+        role_has_permissions = models.Role.objects.filter(id=rid, permissions__id__isnull=False).values('id',
+                                                                                                        'permissions')
+    elif uid and not rid:
+        # 用户的对象
+        user = models.User.objects.filter(id=uid).first()
+        if not user:
+            return HttpResponse('用户不存在')
+        # 当前用户所有的权限的 【{ role_id  permission_id  }】
+        role_has_permissions = user.roles.filter(permissions__id__isnull=False).values('id', 'permissions')
+    else:
+        role_has_permissions = []
+    # 用户所拥有的权限的字典
+    role_has_permissions_dict = {item['permissions']: None for item in role_has_permissions}
+
+    # 所有的菜单
+    all_menu_list = []
+
+    """
+    all_menu_list = [ {   id   title children:[
+            {  'id', 'title', 'menu_id'  children : [
+                     { 'id', 'title', 'parent_id'  }
+            ]  }
+    ]   }
+     
+        {'id': None, 'title': '其他', 'children': [
+              { 'id', 'title', 'parent_id'：None  }
+        ]}
+     ]
+    """
+
+    queryset = models.Menu.objects.values('id', 'title')
+    menu_dict = {}
+    """
+    menu_dict = { 一级菜单的id: {   id   title children:[
+                    {  'id', 'title', 'menu_id'  children : [
+                             { 'id', 'title', 'parent_id'  }
+                        ]  }
+            ]   } ,
+                None:{'id': None, 'title': '其他', 'children': [
+                    
+                     { 'id', 'title', 'parent_id'：None  }
+                ]}
+    }
+    
+    """
+
+    for item in queryset:  #  item  {   id   title children:[]   }
+        item['children'] = []
+        menu_dict[item['id']] = item
+        all_menu_list.append(item)
+
+    other = {'id': None, 'title': '其他', 'children': []}
+    all_menu_list.append(other)
+    menu_dict[None] = other
+
+    root_permission = models.Permission.objects.filter(menu__isnull=False).values('id', 'title', 'menu_id')
+    root_permission_dict = {}
+    """
+    root_permission_dict = {
+        二级菜单的id： {  'id', 'title', 'menu_id'  children : [
+            { 'id', 'title', 'parent_id'  }
+        ]  }  
+    }
+    """
+
+    for per in root_permission:  #  per  {  'id', 'title', 'menu_id'  children : []  }
+        per['children'] = []
+        nid = per['id']
+        menu_id = per['menu_id']
+        root_permission_dict[nid] = per
+        menu_dict[menu_id]['children'].append(per)
+
+    node_permission = models.Permission.objects.filter(menu__isnull=True).values('id', 'title', 'parent_id')
+
+    for per in node_permission:   # per   { 'id', 'title', 'parent_id'  }
+        pid = per['parent_id']
+        if not pid:
+            menu_dict[None]['children'].append(per)
+            continue
+        root_permission_dict[pid]['children'].append(per)
+
+    return render(
+        request,
+        'rbac/distribute_permissions.html',
+        {
+            'user_list': user_list,
+            'role_list': role_list,
+            'user_has_roles_dict': user_has_roles_dict,
+            'role_has_permissions_dict': role_has_permissions_dict,
+            'all_menu_list': all_menu_list,
+            'uid': uid,
+            'rid': rid
         }
     )
