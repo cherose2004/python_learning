@@ -21,6 +21,7 @@ def init_permission(request, obj):
     # 菜单信息的字典
     menu_dict = {}
 
+
     for i in permissions:  # {  'permissions__url', }
         permission_dict[i['permissions__name']] = {
             'url': i['permissions__url'],
@@ -46,11 +47,8 @@ def init_permission(request, obj):
             }
         else:
             menu_dict[menu_id]['children'].append(
-                {'title': i.get('permissions__title'), 'url': i.get('permissions__url'),
-                 'id': i.get('permissions__id')})
+                {'title': i.get('permissions__title'), 'url': i.get('permissions__url'), 'id': i.get('permissions__id')})
 
-    print(permission_dict)
-    print(menu_dict)
     # 保存到session中
     request.session[settings.PERMISSION_SESSION_KEY] = permission_dict  # json序列化
     request.session[settings.MENU_SESSION_KEY] = menu_dict  # json序列化

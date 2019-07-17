@@ -6,10 +6,10 @@ from crm import models
 class AuthMiddleware(MiddlewareMixin):
     def process_request(self, request):
 
-        if request.path_info in [reverse('login'), reverse('reg')]:
-            return None
-        if request.path_info.startswith('/admin'):
-            return None
+        # if request.path_info in [reverse('login'), reverse('reg')]:
+        #     return None
+        # if request.path_info.startswith('/admin'):
+        #     return None
         # 没登录跳转到登录页面
         if not request.session.get('is_login'):
             return redirect(reverse('login'))

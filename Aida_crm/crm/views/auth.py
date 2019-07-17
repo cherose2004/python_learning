@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, reverse, HttpResponse
 from crm import models
 import hashlib
 from crm.forms import RegForm
-
+from rbac.service.init_permission import init_permission
 
 def login(request):
     if request.method == 'POST':
@@ -14,6 +14,7 @@ def login(request):
         obj = models.UserProfile.objects.filter(username=username, password=md5.hexdigest(), is_active=True).first()
         if obj:
             # 登录成功
+            init_permission(request,obj)
             request.session['is_login'] = True
             request.session['user_id'] = obj.pk
             return redirect(reverse('index'))

@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rbac.apps.RbacConfig',
     'crm.apps.CrmConfig',
 ]
 
@@ -46,6 +47,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'rbac.middlewares.middleware.AuthMiddleWare',
     'crm.middlewares.middleware.AuthMiddleware',
 ]
 
@@ -126,3 +128,21 @@ STATICFILES_DIRS = [
 ]
 
 MAX_CUSTOMER_NUM = 3  # 配置写大写
+
+#  白名单
+WHITE_LIST = [
+    r'/crm/login/$',
+    r'/crm/reg/$',
+    r'/admin/.*'
+]
+
+# 免认证的地址
+NO_PERMISSION_LIST = [
+    r'/crm/index/'
+]
+
+# 权限的session的key
+PERMISSION_SESSION_KEY = 'permission'
+
+# 菜单的session的key
+MENU_SESSION_KEY = 'menu'

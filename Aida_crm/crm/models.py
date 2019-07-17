@@ -63,7 +63,9 @@ class Department(models.Model):
         return self.name
 
 
-class UserProfile(models.Model):
+
+from rbac.models import  User
+class UserProfile(User):
     """
     用户表
     """
