@@ -44,7 +44,7 @@
                             <td><i class="fa {{ menu.icon }}"></i></td>
                             <td>
                                 <a href="{% url 'menu_edit' menu.pk %}"> <i class="fa fa-edit"></i> </a>
-                                <a href=""> <i class="fa fa-trash-o"></i> </a>
+                                <a href="{% url 'delete' 'menu' menu.pk %}"> <i class="fa fa-trash-o"></i> </a>
                             </td>
                         </tr>
                     {% endfor %}
@@ -58,9 +58,10 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading"><i class="fa fa-cubes"></i> 权限管理
-                    <a href="" class="btn btn-sm btn-primary pull-right" style="padding: 2px 7px;margin-top: -3px"> <i
+                    <a href="{% url 'multi_permissions' %}" class="btn btn-sm btn-primary pull-right" style="padding: 2px 7px;margin-top: -3px"> <i
                             class="fa fa-mail-forward"></i> 批量操作</a>
-                    <a href="" class="btn btn-sm btn-success pull-right" style="padding: 2px 7px;margin-top: -3px"> <i
+                    <a href="{% url 'permission_add' %}" class="btn btn-sm btn-success pull-right"
+                       style="padding: 2px 7px;margin-top: -3px"> <i
                             class="fa fa-plus-circle"></i> 新建</a>
 
                 </div>
@@ -89,8 +90,8 @@
 
 
                             <td>
-                                <a href=""> <i class="fa fa-edit"></i> </a>
-                                <a href=""> <i class="fa fa-trash-o"></i> </a>
+                                <a href="{% url 'permission_edit' p_permission.id %}"> <i class="fa fa-edit"></i> </a>
+                                <a href="{% url 'delete' 'permission' p_permission.id %}"> <i class="fa fa-trash-o"></i> </a>
                             </td>
                         </tr>
 
@@ -106,8 +107,9 @@
 
 
                                 <td>
-                                    <a href=""> <i class="fa fa-edit"></i> </a>
-                                    <a href=""> <i class="fa fa-trash-o"></i> </a>
+                                    <a href="{% url 'permission_edit' c_permission.id %}"> <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a href="{% url 'delete' 'permission' c_permission.id %}"> <i class="fa fa-trash-o"></i> </a>
                                 </td>
                             </tr>
                         {% endfor %}
