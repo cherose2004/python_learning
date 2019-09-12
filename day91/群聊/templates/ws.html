@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="content"><button onclick="send_msg()">发送消息</button>
+<div id="content_list">
+
+</div>
+
+</body>
+<script type="application/javascript">
+    var ws = new WebSocket("ws://192.168.12.87:9527/ws");
+    ws.onmessage = function (messageEvent) {
+        console.log(messageEvent.data);
+        var my_div = document.getElementById("content_list");
+        var ptag = document.createElement("p");
+        ptag.innerText = messageEvent.data;
+        my_div.appendChild(ptag);
+    };
+
+    function send_msg() {
+        var msg = document.getElementById("content").value;
+        ws.send(msg);
+    }
+
+</script>
+</html>

@@ -122,6 +122,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
+
+
 #  白名单
 WHITE_LIST = [
     r'/login/$',
