@@ -6,8 +6,6 @@ from Aida_crm.settings import MAX_CUSTOMER_NUM
 from django.conf import global_settings, settings
 
 
-
-
 def index(request):
     return render(request, 'index.html')
 
@@ -64,7 +62,8 @@ class CustomerList(View):
         # 公户转私户
         pk = self.request.POST.getlist('pk')  # [5,6]
 
-        if models.Customer.objects.filter(consultant=self.request.user_obj).count() + len(pk) > settings.MAX_CUSTOMER_NUM:
+        if models.Customer.objects.filter(consultant=self.request.user_obj).count() + len(
+                pk) > settings.MAX_CUSTOMER_NUM:
             return HttpResponse('做人不能太贪心，给别人留一点。')
         try:
             with transaction.atomic():
@@ -128,7 +127,7 @@ def edit_customer(request, pk):
     return render(request, 'consultant/edit_customer.html', {'form_obj': form_obj})
 
 
-def customer_change(request, pk=None):
+def customer_change(request, pk=None, ):
     obj = models.Customer.objects.filter(pk=pk).first()
 
     form_obj = CustomerForm(instance=obj)
@@ -193,7 +192,8 @@ class EnrollmentList(View):
         else:
             # 某一个客户的报名记录
             all_enrollment = models.Enrollment.objects.filter(customer_id=customer_id, delete_status=False)
-        return render(request, 'consultant/enrollment_list.html', {'all_enrollment': all_enrollment.order_by('-enrolled_date'), })
+        return render(request, 'consultant/enrollment_list.html',
+                      {'all_enrollment': all_enrollment.order_by('-enrolled_date'), })
 
 
 def enrollment_change(request, pk=None, customer_id=None):

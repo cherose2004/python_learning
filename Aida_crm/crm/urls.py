@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from crm.views import auth,consultant,teacher
-
+from django.utils.safestring import mark_safe
 urlpatterns = [
     url(r'^login/', auth.login, name='login'),
     url(r'^reg/', auth.reg, name='reg'),

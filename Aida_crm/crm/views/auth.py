@@ -4,6 +4,7 @@ import hashlib
 from crm.forms import RegForm
 from rbac.service.init_permission import init_permission
 
+
 def login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -14,7 +15,7 @@ def login(request):
         obj = models.UserProfile.objects.filter(username=username, password=md5.hexdigest(), is_active=True).first()
         if obj:
             # 登录成功
-            init_permission(request,obj)
+            init_permission(request, obj)
             request.session['is_login'] = True
             request.session['user_id'] = obj.pk
             return redirect(reverse('index'))
@@ -37,3 +38,8 @@ def reg(request):
             return redirect(reverse('login'))
         print(form_obj.errors)
     return render(request, 'reg.html', {'form_obj': form_obj})
+
+
+from django.utils.deprecation import MiddlewareMixin
+
+

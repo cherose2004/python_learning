@@ -1,6 +1,7 @@
 from django.utils.deprecation import MiddlewareMixin
 from django.shortcuts import redirect, reverse
 from crm import models
+from django.template.response import TemplateResponse
 
 
 class AuthMiddleware(MiddlewareMixin):
@@ -17,3 +18,8 @@ class AuthMiddleware(MiddlewareMixin):
         obj = models.UserProfile.objects.filter(pk=request.session.get('user_id')).first()
         if obj:
             request.user_obj = obj
+
+    def process_template_response(self, request,response):
+
+
+        return response

@@ -146,3 +146,5 @@ PERMISSION_SESSION_KEY = 'permission'
 
 # 菜单的session的key
 MENU_SESSION_KEY = 'menu'
+SESSION_COOKIE_NAME = 'session'
+from django.contrib.sessions.backends import db
