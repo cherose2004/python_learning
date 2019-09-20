@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="zh-cn"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="referrer" content="origin">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>Web框架的原理 - maple-shaw - 博客园</title>
+    <meta property="og:description" content="Web框架本质 我们可以这样理解：所有的Web应用本质上就是一个socket服务端，而用户的浏览器就是一个socket客户端。 这样我们就可以自己实现Web框架了。 socket服务端 import&amp;">
+    <link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=KOZafwuaDasEedEenI5aTy8aXH0epbm6VUJ0v3vsT_Q1">
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/SimpleMemory/bundle-SimpleMemory.css?v=EanP3quXYv9G0oFCmz4BNBHvmK7M_Si1iD1EpUHL_441">
+<link type="text/css" rel="stylesheet" href="/blog/customcss/356358.css?v=fonu5UfFpOd4zexekRwEiQ3kuII%3d">
+<link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/SimpleMemory/bundle-SimpleMemory-mobile.css?v=C8rNZMN1xUcogg2mnN6C_ci7S2vGnJTt9TmfmncHzEA1">
+    <link title="RSS" type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/maple-shaw/rss">
+    <link title="RSD" type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/maple-shaw/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/maple-shaw/wlwmanifest.xml">
+    <script src="https://cdn.ampproject.org/rtv/011905292322390/amp4ads-host-v0.js"></script><script src="https://securepubads.g.doubleclick.net/gpt/pubads_impl_rendering_2019053001.js"></script><script async="" src="https://www.google-analytics.com/analytics.js"></script><script type="text/javascript" src="https://common.cnblogs.com/script/encoder.js"></script><script src="//common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script>var currentBlogId=356358;var currentBlogApp='maple-shaw',cb_enable_mathjax=false;var isLogined=false;</script>
+    <script src="/bundles/blog-common.js?v=smtcUT5dhdu_5eEO8CKHYoVc7DPLgEBGzp6zKkstlzg1" type="text/javascript"></script>
+<link rel="preload" href="https://adservice.google.com/adsid/integrator.js?domain=www.cnblogs.com" as="script"><script type="text/javascript" src="https://adservice.google.com/adsid/integrator.js?domain=www.cnblogs.com"></script><script src="https://securepubads.g.doubleclick.net/gpt/pubads_impl_2019053001.js" async=""></script><link rel="prefetch" href="https://tpc.googlesyndication.com/safeframe/1-0-33/html/container.html"></head>
+<body>
+<a name="top"></a>
+
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="https://www.cnblogs.com/maple-shaw/"><img id="blogLogo" src="/Skins/custom/images/logo.gif" alt="返回主页"></a>
+
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="https://www.cnblogs.com/maple-shaw/">maple-shaw</a></h1>
+<h2>Make the best use of what is in your power, and take the rest as it happens.</h2>
+
+
+
+
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">博客园</a></li>
+<li><a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/maple-shaw/">首页</a></li>
+<li><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/maple-shaw">联系</a></li>
+<li><a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/maple-shaw/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="https://www.cnblogs.com/maple-shaw/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+		<div class="blogStats">
+
+			<div id="blog_stats">
+<span id="stats_post_count">随笔 - 105&nbsp; </span>
+<span id="stats_article_count">文章 - 28&nbsp; </span>
+<span id="stats-comment_count">评论 - 21</span>
+</div>
+
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+
+        <div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class="postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/maple-shaw/p/8862330.html">Web框架的原理</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body" class="blogpost-body"><a name="_labelTop"></a><div id="navCategory"><h2 id="catalog">目录</h2><ul style="display:none"><li><a href="#_label0" style="color: darkseagreen; text-decoration: none; font-size: 15px;">Web框架本质</a><ul><li><a href="#_label0_0" style="color: darkseagreen; text-decoration: none; font-size: 15px;">socket服务端&nbsp;</a></li><li><a href="#_label0_1" style="color: darkseagreen; text-decoration: none; font-size: 15px;">HTTP GET请求的格式：</a></li><li><a href="#_label0_2" style="color: darkseagreen; text-decoration: none; font-size: 15px;">HTTP响应的格式：</a></li><li><a href="#_label0_3" style="color: darkseagreen; text-decoration: none; font-size: 15px;">&nbsp;自定义web框架</a></li><li><a href="#_label0_4" style="color: darkseagreen; text-decoration: none; font-size: 15px;">根据不同的路径返回不同的内容</a></li><li><a href="#_label0_5" style="color: darkseagreen; text-decoration: none; font-size: 15px;">根据不同的路径返回不同的内容--函数版</a></li><li><a href="#_label0_6" style="color: darkseagreen; text-decoration: none; font-size: 15px;">根据不同的路径返回不同的内容--函数进阶版</a></li><li><a href="#_label0_7" style="color: darkseagreen; text-decoration: none; font-size: 15px;">返回具体的HTML文件</a></li><li><a href="#_label0_8" style="color: darkseagreen; text-decoration: none; font-size: 15px;">让网页动态起来</a></li></ul></li><li><a href="#_label1" style="color: darkseagreen; text-decoration: none; font-size: 15px;">服务器程序和应用程序</a><ul><li><a href="#_label1_0" style="color: darkseagreen; text-decoration: none; font-size: 15px;">wsgiref</a></li><li><a href="#_label1_1" style="color: darkseagreen; text-decoration: none; font-size: 15px;">jinja2</a></li></ul></li><li><a href="#_label2" style="color: darkseagreen; text-decoration: none; font-size: 15px;">Django</a><ul><li><a href="#_label2_0" style="color: darkseagreen; text-decoration: none; font-size: 15px;">安装（安装最新LTS版）：</a></li><li><a href="#_label2_1" style="color: darkseagreen; text-decoration: none; font-size: 15px;">创建一个django项目：</a></li><li><a href="#_label2_2" style="color: darkseagreen; text-decoration: none; font-size: 15px;">目录介绍：</a></li><li><a href="#_label2_3" style="color: darkseagreen; text-decoration: none; font-size: 15px;">运行Django项目：</a></li><li><a href="#_label2_4" style="color: darkseagreen; text-decoration: none; font-size: 15px;">模板文件配置：</a></li><li><a href="#_label2_5" style="color: darkseagreen; text-decoration: none; font-size: 15px;">静态文件配置：</a></li></ul></li><li><a href="#_label3" style="color: darkseagreen; text-decoration: none; font-size: 15px;">Django基础必备三件套：</a><ul><li><a href="#_label3_0" style="color: darkseagreen; text-decoration: none; font-size: 15px;">HttpResponse</a></li><li><a href="#_label3_1" style="color: darkseagreen; text-decoration: none; font-size: 15px;">render</a></li><li><a href="#_label3_2" style="color: darkseagreen; text-decoration: none; font-size: 15px;">redirect</a></li></ul></li><li><a href="#_label4" style="color: darkseagreen; text-decoration: none; font-size: 15px;">重定向是怎么回事？</a></li><li><a href="#_label5" style="color: darkseagreen; text-decoration: none; font-size: 15px;">启动Django报错：</a></li></ul></div><div style="text-align: right"><a href="#_labelTop" style="text-decoration: none; ">回到顶部</a><a name="_label0"></a></div><h2>Web框架本质</h2>
+<p>我们可以这样理解：所有的Web应用本质上就是一个socket服务端，而用户的浏览器就是一个socket客户端。 这样我们就可以自己实现Web框架了。</p>
+<a name="_label0_0"></a><h3>socket服务端<span class="keyword">&nbsp;</span></h3>
+<div class="dp-highlighter"><ol class="dp-py" start="1">
+<li class="alt"><span><span class="keyword">import</span><span>&nbsp;socket&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;</span></li>
+<li class="alt"><span>sk&nbsp;=&nbsp;socket.socket()&nbsp;&nbsp;</span></li>
+<li><span>sk.bind((<span class="string">"127.0.0.1"</span><span>,&nbsp;</span><span class="number">80</span><span>))&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>sk.listen()&nbsp;&nbsp;</span></li>
+<li><span>&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;</span></li>
+<li><span><span class="keyword">while</span><span>&nbsp;</span><span class="special">True</span><span>:&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;conn,&nbsp;addr&nbsp;=&nbsp;sk.accept()&nbsp;&nbsp;</span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;=&nbsp;conn.recv(<span class="number">8096</span><span>)&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;conn.send(b<span class="string">"OK"</span><span>)&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;conn.close()&nbsp;&nbsp;</span></li>
+</ol></div>
+<p>可以说Web服务本质上都是在这十几行代码基础上扩展出来的。这段代码就是它们的祖宗。</p>
+<p>用户在浏览器中输入网址，浏览器会向服务端发送数据，那浏览器会发送什么数据？怎么发？这个谁来定？ 你这个网站是这个规定，他那个网站按照他那个规定，那互联网还能玩么？</p>
+<p>所以，必须有一个统一的规则，让大家发送消息、接收消息的时候都有个格式依据，不能随便写。</p>
+<p>这个规则就是HTTP协议，以后浏览器发送请求信息也好，服务器回复响应信息也罢，都要按照这个规则来。</p>
+<p>HTTP协议主要规定了客户端和服务器之间的通信格式，那HTTP协议是怎么规定消息格式的呢？</p>
+<p>让我们首先打印下我们在服务端接收到的消息是什么。</p>
+<div class="dp-highlighter"><ol class="dp-py" start="1">
+<li class="alt"><span><span class="keyword">import</span><span>&nbsp;socket&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+<li class="alt"><span>sk&nbsp;=&nbsp;socket.socket()&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+<li><span>sk.bind((<span class="string">"127.0.0.1"</span><span>,&nbsp;</span><span class="number">80</span><span>))&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>sk.listen()&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+<li><span><span class="keyword">while</span><span>&nbsp;</span><span class="special">True</span><span>:&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;conn,&nbsp;addr&nbsp;=&nbsp;sk.accept()&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;=&nbsp;conn.recv(<span class="number">8096</span><span>)&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">print</span><span>(data)&nbsp;&nbsp;</span><span class="comment">#&nbsp;将浏览器发来的消息打印出来&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;conn.send(b<span class="string">"OK"</span><span>)&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;conn.close()&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+</ol></div>
+<p>输出：</p>
+<div class="cnblogs_code">
+<pre>b'GET / HTTP/1.1\r\nHost: 127.0.0.1:8080\r\nConnection: keep-alive\r\nCache-Control: max-age=0\r\nUpgrade-Insecure-Requests: 1\r\nUser-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3355.4 Safari/537.36\r\nAccept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8\r\nAccept-Encoding: gzip, deflate, br\r\nAccept-Language: zh-CN,zh;q=0.9\r\nCookie: csrftoken=CtHePYARJOKNx5oNVwxIteOJXpNyJ29L4bW4506YoVqFaIFFaHm0EWDZqKmw6Jm8\r\n\r\n'</pre>
+</div>
+<p>我们将\r\n替换成换行看得更清晰点：</p>
+<div class="dp-highlighter"><ol class="dp-py" start="1">
+<li class="alt"><span><span>GET&nbsp;/&nbsp;HTTP/</span><span class="number">1.1</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>Host:&nbsp;<span class="number">127.0</span><span>.</span><span class="number">0.1</span><span>:</span><span class="number">8080</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>Connection:&nbsp;keep-alive&nbsp;&nbsp;</span></li>
+<li><span>Cache-Control:&nbsp;max-age=<span class="number">0</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>Upgrade-Insecure-Requests:&nbsp;<span class="number">1</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>User-Agent:&nbsp;Mozilla/<span class="number">5.0</span><span>&nbsp;(Windows&nbsp;NT&nbsp;</span><span class="number">6.1</span><span>;&nbsp;WOW64)&nbsp;AppleWebKit/</span><span class="number">537.36</span><span>&nbsp;(KHTML,&nbsp;like&nbsp;Gecko)&nbsp;Chrome/</span><span class="number">66.0</span><span>.</span><span class="number">3355.4</span><span>&nbsp;Safari/</span><span class="number">537.36</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>Accept:&nbsp;text/html,application/xhtml+xml,application/xml;q=<span class="number">0.9</span><span>,image/webp,image/apng,*/*;q=</span><span class="number">0.8</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>Accept-Encoding:&nbsp;gzip,&nbsp;deflate,&nbsp;br&nbsp;&nbsp;</span></li>
+<li class="alt"><span>Accept-Language:&nbsp;zh-CN,zh;q=<span class="number">0.9</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>Cookie:&nbsp;csrftoken=CtHePYARJOKNx5oNVwxIteOJXpNyJ29L4bW4506YoVqFaIFFaHm0EWDZqKmw6Jm8&nbsp;&nbsp;</span></li>
+<li class="alt"><span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;</span></li>
+</ol></div>
+<p>然后我们再看一下我们访问博客园官网时浏览器收到的响应信息是什么。</p>
+<p>响应相关信息可以在浏览器调试窗口的Network标签页中看到。</p>
+<p><img src="https://images2018.cnblogs.com/blog/867021/201803/867021-20180323150019047-1023274645.png" alt=""></p>
+<p>点击<span style="background-color: #ffff00;">view source</span>之后显示如下图：</p>
+<p><img src="https://images2018.cnblogs.com/blog/867021/201803/867021-20180323150139312-1752889895.png" alt=""></p>
+<p>我们发现收发的消息需要按照一定的格式来，这里就需要了解一下HTTP协议了。</p>
+<p><a href="http://www.cnblogs.com/maple-shaw/articles/9060408.html" target="_blank">HTTP协议介绍</a></p>
+<p>HTTP协议对收发消息的格式要求</p>
+<p>每个HTTP请求和响应都遵循相同的格式，一个HTTP包含Header和Body两部分，其中Body是可选的。</p>
+<p>HTTP响应的Header中有一个 <code class="prettyprint code-in-text prettyprinted" style="font-size: 16px; line-height: 18px;"><span class="typ">Content</span><span class="pun">-</span><span class="typ">Type</span></code>表明响应的内容格式。它的值如text/html; charset=utf-8。</p>
+<p>text/html则表示是网页，charset=utf-8则表示编码为utf-8。</p>
+<a name="_label0_1"></a><h3>HTTP GET请求的格式：</h3>
+<p><img src="https://images2018.cnblogs.com/blog/867021/201803/867021-20180330221943115-1291906159.png" alt=""></p>
+<a name="_label0_2"></a><h3>HTTP响应的格式：</h3>
+<p><img src="https://images2018.cnblogs.com/blog/867021/201803/867021-20180330222031912-1851965755.png" alt=""></p>
+<a name="_label0_3"></a><h3>&nbsp;自定义web框架</h3>
+<p>经过上面的学习，那我们基于socket服务端的十几行代码写一个我们自己的web框架。我们先不处理浏览器发送的请求，先让浏览器能显示我们web框架返回的信息，那我们就要按照HTTP协议的格式来发送响应。</p>
+<div class="dp-highlighter"><ol class="dp-py" start="1">
+<li class="alt"><span><span class="keyword">import</span><span>&nbsp;socket&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+<li class="alt"><span>sock&nbsp;=&nbsp;socket.socket(socket.AF_INET,&nbsp;socket.SOCK_STREAM)&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+<li><span>sock.bind((<span class="string">'127.0.0.1'</span><span>,&nbsp;</span><span class="number">8000</span><span>))&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>sock.listen()&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+<li class="alt"><span><span class="keyword">while</span><span>&nbsp;</span><span class="special">True</span><span>:&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;conn,&nbsp;addr&nbsp;=&nbsp;sock.accept()&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;=&nbsp;conn.recv(<span class="number">8096</span><span>)&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;给回复的消息加上响应状态行&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;conn.send(b<span class="string">"HTTP/1.1&nbsp;200&nbsp;OK\r\n\r\n"</span><span>)&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;conn.send(b<span class="string">"OK"</span><span>)&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;conn.close()&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+</ol></div>
+<p>我们通过十几行代码简单地演示了web 框架的本质。</p>
+<p>接下来就让我们继续完善我们的自定义web框架吧！</p>
+<a name="_label0_4"></a><h3>根据不同的路径返回不同的内容</h3>
+<p>这样就结束了吗？ 如何让我们的Web服务根据用户请求的URL不同而返回不同的内容呢？&nbsp;</p>
+<p>小事一桩，我们可以从请求相关数据里面拿到请求URL的路径，然后拿路径做一个判断...</p>
+<div class="dp-highlighter"><ol class="dp-py" start="1">
+<li class="alt"><span><span class="comment">"""</span>&nbsp;</span></li>
+<li><span><span class="comment">根据URL中不同的路径返回不同的内容</span>&nbsp;</span></li>
+<li class="alt"><span><span class="comment">"""</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;</span></li>
+<li class="alt"><span><span class="keyword">import</span><span>&nbsp;socket&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;</span></li>
+<li class="alt"><span>sk&nbsp;=&nbsp;socket.socket()&nbsp;&nbsp;</span></li>
+<li><span>sk.bind((<span class="string">"127.0.0.1"</span><span>,&nbsp;</span><span class="number">8080</span><span>))&nbsp;&nbsp;</span><span class="comment">#&nbsp;绑定IP和端口</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>sk.listen()&nbsp;&nbsp;<span class="comment">#&nbsp;监听</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;</span></li>
+<li class="alt"><span><span class="keyword">while</span><span>&nbsp;</span><span class="special">True</span><span>:&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;等待连接</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;conn,&nbsp;add&nbsp;=&nbsp;sk.accept()&nbsp;&nbsp;</span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;=&nbsp;conn.recv(<span class="number">8096</span><span>)&nbsp;&nbsp;</span><span class="comment">#&nbsp;接收客户端发来的消息</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;从data中取到路径</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;=&nbsp;str(data,&nbsp;encoding=<span class="string">"utf8"</span><span>)&nbsp;&nbsp;</span><span class="comment">#&nbsp;把收到的字节类型的数据转换成字符串</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;按\r\n分割</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;data1&nbsp;=&nbsp;data.split(<span class="string">"\r\n"</span><span>)[</span><span class="number">0</span><span>]&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;url&nbsp;=&nbsp;data1.split()[<span class="number">1</span><span>]&nbsp;&nbsp;</span><span class="comment">#&nbsp;url是我们从浏览器发过来的消息中分离出的访问路径</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;conn.send(b<span class="string">'HTTP/1.1&nbsp;200&nbsp;OK\r\n\r\n'</span><span>)&nbsp;&nbsp;</span><span class="comment">#&nbsp;因为要遵循HTTP协议，所以回复的消息也要加状态行</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;根据不同的路径返回不同内容</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;url&nbsp;==&nbsp;</span><span class="string">"/index/"</span><span>:&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;=&nbsp;b<span class="string">"index"</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">elif</span><span>&nbsp;url&nbsp;==&nbsp;</span><span class="string">"/home/"</span><span>:&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;=&nbsp;b<span class="string">"home"</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span><span>:&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;=&nbsp;b<span class="string">"404&nbsp;not&nbsp;found!"</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;conn.send(response)&nbsp;&nbsp;</span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;conn.close()&nbsp;&nbsp;</span></li>
+</ol></div>
+<a name="_label0_5"></a><h3>根据不同的路径返回不同的内容--函数版</h3>
+<p>上面的代码解决了不同URL路径返回不同内容的需求。</p>
+<p>我们返回的内容是简单的几个字符，那如果我可以将返回的结果封装成一个函数呢？</p>
+<div class="dp-highlighter"><ol class="dp-py" start="1">
+<li class="alt"><span><span class="comment">"""</span>&nbsp;</span></li>
+<li><span><span class="comment">根据URL中不同的路径返回不同的内容--函数版</span>&nbsp;</span></li>
+<li class="alt"><span><span class="comment">"""</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;</span></li>
+<li class="alt"><span><span class="keyword">import</span><span>&nbsp;socket&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;</span></li>
+<li class="alt"><span>sk&nbsp;=&nbsp;socket.socket()&nbsp;&nbsp;</span></li>
+<li><span>sk.bind((<span class="string">"127.0.0.1"</span><span>,&nbsp;</span><span class="number">8080</span><span>))&nbsp;&nbsp;</span><span class="comment">#&nbsp;绑定IP和端口</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>sk.listen()&nbsp;&nbsp;<span class="comment">#&nbsp;监听</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;</span></li>
+<li><span><span class="comment">#&nbsp;将返回不同的内容部分封装成函数</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span><span class="keyword">def</span><span>&nbsp;func(url):&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;s&nbsp;=&nbsp;<span class="string">"这是{}页面！"</span><span>.format(url)&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;bytes(s,&nbsp;encoding=</span><span class="string">"utf8"</span><span>)&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;</span></li>
+<li><span><span class="keyword">while</span><span>&nbsp;</span><span class="special">True</span><span>:&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;等待连接</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;conn,&nbsp;add&nbsp;=&nbsp;sk.accept()&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;=&nbsp;conn.recv(<span class="number">8096</span><span>)&nbsp;&nbsp;</span><span class="comment">#&nbsp;接收客户端发来的消息</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;从data中取到路径</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;=&nbsp;str(data,&nbsp;encoding=<span class="string">"utf8"</span><span>)&nbsp;&nbsp;</span><span class="comment">#&nbsp;把收到的字节类型的数据转换成字符串</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;按\r\n分割</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;data1&nbsp;=&nbsp;data.split(<span class="string">"\r\n"</span><span>)[</span><span class="number">0</span><span>]&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;url&nbsp;=&nbsp;data1.split()[<span class="number">1</span><span>]&nbsp;&nbsp;</span><span class="comment">#&nbsp;url是我们从浏览器发过来的消息中分离出的访问路径</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;conn.send(b<span class="string">'HTTP/1.1&nbsp;200&nbsp;OK\r\n\r\n'</span><span>)&nbsp;&nbsp;</span><span class="comment">#&nbsp;因为要遵循HTTP协议，所以回复的消息也要加状态行</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;根据不同的路径返回不同内容，response是具体的响应体</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;url&nbsp;==&nbsp;</span><span class="string">"/index/"</span><span>:&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;=&nbsp;func(url)&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">elif</span><span>&nbsp;url&nbsp;==&nbsp;</span><span class="string">"/home/"</span><span>:&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;=&nbsp;func(url)&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span><span>:&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;=&nbsp;b<span class="string">"404&nbsp;not&nbsp;found!"</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;</span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;conn.send(response)&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;conn.close()&nbsp;&nbsp;</span></li>
+</ol></div>
+<a name="_label0_6"></a><h3>根据不同的路径返回不同的内容--函数进阶版</h3>
+<p>看起来上面的代码写了一个函数，那肯定可以写多个函数，不同的路径对应执行不同的函数拿到结果，但是我们要一个个判断路径，是不是很麻烦？我们有简单的办法来解决。</p>
+<div class="dp-highlighter"><ol class="dp-py" start="1">
+<li class="alt"><span><span class="comment">"""</span>&nbsp;</span></li>
+<li><span><span class="comment">根据URL中不同的路径返回不同的内容--函数进阶版</span>&nbsp;</span></li>
+<li class="alt"><span><span class="comment">"""</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;</span></li>
+<li class="alt"><span><span class="keyword">import</span><span>&nbsp;socket&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;</span></li>
+<li class="alt"><span>sk&nbsp;=&nbsp;socket.socket()&nbsp;&nbsp;</span></li>
+<li><span>sk.bind((<span class="string">"127.0.0.1"</span><span>,&nbsp;</span><span class="number">8080</span><span>))&nbsp;&nbsp;</span><span class="comment">#&nbsp;绑定IP和端口</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>sk.listen()&nbsp;&nbsp;<span class="comment">#&nbsp;监听</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;</span></li>
+<li><span><span class="comment">#&nbsp;将返回不同的内容部分封装成不同的函数</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span><span class="keyword">def</span><span>&nbsp;index(url):&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;s&nbsp;=&nbsp;<span class="string">"这是{}页面XX！"</span><span>.format(url)&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;bytes(s,&nbsp;encoding=</span><span class="string">"utf8"</span><span>)&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;</span></li>
+<li><span><span class="keyword">def</span><span>&nbsp;home(url):&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;s&nbsp;=&nbsp;<span class="string">"这是{}页面。。！"</span><span>.format(url)&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;bytes(s,&nbsp;encoding=</span><span class="string">"utf8"</span><span>)&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;</span></li>
+<li><span>&nbsp;&nbsp;</span></li>
+<li class="alt"><span><span class="comment">#&nbsp;定义一个url和实际要执行的函数的对应关系</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>list1&nbsp;=&nbsp;[&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">"/index/"</span><span>,&nbsp;index),&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">"/home/"</span><span>,&nbsp;home),&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>]&nbsp;&nbsp;</span></li>
+<li><span>&nbsp;&nbsp;</span></li>
+<li class="alt"><span><span class="keyword">while</span><span>&nbsp;</span><span class="special">True</span><span>:&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;等待连接</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;conn,&nbsp;add&nbsp;=&nbsp;sk.accept()&nbsp;&nbsp;</span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;=&nbsp;conn.recv(<span class="number">8096</span><span>)&nbsp;&nbsp;</span><span class="comment">#&nbsp;接收客户端发来的消息</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;从data中取到路径</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;=&nbsp;str(data,&nbsp;encoding=<span class="string">"utf8"</span><span>)&nbsp;&nbsp;</span><span class="comment">#&nbsp;把收到的字节类型的数据转换成字符串</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;按\r\n分割</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;data1&nbsp;=&nbsp;data.split(<span class="string">"\r\n"</span><span>)[</span><span class="number">0</span><span>]&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;url&nbsp;=&nbsp;data1.split()[<span class="number">1</span><span>]&nbsp;&nbsp;</span><span class="comment">#&nbsp;url是我们从浏览器发过来的消息中分离出的访问路径</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;conn.send(b<span class="string">'HTTP/1.1&nbsp;200&nbsp;OK\r\n\r\n'</span><span>)&nbsp;&nbsp;</span><span class="comment">#&nbsp;因为要遵循HTTP协议，所以回复的消息也要加状态行</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;根据不同的路径返回不同内容</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;func&nbsp;=&nbsp;<span class="special">None</span><span>&nbsp;&nbsp;</span><span class="comment">#&nbsp;定义一个保存将要执行的函数名的变量</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span><span>&nbsp;item&nbsp;</span><span class="keyword">in</span><span>&nbsp;list1:&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;item[</span><span class="number">0</span><span>]&nbsp;==&nbsp;url:&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;func&nbsp;=&nbsp;item[<span class="number">1</span><span>]&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;func:&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;=&nbsp;func(url)&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span><span>:&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;=&nbsp;b<span class="string">"404&nbsp;not&nbsp;found!"</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;</span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;返回具体的响应消息</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;conn.send(response)&nbsp;&nbsp;</span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;conn.close()&nbsp;&nbsp;</span></li>
+</ol></div>
+<a name="_label0_7"></a><h3>返回具体的HTML文件</h3>
+<p>完美解决了不同URL返回不同内容的问题。 但是我不想仅仅返回几个字符串，我想给浏览器返回完整的HTML内容，这又该怎么办呢？</p>
+<p>没问题，不管是什么内容，最后都是转换成字节数据发送出去的。 我们可以打开HTML文件，读取出它内部的二进制数据，然后再发送给浏览器。</p>
+<div class="dp-highlighter"><ol class="dp-py" start="1">
+<li class="alt"><span><span class="comment">"""</span>&nbsp;</span></li>
+<li><span><span class="comment">根据URL中不同的路径返回不同的内容--函数进阶版</span>&nbsp;</span></li>
+<li class="alt"><span><span class="comment">返回独立的HTML页面</span>&nbsp;</span></li>
+<li><span><span class="comment">"""</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;</span></li>
+<li><span><span class="keyword">import</span><span>&nbsp;socket&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;</span></li>
+<li><span>sk&nbsp;=&nbsp;socket.socket()&nbsp;&nbsp;</span></li>
+<li class="alt"><span>sk.bind((<span class="string">"127.0.0.1"</span><span>,&nbsp;</span><span class="number">8080</span><span>))&nbsp;&nbsp;</span><span class="comment">#&nbsp;绑定IP和端口</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>sk.listen()&nbsp;&nbsp;<span class="comment">#&nbsp;监听</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;</span></li>
+<li><span>&nbsp;&nbsp;</span></li>
+<li class="alt"><span><span class="comment">#&nbsp;将返回不同的内容部分封装成不同的函数</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span><span class="keyword">def</span><span>&nbsp;index(url):&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;读取index.html页面的内容</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;open(<span class="string">"index.html"</span><span>,&nbsp;</span><span class="string">"r"</span><span>,&nbsp;encoding=</span><span class="string">"utf8"</span><span>)&nbsp;as&nbsp;f:&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s&nbsp;=&nbsp;f.read()&nbsp;&nbsp;</span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;返回字节数据</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;bytes(s,&nbsp;encoding=</span><span class="string">"utf8"</span><span>)&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;</span></li>
+<li><span><span class="keyword">def</span><span>&nbsp;home(url):&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;open(<span class="string">"home.html"</span><span>,&nbsp;</span><span class="string">"r"</span><span>,&nbsp;encoding=</span><span class="string">"utf8"</span><span>)&nbsp;as&nbsp;f:&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s&nbsp;=&nbsp;f.read()&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;bytes(s,&nbsp;encoding=</span><span class="string">"utf8"</span><span>)&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;</span></li>
+<li><span><span class="comment">#&nbsp;定义一个url和实际要执行的函数的对应关系</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>list1&nbsp;=&nbsp;[&nbsp;&nbsp;</span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">"/index/"</span><span>,&nbsp;index),&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">"/home/"</span><span>,&nbsp;home),&nbsp;&nbsp;</span></span></li>
+<li><span>]&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;</span></li>
+<li><span><span class="keyword">while</span><span>&nbsp;</span><span class="special">True</span><span>:&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;等待连接</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;conn,&nbsp;add&nbsp;=&nbsp;sk.accept()&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;=&nbsp;conn.recv(<span class="number">8096</span><span>)&nbsp;&nbsp;</span><span class="comment">#&nbsp;接收客户端发来的消息</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;从data中取到路径</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;=&nbsp;str(data,&nbsp;encoding=<span class="string">"utf8"</span><span>)&nbsp;&nbsp;</span><span class="comment">#&nbsp;把收到的字节类型的数据转换成字符串</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;按\r\n分割</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;data1&nbsp;=&nbsp;data.split(<span class="string">"\r\n"</span><span>)[</span><span class="number">0</span><span>]&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;url&nbsp;=&nbsp;data1.split()[<span class="number">1</span><span>]&nbsp;&nbsp;</span><span class="comment">#&nbsp;url是我们从浏览器发过来的消息中分离出的访问路径</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;conn.send(b<span class="string">'HTTP/1.1&nbsp;200&nbsp;OK\r\n\r\n'</span><span>)&nbsp;&nbsp;</span><span class="comment">#&nbsp;因为要遵循HTTP协议，所以回复的消息也要加状态行</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;根据不同的路径返回不同内容</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;func&nbsp;=&nbsp;<span class="special">None</span><span>&nbsp;&nbsp;</span><span class="comment">#&nbsp;定义一个保存将要执行的函数名的变量</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span><span>&nbsp;item&nbsp;</span><span class="keyword">in</span><span>&nbsp;list1:&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;item[</span><span class="number">0</span><span>]&nbsp;==&nbsp;url:&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;func&nbsp;=&nbsp;item[<span class="number">1</span><span>]&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;func:&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;=&nbsp;func(url)&nbsp;&nbsp;</span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span><span>:&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;=&nbsp;b<span class="string">"404&nbsp;not&nbsp;found!"</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;返回具体的响应消息</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;conn.send(response)&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;conn.close()&nbsp;&nbsp;</span></li>
+</ol></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('ae7b364a-17b2-4f9d-b1fc-e4c957a42e24')"><img id="code_img_closed_ae7b364a-17b2-4f9d-b1fc-e4c957a42e24" class="code_img_closed" src="https://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt=""><img id="code_img_opened_ae7b364a-17b2-4f9d-b1fc-e4c957a42e24" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('ae7b364a-17b2-4f9d-b1fc-e4c957a42e24',event)" src="https://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="">
+<div id="cnblogs_code_open_ae7b364a-17b2-4f9d-b1fc-e4c957a42e24" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">&lt;!</span><span style="color: #ff00ff;">DOCTYPE html</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">html </span><span style="color: #ff0000;">lang</span><span style="color: #0000ff;">="en"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">head</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">meta </span><span style="color: #ff0000;">charset</span><span style="color: #0000ff;">="UTF-8"</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">meta </span><span style="color: #ff0000;">http-equiv</span><span style="color: #0000ff;">="x-ua-compatible"</span><span style="color: #ff0000;"> content</span><span style="color: #0000ff;">="IE=edge"</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">meta </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="viewport"</span><span style="color: #ff0000;"> content</span><span style="color: #0000ff;">="width=device-width, initial-scale=1"</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">title</span><span style="color: #0000ff;">&gt;</span>index<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">title</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">head</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">body</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">div</span><span style="color: #0000ff;">&gt;</span>这是index页面<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">div</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">body</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">html</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<span class="cnblogs_code_collapse">index.html</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('9e15b6f7-c136-49d5-90bd-68c988c7afe5')"><img id="code_img_closed_9e15b6f7-c136-49d5-90bd-68c988c7afe5" class="code_img_closed" src="https://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt=""><img id="code_img_opened_9e15b6f7-c136-49d5-90bd-68c988c7afe5" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('9e15b6f7-c136-49d5-90bd-68c988c7afe5',event)" src="https://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="">
+<div id="cnblogs_code_open_9e15b6f7-c136-49d5-90bd-68c988c7afe5" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">&lt;!</span><span style="color: #ff00ff;">DOCTYPE html</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">html </span><span style="color: #ff0000;">lang</span><span style="color: #0000ff;">="en"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">head</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">meta </span><span style="color: #ff0000;">charset</span><span style="color: #0000ff;">="UTF-8"</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">meta </span><span style="color: #ff0000;">http-equiv</span><span style="color: #0000ff;">="x-ua-compatible"</span><span style="color: #ff0000;"> content</span><span style="color: #0000ff;">="IE=edge"</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">meta </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="viewport"</span><span style="color: #ff0000;"> content</span><span style="color: #0000ff;">="width=device-width, initial-scale=1"</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">title</span><span style="color: #0000ff;">&gt;</span>index<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">title</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">head</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">body</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">div</span><span style="color: #0000ff;">&gt;</span>这是home页面<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">div</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">body</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">html</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<span class="cnblogs_code_collapse">home.html</span></div>
+<a name="_label0_8"></a><h3>让网页动态起来</h3>
+<p>这网页能够显示出来了，但是都是静态的啊。页面的内容都不会变化的，我想要的是动态网站。</p>
+<p>没问题，我也有办法解决。我选择使用字符串替换来实现这个需求。（这里使用时间戳来模拟动态的数据）</p>
+<div class="dp-highlighter"><ol class="dp-py" start="1">
+<li class="alt"><span><span class="comment">"""</span>&nbsp;</span></li>
+<li><span><span class="comment">根据URL中不同的路径返回不同的内容--函数进阶版</span>&nbsp;</span></li>
+<li class="alt"><span><span class="comment">返回独立的HTML页面</span>&nbsp;</span></li>
+<li><span><span class="comment">"""</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;</span></li>
+<li><span><span class="keyword">import</span><span>&nbsp;socket&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;</span></li>
+<li><span>sk&nbsp;=&nbsp;socket.socket()&nbsp;&nbsp;</span></li>
+<li class="alt"><span>sk.bind((<span class="string">"127.0.0.1"</span><span>,&nbsp;</span><span class="number">8080</span><span>))&nbsp;&nbsp;</span><span class="comment">#&nbsp;绑定IP和端口</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>sk.listen()&nbsp;&nbsp;<span class="comment">#&nbsp;监听</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;</span></li>
+<li><span>&nbsp;&nbsp;</span></li>
+<li class="alt"><span><span class="comment">#&nbsp;将返回不同的内容部分封装成不同的函数</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span><span class="keyword">def</span><span>&nbsp;index(url):&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;读取index.html页面的内容</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;open(<span class="string">"index.html"</span><span>,&nbsp;</span><span class="string">"r"</span><span>,&nbsp;encoding=</span><span class="string">"utf8"</span><span>)&nbsp;as&nbsp;f:&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s&nbsp;=&nbsp;f.read()&nbsp;&nbsp;</span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;返回字节数据</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;bytes(s,&nbsp;encoding=</span><span class="string">"utf8"</span><span>)&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;</span></li>
+<li><span><span class="keyword">def</span><span>&nbsp;home(url):&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;open(<span class="string">"home.html"</span><span>,&nbsp;</span><span class="string">"r"</span><span>,&nbsp;encoding=</span><span class="string">"utf8"</span><span>)&nbsp;as&nbsp;f:&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s&nbsp;=&nbsp;f.read()&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;bytes(s,&nbsp;encoding=</span><span class="string">"utf8"</span><span>)&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;</span></li>
+<li><span><span class="keyword">def</span><span>&nbsp;timer(url):&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">import</span><span>&nbsp;time&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;open(<span class="string">"time.html"</span><span>,&nbsp;</span><span class="string">"r"</span><span>,&nbsp;encoding=</span><span class="string">"utf8"</span><span>)&nbsp;as&nbsp;f:&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s&nbsp;=&nbsp;f.read()&nbsp;&nbsp;</span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s&nbsp;=&nbsp;s.replace(<span class="string">'@@time@@'</span><span>,&nbsp;time.strftime(</span><span class="string">"%Y-%m-%d&nbsp;%H:%M:%S"</span><span>))&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;bytes(s,&nbsp;encoding=</span><span class="string">"utf8"</span><span>)&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;</span></li>
+<li><span><span class="comment">#&nbsp;定义一个url和实际要执行的函数的对应关系</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>list1&nbsp;=&nbsp;[&nbsp;&nbsp;</span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">"/index/"</span><span>,&nbsp;index),&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">"/home/"</span><span>,&nbsp;home),&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">"/time/"</span><span>,&nbsp;timer),&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>]&nbsp;&nbsp;</span></li>
+<li><span>&nbsp;&nbsp;</span></li>
+<li class="alt"><span><span class="keyword">while</span><span>&nbsp;</span><span class="special">True</span><span>:&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;等待连接</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;conn,&nbsp;add&nbsp;=&nbsp;sk.accept()&nbsp;&nbsp;</span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;=&nbsp;conn.recv(<span class="number">8096</span><span>)&nbsp;&nbsp;</span><span class="comment">#&nbsp;接收客户端发来的消息</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;从data中取到路径</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;=&nbsp;str(data,&nbsp;encoding=<span class="string">"utf8"</span><span>)&nbsp;&nbsp;</span><span class="comment">#&nbsp;把收到的字节类型的数据转换成字符串</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;按\r\n分割</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;data1&nbsp;=&nbsp;data.split(<span class="string">"\r\n"</span><span>)[</span><span class="number">0</span><span>]&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;url&nbsp;=&nbsp;data1.split()[<span class="number">1</span><span>]&nbsp;&nbsp;</span><span class="comment">#&nbsp;url是我们从浏览器发过来的消息中分离出的访问路径</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;conn.send(b<span class="string">'HTTP/1.1&nbsp;200&nbsp;OK\r\n\r\n'</span><span>)&nbsp;&nbsp;</span><span class="comment">#&nbsp;因为要遵循HTTP协议，所以回复的消息也要加状态行</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;根据不同的路径返回不同内容</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;func&nbsp;=&nbsp;<span class="special">None</span><span>&nbsp;&nbsp;</span><span class="comment">#&nbsp;定义一个保存将要执行的函数名的变量</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span><span>&nbsp;item&nbsp;</span><span class="keyword">in</span><span>&nbsp;list1:&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;item[</span><span class="number">0</span><span>]&nbsp;==&nbsp;url:&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;func&nbsp;=&nbsp;item[<span class="number">1</span><span>]&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;func:&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;=&nbsp;func(url)&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span><span>:&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;=&nbsp;b<span class="string">"404&nbsp;not&nbsp;found!"</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;</span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;返回具体的响应消息</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;conn.send(response)&nbsp;&nbsp;</span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;conn.close()&nbsp;&nbsp;</span></li>
+</ol></div>
+<div style="text-align: right"><a href="#_labelTop" style="text-decoration: none; ">回到顶部</a><a name="_label1"></a></div><h2>服务器程序和应用程序</h2>
+<p>对于真实开发中的python web程序来说，一般会分为两部分：服务器程序和应用程序。</p>
+<p>服务器程序负责对socket服务端进行封装，并在请求到来时，对请求的各种数据进行整理。</p>
+<p>应用程序则负责具体的逻辑处理。为了方便应用程序的开发，就出现了众多的Web框架，例如：Django、Flask、web.py 等。不同的框架有不同的开发方式，但是无论如何，开发出的应用程序都要和服务器程序配合，才能为用户提供服务。</p>
+<p>&nbsp;</p>
+<p>这样，服务器程序就需要为不同的框架提供不同的支持。这样混乱的局面无论对于服务器还是框架，都是不好的。对服务器来说，需要支持各种不同框架，对框架来说，只有支持它的服务器才能被开发出的应用使用。</p>
+<p>这时候，标准化就变得尤为重要。我们可以设立一个标准，只要服务器程序支持这个标准，框架也支持这个标准，那么他们就可以配合使用。一旦标准确定，双方各自实现。这样，服务器可以支持更多支持标准的框架，框架也可以使用更多支持标准的服务器。</p>
+<p>WSGI（Web Server Gateway Interface）就是一种规范，它定义了使用Python编写的web应用程序与web服务器程序之间的接口格式，实现web应用程序与web服务器程序间的解耦。</p>
+<p>常用的WSGI服务器有uWSGI、Gunicorn。而Python标准库提供的独立WSGI服务器叫wsgiref，<span style="background-color: #ffff00;">Django开发环境用的就是这个模块来做服务器</span>。</p>
+<p>&nbsp;</p>
+<a name="_label1_0"></a><h3>wsgiref</h3>
+<p>我们利用wsgiref模块来替换我们自己写的web框架的socket server部分：</p>
+<div class="dp-highlighter"><ol class="dp-py" start="1">
+<li class="alt"><span><span class="comment">"""&nbsp;</span>&nbsp;</span></li>
+<li><span><span class="comment">根据URL中不同的路径返回不同的内容--函数进阶版&nbsp;</span>&nbsp;</span></li>
+<li class="alt"><span><span class="comment">返回HTML页面&nbsp;</span>&nbsp;</span></li>
+<li><span><span class="comment">让网页动态起来&nbsp;</span>&nbsp;</span></li>
+<li class="alt"><span><span class="comment">wsgiref模块版&nbsp;</span>&nbsp;</span></li>
+<li><span><span class="comment">"""</span><span>&nbsp;&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+<li><span><span class="keyword">from</span><span>&nbsp;wsgiref.simple_server&nbsp;</span><span class="keyword">import</span><span>&nbsp;make_server&nbsp;&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+<li class="alt"><span><span class="comment">#&nbsp;将返回不同的内容部分封装成函数&nbsp;</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span><span class="keyword">def</span><span>&nbsp;index(url):&nbsp;&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;读取index.html页面的内容&nbsp;</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;open(<span class="string">"index.html"</span><span>,&nbsp;</span><span class="string">"r"</span><span>,&nbsp;encoding=</span><span class="string">"utf8"</span><span>)&nbsp;as&nbsp;f:&nbsp;&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s&nbsp;=&nbsp;f.read()&nbsp;&nbsp;&nbsp;</span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;返回字节数据&nbsp;</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;bytes(s,&nbsp;encoding=</span><span class="string">"utf8"</span><span>)&nbsp;&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+<li><span><span class="keyword">def</span><span>&nbsp;home(url):&nbsp;&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;open(<span class="string">"home.html"</span><span>,&nbsp;</span><span class="string">"r"</span><span>,&nbsp;encoding=</span><span class="string">"utf8"</span><span>)&nbsp;as&nbsp;f:&nbsp;&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s&nbsp;=&nbsp;f.read()&nbsp;&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;bytes(s,&nbsp;encoding=</span><span class="string">"utf8"</span><span>)&nbsp;&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+<li><span><span class="keyword">def</span><span>&nbsp;timer(url):&nbsp;&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">import</span><span>&nbsp;time&nbsp;&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;open(<span class="string">"time.html"</span><span>,&nbsp;</span><span class="string">"r"</span><span>,&nbsp;encoding=</span><span class="string">"utf8"</span><span>)&nbsp;as&nbsp;f:&nbsp;&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s&nbsp;=&nbsp;f.read()&nbsp;&nbsp;&nbsp;</span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s&nbsp;=&nbsp;s.replace(<span class="string">'@@time@@'</span><span>,&nbsp;time.strftime(</span><span class="string">"%Y-%m-%d&nbsp;%H:%M:%S"</span><span>))&nbsp;&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;bytes(s,&nbsp;encoding=</span><span class="string">"utf8"</span><span>)&nbsp;&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+<li><span><span class="comment">#&nbsp;定义一个url和实际要执行的函数的对应关系&nbsp;</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>list1&nbsp;=&nbsp;[&nbsp;&nbsp;&nbsp;</span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">"/index/"</span><span>,&nbsp;index),&nbsp;&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">"/home/"</span><span>,&nbsp;home),&nbsp;&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">"/time/"</span><span>,&nbsp;timer),&nbsp;&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>]&nbsp;&nbsp;&nbsp;</span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+<li><span><span class="keyword">def</span><span>&nbsp;run_server(environ,&nbsp;start_response):&nbsp;&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;start_response(<span class="string">'200&nbsp;OK'</span><span>,&nbsp;[(</span><span class="string">'Content-Type'</span><span>,&nbsp;</span><span class="string">'text/html;charset=utf8'</span><span>),&nbsp;])&nbsp;&nbsp;</span><span class="comment">#&nbsp;设置HTTP响应的状态码和头信息&nbsp;</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;url&nbsp;=&nbsp;environ[<span class="string">'PATH_INFO'</span><span>]&nbsp;&nbsp;</span><span class="comment">#&nbsp;取到用户输入的url&nbsp;</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;func&nbsp;=&nbsp;<span class="special">None</span><span>&nbsp;&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span><span>&nbsp;i&nbsp;</span><span class="keyword">in</span><span>&nbsp;list1:&nbsp;&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;i[</span><span class="number">0</span><span>]&nbsp;==&nbsp;url:&nbsp;&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;func&nbsp;=&nbsp;i[<span class="number">1</span><span>]&nbsp;&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span><span>&nbsp;&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;func:&nbsp;&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;=&nbsp;func(url)&nbsp;&nbsp;&nbsp;</span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span><span>:&nbsp;&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;=&nbsp;b<span class="string">"404&nbsp;not&nbsp;found!"</span><span>&nbsp;&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;[response,&nbsp;]&nbsp;&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+<li class="alt"><span><span class="keyword">if</span><span>&nbsp;__name__&nbsp;==&nbsp;</span><span class="string">'__main__'</span><span>:&nbsp;&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;httpd&nbsp;=&nbsp;make_server(<span class="string">'127.0.0.1'</span><span>,&nbsp;</span><span class="number">8090</span><span>,&nbsp;run_server)&nbsp;&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">print</span><span>(</span><span class="string">"我在8090等你哦..."</span><span>)&nbsp;&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;httpd.serve_forever()&nbsp;&nbsp;</span></li>
+</ol></div>
+<a name="_label1_1"></a><h3>jinja2</h3>
+<p>上面的代码实现了一个简单的动态，我完全可以从数据库中查询数据，然后去替换我html中的对应内容，然后再发送给浏览器完成渲染。 这个过程就相当于HTML模板渲染数据。 本质上就是HTML内容中利用一些特殊的符号来替换要展示的数据。 我这里用的特殊符号是我定义的，其实模板渲染有个现成的工具： <code class="prettyprint code-in-text prettyprinted" style="font-size: 16px; line-height: 18px;"><span class="pln">jinja2</span></code></p>
+<p><span class="pln">下载jinja2:</span></p>
+<div class="cnblogs_code">
+<pre>pip <span style="color: #0000ff;">install</span> jinja2</pre>
+</div>
+<div class="cnblogs_code"><img id="code_img_closed_2c40de7f-594d-4e11-a991-46da670ab05f" class="code_img_closed" src="https://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt=""><img id="code_img_opened_2c40de7f-594d-4e11-a991-46da670ab05f" class="code_img_opened" style="display: none;" src="https://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="">
+<div id="cnblogs_code_open_2c40de7f-594d-4e11-a991-46da670ab05f" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">&lt;!</span><span style="color: #ff00ff;">DOCTYPE html</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">html </span><span style="color: #ff0000;">lang</span><span style="color: #0000ff;">="zh-CN"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">head</span><span style="color: #0000ff;">&gt;</span>
+  <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">meta </span><span style="color: #ff0000;">charset</span><span style="color: #0000ff;">="UTF-8"</span><span style="color: #0000ff;">&gt;</span>
+  <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">meta </span><span style="color: #ff0000;">http-equiv</span><span style="color: #0000ff;">="x-ua-compatible"</span><span style="color: #ff0000;"> content</span><span style="color: #0000ff;">="IE=edge"</span><span style="color: #0000ff;">&gt;</span>
+  <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">meta </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="viewport"</span><span style="color: #ff0000;"> content</span><span style="color: #0000ff;">="width=device-width, initial-scale=1"</span><span style="color: #0000ff;">&gt;</span>
+  <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">title</span><span style="color: #0000ff;">&gt;</span>Title<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">title</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">head</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">body</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">h1</span><span style="color: #0000ff;">&gt;</span>姓名：{{name}}<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">h1</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">h1</span><span style="color: #0000ff;">&gt;</span>爱好：<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">h1</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">ul</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+        {% for hobby in hobby_list %}
+        </span><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">li</span><span style="color: #0000ff;">&gt;</span>{{hobby}}<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">li</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+        {% endfor %}
+    </span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">ul</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">body</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">html</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<span class="cnblogs_code_collapse">index2.html文件</span></div>
+<p><span class="pln">使用jinja2渲染index2.html文件：</span></p>
+<div class="dp-highlighter"><ol class="dp-py" start="1">
+<li class="alt"><span><span class="keyword">from</span><span>&nbsp;wsgiref.simple_server&nbsp;</span><span class="keyword">import</span><span>&nbsp;make_server&nbsp;&nbsp;</span></span></li>
+<li><span><span class="keyword">from</span><span>&nbsp;jinja2&nbsp;</span><span class="keyword">import</span><span>&nbsp;Template&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;</span></li>
+<li><span>&nbsp;&nbsp;</span></li>
+<li class="alt"><span><span class="keyword">def</span><span>&nbsp;index(url):&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;读取HTML文件内容</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;open(<span class="string">"index2.html"</span><span>,&nbsp;</span><span class="string">"r"</span><span>,&nbsp;encoding=</span><span class="string">"utf8"</span><span>)&nbsp;as&nbsp;f:&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;=&nbsp;f.read()&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;template&nbsp;=&nbsp;Template(data)&nbsp;&nbsp;&nbsp;<span class="comment">#&nbsp;生成模板文件</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ret&nbsp;=&nbsp;template.render({<span class="string">'name'</span><span>:&nbsp;</span><span class="string">'alex'</span><span>,&nbsp;</span><span class="string">'hobby_list'</span><span>:&nbsp;[</span><span class="string">'抽烟'</span><span>,&nbsp;</span><span class="string">'喝酒'</span><span>,&nbsp;</span><span class="string">'烫头'</span><span>]})&nbsp;&nbsp;&nbsp;</span><span class="comment">#&nbsp;把数据填充到模板中</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;bytes(ret,&nbsp;encoding=</span><span class="string">"utf8"</span><span>)&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;</span></li>
+<li><span><span class="keyword">def</span><span>&nbsp;home(url):&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;open(<span class="string">"home.html"</span><span>,&nbsp;</span><span class="string">"r"</span><span>,&nbsp;encoding=</span><span class="string">"utf8"</span><span>)&nbsp;as&nbsp;f:&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s&nbsp;=&nbsp;f.read()&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;bytes(s,&nbsp;encoding=</span><span class="string">"utf8"</span><span>)&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;</span></li>
+<li><span><span class="comment">#&nbsp;定义一个url和实际要执行的函数的对应关系</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>list1&nbsp;=&nbsp;[&nbsp;&nbsp;</span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">"/index/"</span><span>,&nbsp;index),&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">"/home/"</span><span>,&nbsp;home),&nbsp;&nbsp;</span></span></li>
+<li><span>]&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;</span></li>
+<li><span>&nbsp;&nbsp;</span></li>
+<li class="alt"><span><span class="keyword">def</span><span>&nbsp;run_server(environ,&nbsp;start_response):&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;start_response(<span class="string">'200&nbsp;OK'</span><span>,&nbsp;[(</span><span class="string">'Content-Type'</span><span>,&nbsp;</span><span class="string">'text/html;charset=utf8'</span><span>),&nbsp;])&nbsp;&nbsp;</span><span class="comment">#&nbsp;设置HTTP响应的状态码和头信息</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;url&nbsp;=&nbsp;environ[<span class="string">'PATH_INFO'</span><span>]&nbsp;&nbsp;</span><span class="comment">#&nbsp;取到用户输入的url</span><span>&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;func&nbsp;=&nbsp;<span class="special">None</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span><span>&nbsp;i&nbsp;</span><span class="keyword">in</span><span>&nbsp;list1:&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;i[</span><span class="number">0</span><span>]&nbsp;==&nbsp;url:&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;func&nbsp;=&nbsp;i[<span class="number">1</span><span>]&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;func:&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;=&nbsp;func(url)&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span><span>:&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;=&nbsp;b<span class="string">"404&nbsp;not&nbsp;found!"</span><span>&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;[response,&nbsp;]&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;</span></li>
+<li class="alt"><span>&nbsp;&nbsp;</span></li>
+<li><span><span class="keyword">if</span><span>&nbsp;__name__&nbsp;==&nbsp;</span><span class="string">'__main__'</span><span>:&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;httpd&nbsp;=&nbsp;make_server(<span class="string">'127.0.0.1'</span><span>,&nbsp;</span><span class="number">8090</span><span>,&nbsp;run_server)&nbsp;&nbsp;</span></span></li>
+<li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">print</span><span>(</span><span class="string">"我在8090等你哦..."</span><span>)&nbsp;&nbsp;</span></span></li>
+<li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;httpd.serve_forever()&nbsp;&nbsp;</span></li>
+</ol></div>
+<p>现在的数据是我们自己手写的，那可不可以从数据库中查询数据，来填充页面呢？</p>
+<p>使用pymysql连接数据库：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div>
+<pre>conn = pymysql.connect(host=<span style="color: #800000;">"</span><span style="color: #800000;">127.0.0.1</span><span style="color: #800000;">"</span>, port=3306, user=<span style="color: #800000;">"</span><span style="color: #800000;">root</span><span style="color: #800000;">"</span>, passwd=<span style="color: #800000;">"</span><span style="color: #800000;">xxx</span><span style="color: #800000;">"</span>, db=<span style="color: #800000;">"</span><span style="color: #800000;">xxx</span><span style="color: #800000;">"</span>, charset=<span style="color: #800000;">"</span><span style="color: #800000;">utf8</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+cursor </span>= conn.cursor(cursor=<span style="color: #000000;">pymysql.cursors.DictCursor)
+cursor.execute(</span><span style="color: #800000;">"</span><span style="color: #800000;">select name, age, department_id from userinfo</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+user_list </span>=<span style="color: #000000;"> cursor.fetchall()
+cursor.close()
+conn.close()</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>创建一个测试的user表：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">CREATE</span> <span style="color: #0000ff;">TABLE</span> <span style="color: #ff00ff;">user</span><span style="color: #000000;">(
+  id </span><span style="color: #0000ff;">int</span> auto_increment <span style="color: #0000ff;">PRIMARY</span> <span style="color: #0000ff;">KEY</span><span style="color: #000000;">,
+  name </span><span style="color: #0000ff;">CHAR</span>(<span style="color: #800000; font-weight: bold;">10</span>) <span style="color: #808080;">NOT</span> <span style="color: #0000ff;">NULL</span><span style="color: #000000;">,
+  hobby </span><span style="color: #0000ff;">CHAR</span>(<span style="color: #800000; font-weight: bold;">20</span>) <span style="color: #808080;">NOT</span> <span style="color: #0000ff;">NULL</span><span style="color: #000000;">
+)engine</span><span style="color: #808080;">=</span>innodb <span style="color: #0000ff;">DEFAULT</span> charset<span style="color: #808080;">=</span>UTF8;</pre>
+</div>
+<p><span style="background-color: #ffff00;">模板的原理就是字符串替换，我们只要在HTML页面中遵循jinja2的语法规则写上，其内部就会按照指定的语法进行相应的替换，从而达到动态的返回内容。</span></p>
+<div style="text-align: right"><a href="#_labelTop" style="text-decoration: none; ">回到顶部</a><a name="_label2"></a></div><h2 id="django">Django</h2>
+<p><a href="https://www.djangoproject.com/download/" target="_blank">Django官网下载页面</a></p>
+<a name="_label2_0"></a><h3>安装（安装最新LTS版）：</h3>
+<div class="cnblogs_code">
+<pre>pip3 <span style="color: #0000ff;">install</span> django==1.11.20</pre>
+</div>
+<a name="_label2_1"></a><h3>创建一个django项目：</h3>
+<p>下面的命令创建了一个名为"mysite"的Django 项目：</p>
+<div class="cnblogs_code">
+<pre>django-admin startproject mysite</pre>
+</div>
+<a name="_label2_2"></a><h3>目录介绍：</h3>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div>
+<pre>mysite/<span style="color: #000000;">
+├── manage.py  # 管理文件
+└── mysite  # 项目目录
+    ├── __init__.py
+    ├── settings.py  # 配置
+    ├── urls.py  # 路由 </span>--&gt;<span style="color: #000000;"> URL和函数的对应关系
+    └── wsgi.py  # runserver命令就使用wsgiref模块做简单的web server</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div></div>
+<a name="_label2_3"></a><h3>运行Django项目：</h3>
+<div class="cnblogs_code">
+<pre>python manage.py runserver <span style="color: #800080;">127.0</span>.<span style="color: #800080;">0.1</span>:<span style="color: #800080;">8000</span></pre>
+</div>
+<a name="_label2_4"></a><h3>模板文件配置：</h3>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div>
+<pre>TEMPLATES =<span style="color: #000000;"> [
+    {
+        </span><span style="color: #800000;">'</span><span style="color: #800000;">BACKEND</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">django.template.backends.django.DjangoTemplates</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+        </span><span style="color: #800000;">'</span><span style="color: #800000;">DIRS</span><span style="color: #800000;">'</span>: [os.path.join(BASE_DIR, <span style="color: #800000;">"</span><span style="color: #800000;">template</span><span style="color: #800000;">"</span>)],  <span style="color: #008000;">#</span><span style="color: #008000;"> template文件夹位置</span>
+        <span style="color: #800000;">'</span><span style="color: #800000;">APP_DIRS</span><span style="color: #800000;">'</span><span style="color: #000000;">: True,
+        </span><span style="color: #800000;">'</span><span style="color: #800000;">OPTIONS</span><span style="color: #800000;">'</span><span style="color: #000000;">: {
+            </span><span style="color: #800000;">'</span><span style="color: #800000;">context_processors</span><span style="color: #800000;">'</span><span style="color: #000000;">: [
+                </span><span style="color: #800000;">'</span><span style="color: #800000;">django.template.context_processors.debug</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                </span><span style="color: #800000;">'</span><span style="color: #800000;">django.template.context_processors.request</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                </span><span style="color: #800000;">'</span><span style="color: #800000;">django.contrib.auth.context_processors.auth</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                </span><span style="color: #800000;">'</span><span style="color: #800000;">django.contrib.messages.context_processors.messages</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+            ],
+        },
+    },
+]</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div></div>
+<a name="_label2_5"></a><h3>静态文件配置：</h3>
+<div class="cnblogs_code">
+<pre>STATIC_URL = <span style="color: #800000;">'</span><span style="color: #800000;">/static/</span><span style="color: #800000;">'</span>  <span style="color: #008000;">#</span><span style="color: #008000;"> HTML中使用的静态文件夹前缀</span>
+STATICFILES_DIRS =<span style="color: #000000;"> [
+    os.path.join(BASE_DIR, </span><span style="color: #800000;">"</span><span style="color: #800000;">static</span><span style="color: #800000;">"</span>),  <span style="color: #008000;">#</span><span style="color: #008000;"> 静态文件存放位置</span>
+]</pre>
+</div>
+<p><span style="background-color: #ffffff;"><strong>看不明白？有图有真相：</strong></span></p>
+<p><span style="background-color: #ffffff;"><strong><img src="https://images2017.cnblogs.com/blog/867021/201801/867021-20180110190001816-1349372864.png" alt=""></strong></span></p>
+<p><span style="background-color: #ffff00;"><strong>刚开始学习时可在配置文件中暂时禁用csrf中间件，方便表单提交测试。</strong></span></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div>
+<pre>MIDDLEWARE =<span style="color: #000000;"> [
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">django.middleware.security.SecurityMiddleware</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">django.contrib.sessions.middleware.SessionMiddleware</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">django.middleware.common.CommonMiddleware</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+    </span><span style="color: #008000;">#</span><span style="color: #008000;"> 'django.middleware.csrf.CsrfViewMiddleware',</span>
+    <span style="color: #800000;">'</span><span style="color: #800000;">django.contrib.auth.middleware.AuthenticationMiddleware</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">django.contrib.messages.middleware.MessageMiddleware</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">django.middleware.clickjacking.XFrameOptionsMiddleware</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+]</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div></div>
+<div style="text-align: right"><a href="#_labelTop" style="text-decoration: none; ">回到顶部</a><a name="_label3"></a></div><h2>Django基础必备三件套：</h2>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">from</span> django.shortcuts import HttpResponse, render, redirect</pre>
+</div>
+<a name="_label3_0"></a><h3>HttpResponse</h3>
+<p>内部传入一个字符串参数，返回给浏览器。</p>
+<p>例如：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">def</span><span style="color: #000000;"> index(request):
+    </span><span style="color: #008000;">#</span><span style="color: #008000;"> 业务逻辑代码</span>
+    <span style="color: #0000ff;">return</span> HttpResponse(<span style="color: #800000;">"</span><span style="color: #800000;">OK</span><span style="color: #800000;">"</span>)</pre>
+</div>
+<a name="_label3_1"></a><h3>render</h3>
+<p>除request参数外还接受一个待渲染的模板文件和一个保存具体数据的字典参数。</p>
+<p>将数据填充进模板文件，最后把结果返回给浏览器。（类似于我们上面用到的jinja2）</p>
+<p>例如：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">def</span><span style="color: #000000;"> index(request):
+    </span><span style="color: #008000;">#</span><span style="color: #008000;"> 业务逻辑代码</span>
+    <span style="color: #0000ff;">return</span> render(request, <span style="color: #800000;">"</span><span style="color: #800000;">index.html</span><span style="color: #800000;">"</span>, {<span style="color: #800000;">"</span><span style="color: #800000;">name</span><span style="color: #800000;">"</span>: <span style="color: #800000;">"</span><span style="color: #800000;">alex</span><span style="color: #800000;">"</span>, <span style="color: #800000;">"</span><span style="color: #800000;">hobby</span><span style="color: #800000;">"</span>: [<span style="color: #800000;">"</span><span style="color: #800000;">烫头</span><span style="color: #800000;">"</span>, <span style="color: #800000;">"</span><span style="color: #800000;">泡吧</span><span style="color: #800000;">"</span>]})</pre>
+</div>
+<a name="_label3_2"></a><h3>redirect</h3>
+<p>接受一个URL参数，表示跳转到指定的URL。</p>
+<p>例如：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">def</span><span style="color: #000000;"> index(request):
+    </span><span style="color: #008000;">#</span><span style="color: #008000;"> 业务逻辑代码</span>
+    <span style="color: #0000ff;">return</span> redirect(<span style="color: #800000;">"</span><span style="color: #800000;">/home/</span><span style="color: #800000;">"</span>)</pre>
+</div>
+<div style="text-align: right"><a href="#_labelTop" style="text-decoration: none; ">回到顶部</a><a name="_label4"></a></div><h2>重定向是怎么回事？</h2>
+<p><img src="https://images2018.cnblogs.com/blog/867021/201803/867021-20180323145433091-385962907.png" alt=""></p>
+<div style="text-align: right"><a href="#_labelTop" style="text-decoration: none; ">回到顶部</a><a name="_label5"></a></div><h2>启动Django报错：</h2>
+<p>Django 启动时报错 UnicodeEncodeError ...</p>
+<p>报这个错误通常是因为计算机名为中文，改成英文的计算机名重启下电脑就可以了。</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(8862330,cb_blogId,1);green_channel_success(this,'谢谢推荐！');">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow('b6afb427-ccb2-44b1-e21e-08d49c350eca');" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="//common.cnblogs.com/images/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="//common.cnblogs.com/images/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="https://home.cnblogs.com/u/maple-shaw/" target="_blank"><img src="//pic.cnblogs.com/face/1168194/20170624120715.png" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="https://home.cnblogs.com/u/maple-shaw/">maple-shaw</a><br>
+            <a href="https://home.cnblogs.com/u/maple-shaw/followees">关注 - 3</a><br>
+            <a href="https://home.cnblogs.com/u/maple-shaw/followers">粉丝 - 351</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow('b6afb427-ccb2-44b1-e21e-08d49c350eca');return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(8862330,'Digg')">
+        <span class="diggnum" id="digg_count">1</span>
+    </div>
+    <div class="buryit" onclick="votePost(8862330,'Bury')">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+<script type="text/javascript">
+    currentDiggType = 0;
+</script></div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="https://www.cnblogs.com/maple-shaw/p/8335884.html" class="p_n_p_prefix">« </a> 上一篇：<a href="https://www.cnblogs.com/maple-shaw/p/8335884.html" title="发布于2018-01-23 15:04">Django ORM 中的批量操作</a><br><a href="https://www.cnblogs.com/maple-shaw/p/9029086.html" class="p_n_p_prefix">» </a> 下一篇：<a href="https://www.cnblogs.com/maple-shaw/p/9029086.html" title="发布于2018-05-12 16:33">Django简介</a><br></div>
+</div>
+
+
+		</div>
+		<div class="postDesc">posted @ <span id="post-date">2018-04-19 00:11</span> <a href="https://www.cnblogs.com/maple-shaw/">maple-shaw</a> 阅读(<span id="post_view_count">3045</span>) 评论(<span id="post_comment_count">0</span>)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=8862330" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(8862330);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=356358,cb_entryId=8862330,cb_blogApp=currentBlogApp,cb_blogUserGuid='b6afb427-ccb2-44b1-e21e-08d49c350eca',cb_entryCreatedDate='2018/4/19 0:11:00';loadViewCount(cb_entryId);var cb_postType=1;var isMarkdown=false;</script>
+
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login('commentform');">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank" onclick="ga('send', 'event', 'Link', 'click', 'T2-工控')">【推荐】超50万C++/C#源码: 大型实时仿真组态图形源码</a><br><a href="https://www.grapecity.com.cn/developer/spreadjs?utm_source=cnblogs&amp;utm_medium=blogpage&amp;utm_term=bottom&amp;utm_content=SpreadJS&amp;utm_campaign=community" target="_blank" onclick="ga('send', 'event', 'Link', 'click', 'T2-SpreadJS')">【前端】SpreadJS表格控件，可嵌入系统开发的在线Excel</a><br><a href="https://q.cnblogs.com/" target="_blank" onclick="ga('send', 'event', 'Link', 'click', 'T2-博问')">【推荐】程序员问答平台，解决您开发中遇到的技术难题</a><br></div>
+<div id="opt_under_post"></div>
+<script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+<script>
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+</script>
+<script>
+  googletag.cmd.push(function() {
+        googletag.defineSlot('/1090369/C1', [300, 250], 'div-gpt-ad-1546353474406-0').addService(googletag.pubads());
+        googletag.defineSlot('/1090369/C2', [468, 60], 'div-gpt-ad-1539008685004-0').addService(googletag.pubads());
+        googletag.pubads().enableSingleRequest();
+        googletag.enableServices();
+  });
+</script>
+<div id="cnblogs_c1" class="c_ad_block">
+    <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;" data-google-query-id="CKTnho664OICFQg5lgodnAEKqQ"><div id="google_ads_iframe_/1090369/C1_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/1090369/C1_0" title="3rd party ad content" name="google_ads_iframe_/1090369/C1_0" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" srcdoc="" style="border: 0px; vertical-align: bottom;" data-google-container-id="1" data-load-complete="true"></iframe></div></div>
+</div>
+<div id="under_post_news"><div class="recomm-block"><b>相关博文：</b><br>·  <a href="https://www.cnblogs.com/liuye1990/p/9648455.html" target="_blank" onclick="clickRecomItmem(9648455)">Web框架的原理</a><br>·  <a href="https://www.cnblogs.com/kakawith/p/8630700.html" target="_blank" onclick="clickRecomItmem(8630700)">Django:web框架本质</a><br>·  <a href="https://www.cnblogs.com/cp-miao/p/5750226.html" target="_blank" onclick="clickRecomItmem(5750226)">Web框架</a><br>·  <a href="https://www.cnblogs.com/zhang997050423/p/6918599.html" target="_blank" onclick="clickRecomItmem(6918599)">自定义Web框架</a><br>·  <a href="https://www.cnblogs.com/nixingguo/p/6613268.html" target="_blank" onclick="clickRecomItmem(6613268)">Python全栈开发：web框架</a><br></div></div>
+<div id="cnblogs_c2" class="c_ad_block">
+    <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;" data-google-query-id="CP71h4664OICFQg5lgodnAEKqQ"><div id="google_ads_iframe_/1090369/C2_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/1090369/C2_0" title="3rd party ad content" name="google_ads_iframe_/1090369/C2_0" width="468" height="60" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" srcdoc="" style="border: 0px; vertical-align: bottom;" data-google-container-id="2" data-load-complete="true"></iframe></div></div>
+</div>
+<div id="under_post_kb"><div class="itnews c_ad_block"><b>最新新闻</b>：<br> ·  <a href="https://news.cnblogs.com/n/626672/" target="_blank">机构称谷歌新闻业务2018收入47亿美元 谷歌：计算方法有误</a><br> ·  <a href="https://news.cnblogs.com/n/626670/" target="_blank">知否|担心没人愿意冒险，NASA曾想让囚犯成首批宇航员</a><br> ·  <a href="https://news.cnblogs.com/n/626668/" target="_blank">中国公布规定限制手机 APP 读取通讯录</a><br> ·  <a href="https://news.cnblogs.com/n/626667/" target="_blank">美国年轻人娱乐方式巨变：包月玩游戏者超过包月看电视</a><br> ·  <a href="https://news.cnblogs.com/n/626666/" target="_blank">AMD三代锐龙性能秀肌肉：不给九代酷睿任何机会</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+ if(enablePostBottom()) {
+    codeHighlight();
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverT2();
+    deliverC1();
+    deliverC2();
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+}
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"><script type="text/javascript">window['__document_write_ajax_callbacks__']['3']();</script><script language="javascript" type="text/javascript">window['__document_write_ajax_callbacks__']['1']();</script>
+<h4 style="padding-top: 10px; text-align: center"><a style="font-size: 18px; color: #21759b;" href="https://www.luffycity.com/?source=xiaofeng">路飞学城作者</a></h4>
+
+<p style="padding: 10px; text-align: center"><b>最新免费视频：</b><a style="font-size: 18px;color: #21759b;" target="_blank" href="http://www.pythonav.com">PythonAv.com</a></p>
+<a href="https://www.luffycity.com/home/camp?source=xiaofeng" target="_blank" style="font-weight: bold; font-size: 15px">
+   <img src="https://files-cdn.cnblogs.com/files/maple-shaw/luffycity.bmp" alt="路飞学城作者" width="240px">
+</a><div id="profile_block">昵称：<a href="https://home.cnblogs.com/u/maple-shaw/">maple-shaw</a><br>园龄：<a href="https://home.cnblogs.com/u/maple-shaw/" title="入园时间：2017-05-18">2年</a><br>粉丝：<a href="https://home.cnblogs.com/u/maple-shaw/followers/">351</a><br>关注：<a href="https://home.cnblogs.com/u/maple-shaw/followees/">3</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="follow('b6afb427-ccb2-44b1-e21e-08d49c350eca')">+加关注</a></div><script type="text/javascript">window['__document_write_ajax_callbacks__']['4']();</script><script>window['__document_write_ajax_callbacks__']['2']();</script></div></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style=""><table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="Calendar">
+	<tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
+		<tbody><tr><td class="CalNextPrev"><a href="javascript:void(0);" onclick="loadBlogCalendar('2019/05/01');return false;">&lt;</a></td><td align="center">2019年6月</td><td class="CalNextPrev" align="right"><a href="javascript:void(0);" onclick="loadBlogCalendar('2019/07/01');return false;">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th class="CalDayHeader" align="center" abbr="日" scope="col">日</th><th class="CalDayHeader" align="center" abbr="一" scope="col">一</th><th class="CalDayHeader" align="center" abbr="二" scope="col">二</th><th class="CalDayHeader" align="center" abbr="三" scope="col">三</th><th class="CalDayHeader" align="center" abbr="四" scope="col">四</th><th class="CalDayHeader" align="center" abbr="五" scope="col">五</th><th class="CalDayHeader" align="center" abbr="六" scope="col">六</th></tr><tr><td class="CalOtherMonthDay" align="center">26</td><td class="CalOtherMonthDay" align="center">27</td><td class="CalOtherMonthDay" align="center">28</td><td class="CalOtherMonthDay" align="center">29</td><td class="CalOtherMonthDay" align="center">30</td><td class="CalOtherMonthDay" align="center">31</td><td class="CalWeekendDay" align="center">1</td></tr><tr><td class="CalWeekendDay" align="center">2</td><td align="center">3</td><td align="center">4</td><td align="center">5</td><td align="center">6</td><td align="center">7</td><td class="CalWeekendDay" align="center">8</td></tr><tr><td class="CalWeekendDay" align="center">9</td><td align="center">10</td><td class="CalTodayDay" align="center">11</td><td align="center">12</td><td align="center">13</td><td align="center">14</td><td class="CalWeekendDay" align="center">15</td></tr><tr><td class="CalWeekendDay" align="center">16</td><td align="center">17</td><td align="center">18</td><td align="center">19</td><td align="center">20</td><td align="center">21</td><td class="CalWeekendDay" align="center">22</td></tr><tr><td class="CalWeekendDay" align="center">23</td><td align="center">24</td><td align="center">25</td><td align="center">26</td><td align="center">27</td><td align="center">28</td><td class="CalWeekendDay" align="center">29</td></tr><tr><td class="CalWeekendDay" align="center">30</td><td class="CalOtherMonthDay" align="center">1</td><td class="CalOtherMonthDay" align="center">2</td><td class="CalOtherMonthDay" align="center">3</td><td class="CalOtherMonthDay" align="center">4</td><td class="CalOtherMonthDay" align="center">5</td><td class="CalOtherMonthDay" align="center">6</td></tr>
+</tbody></table></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block">
+<div id="sidebar_search" class="mySearch">
+<h3 class="catListTitle">搜索</h3>
+<div id="sidebar_search_box">
+<div id="widget_my_zzk" class="div_my_zzk"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk"></div>
+
+</div>
+</div>
+
+</div><div id="sidebar_toptags" class="sidebar-block"></div><div id="sidebar_categories">
+<div id="sidebar_postcategory" class="catListPostCategory sidebar-block">
+<h3 class="catListTitle">随笔分类<span style="font-size:11px;font-weight:normal">(34)</span></h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_0_Link_0" href="https://www.cnblogs.com/maple-shaw/category/1068079.html">HTML/CSS/JS(14)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_1" href="https://www.cnblogs.com/maple-shaw/category/1117479.html">Linux基础(12)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_2" href="https://www.cnblogs.com/maple-shaw/category/1068078.html">Mysql(4)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_3" href="https://www.cnblogs.com/maple-shaw/category/1132529.html">Python模块(4)</a> </li>
+
+</ul>
+
+</div>
+
+</div><div id="sidebar_scorerank" class="sidebar-block">
+<div class="catListBlogRank">
+<h3 class="catListTitle">积分与排名</h3>
+<ul>
+	<li class="liScore">
+		积分 -	55358
+	</li>
+	<li class="liRank">
+		排名 -	10362
+	</li>
+</ul>
+</div>
+
+
+</div><div id="sidebar_recentcomments" class="sidebar-block"><div id="recent_comments_wrap">
+<div class="catListComment">
+<h3 class="catListTitle">最新评论</h3>
+
+	<div id="RecentCommentsBlock"><ul>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/maple-shaw/articles/9414626.html#4226561">1. Re:Django ORM练习题</a></li>
+        <li class="recent_comment_body">哈哈嘿嘿嘻嘻</li>
+        <li class="recent_comment_author">--baby12138</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/maple-shaw/articles/9414626.html#4223936">2. Re:Django ORM练习题</a></li>
+        <li class="recent_comment_body">@小猫恨鱼也是可以啊，挺早的。...</li>
+        <li class="recent_comment_author">--maple-shaw</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/maple-shaw/articles/9414626.html#4223935">3. Re:Django ORM练习题</a></li>
+        <li class="recent_comment_body">肖帮主，加油</li>
+        <li class="recent_comment_author">--小猫恨鱼</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/maple-shaw/articles/7552210.html#4221083">4. Re:git和GitHub</a></li>
+        <li class="recent_comment_body">肖老大英姿飒爽</li>
+        <li class="recent_comment_author">--我不是胡歌</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/maple-shaw/articles/9333821.html#4220471">5. Re:Django之模板</a></li>
+        <li class="recent_comment_body">...</li>
+        <li class="recent_comment_author">--maple-shaw</li>
+</ul>
+</div>
+</div>
+</div></div><div id="sidebar_topviewedposts" class="sidebar-block"><div id="topview_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">阅读排行榜</h3>
+	<div id="TopViewPostsBlock"><ul><li><a href="https://www.cnblogs.com/maple-shaw/p/9029086.html">1. Django简介(4239)</a></li><li><a href="https://www.cnblogs.com/maple-shaw/p/8862330.html">2. Web框架的原理(3043)</a></li><li><a href="https://www.cnblogs.com/maple-shaw/p/8335884.html">3. Django ORM 中的批量操作(2899)</a></li><li><a href="https://www.cnblogs.com/maple-shaw/p/7843158.html">4. Vue中发送ajax请求——axios使用详解(1533)</a></li><li><a href="https://www.cnblogs.com/maple-shaw/p/7581316.html">5. Django的性能优化(1264)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topcommentedposts" class="sidebar-block"><div id="topfeedback_posts_wrap">
+<div class="catListFeedback">
+<h3 class="catListTitle">评论排行榜</h3>
+	<div id="TopFeedbackPostsBlock"><ul><li><a href="https://www.cnblogs.com/maple-shaw/p/9029086.html">1. Django简介(5)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topdiggedposts" class="sidebar-block"><div id="topdigg_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">推荐排行榜</h3>
+<div id="TopDiggPostsBlock"><ul><li><a href="https://www.cnblogs.com/maple-shaw/p/9029086.html">1. Django简介(6)</a></li><li><a href="https://www.cnblogs.com/maple-shaw/p/8862330.html">2. Web框架的原理(1)</a></li><li><a href="https://www.cnblogs.com/maple-shaw/p/7111964.html">3. 类的继承、派生、组合和接口(1)</a></li><li><a href="https://www.cnblogs.com/maple-shaw/p/7787873.html">4. 列表排序（冒泡、选择、插入、快速、堆、归并、希尔）(1)</a></li><li><a href="https://www.cnblogs.com/maple-shaw/p/7701201.html">5. Django 字段查询谓词表(1)</a></li></ul></div>
+</div></div></div></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+
+<!--done-->
+Copyright ©2019 maple-shaw
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+
+<script type="text/javascript">
+
+
+    function GenerateContentList() {
+        var $mainContent = $('#cnblogs_post_body');
+        var h2_list = $('#cnblogs_post_body h2');
+        var h3_all_list = $('#cnblogs_post_body h3');
+
+        if ($mainContent.length < 1)
+            return;
+
+        if (h2_list.length > 0) {
+            var content = '<a name="_labelTop"></a>';
+            content += '<div id="navCategory">';
+            content += '<h2 id="catalog">目录</h2>';
+            content += '<ul style="display:none">';
+            for (var i = 0; i < h2_list.length; i++) {
+                var go_to_top = '<div style="text-align: right"><a href="#_labelTop" style="text-decoration: none; ">回到顶部</a><a name="_label' + i + '"></a></div>';
+                $(h2_list[i]).before(go_to_top);
+
+                var h3_list = $(h2_list[i]).nextAll("h3");
+                var li3_content = '';
+                for (var j = 0; j < h3_list.length; j++) {
+                    var tmp = $(h3_list[j]).prevAll('h2').first();
+                    if (!tmp.is(h2_list[i]))
+                        break;
+                    var li3_anchor = '<a name="_label' + i + '_' + j + '"></a>';
+                    $(h3_list[j]).before(li3_anchor);
+                    li3_content += '<li><a href="#_label' + i + '_' + j + '" style="color: darkseagreen; text-decoration: none; font-size: 15px;">' + $(h3_list[j]).text() + '</a></li>';
+                }
+
+                var li2_content = '';
+                if (li3_content.length > 0)
+                    li2_content = '<li><a href="#_label' + i + '" style="color: darkseagreen; text-decoration: none; font-size: 15px;">' + $(h2_list[i]).text() + '</a><ul>' + li3_content + '</ul></li>';
+                else
+                    li2_content = '<li><a href="#_label' + i + '" style="color: darkseagreen; text-decoration: none; font-size: 15px;">' + $(h2_list[i]).text() + '</a></li>';
+                content += li2_content;
+            }
+            content += '</ul>';
+            content += '</div>';
+            if ($mainContent.length != 0) {
+                $mainContent.prepend(content);
+            }
+        }
+        else if (h2_list.length == 0 && h3_all_list.length > 1) {
+            var h3_list = h3_all_list;
+            var content = '<a name="_labelTop"></a>';
+            content += '<div id="navCategory">';
+            content += '<h2 id="catalog">目录</h2>';
+            content += '<ul style="display:none">';
+            for (var i = 0; i < h3_list.length; i++) {
+                var go_to_top = '<div style="text-align: right"><a href="#_labelTop">回到顶部</a><a name="_label' + i + '"></a></div>';
+                $(h3_list[i]).before(go_to_top);
+
+                var li3_content = '';
+                li3_content = '<li><a href="#_label' + i + '">' + $(h3_list[i]).text() + '</a></li>';
+                content += li3_content;
+            }
+            content += '</ul>';
+            content += '</div>';
+            if ($mainContent.length != 0) {
+                $mainContent.prepend(content);
+            }
+        }
+
+    }
+
+    GenerateContentList();
+
+    $('#catalog').click(function () {
+        $(this).next().toggle()
+    })
+
+
+</script><script type="text/javascript">getFollowStatus('b6afb427-ccb2-44b1-e21e-08d49c350eca')</script></body></html>

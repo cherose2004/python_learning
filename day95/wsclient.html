@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+</head>
+<body>
+<audio id="player" controls autoplay></audio>
+</body>
+<script type="application/javascript">
+    var ws_client = new WebSocket("ws://192.168.12.87:9528/app_ws/web");
+    ws_client.onmessage = function (eventMessage) {
+        // console.log(eventMessage);
+        // "{"sender":"app","receiver":"web","data":"1565756073764.amr"}"
+        var data = JSON.parse(eventMessage.data);
+        document.getElementById("player").src = "http://192.168.12.87:9527/get_chat/" + data.data;
+    }
+</script>
+</html>

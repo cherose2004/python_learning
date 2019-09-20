@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			button.active{
+				color: red;
+			}
+			p{
+				display: none;
+			}
+			p.active{
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<button class="active">热门</button>
+		<button>电视影音</button>
+		<button>电脑</button>
+		<button>家具</button>
+		<p class="active">热门</p>
+		<p>电视影音</p>
+		<p>电脑</p>
+		<p>家具</p>
+		<script type="text/javascript">
+			// 1.获取标签
+			var btns = document.getElementsByTagName('button');
+			var ops = document.getElementsByTagName('p');
+			
+			//2.给每个标签绑定点击事件
+			/* for(var i = 0;i < btns.length; i++){
+				btns[i].index = i;
+				btns[i].onclick = function (){
+					for(var j = 0; j < btns.length; j++){
+						btns[j].className = '';
+						ops[j].className = '';
+					}
+					//改变button的样式
+					this.className = 'active';
+					//改变p标签的样式
+					ops[this.index].className = 'active';
+				}
+			} */
+			
+			for(let i = 0;i < btns.length; i++){
+				
+				btns[i].onclick = function (){
+					for(var j = 0; j < btns.length; j++){
+						btns[j].className = '';
+						ops[j].className = '';
+					}
+					//改变button的样式
+					this.className = 'active';
+					//改变p标签的样式
+					ops[i].className = 'active';
+				}
+			}
+		</script>
+	</body>
+</html>

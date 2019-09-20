@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			.a{
+				color: red;
+				font-size: 30px;
+			}
+			p.active{
+				color: blue;
+			}
+		</style>
+	</head>
+	<body>
+		<p title="我的班级" id="p1" class="a">21</p>
+		<script type="text/javascript">
+			
+			// 如果是自定义的属性,要在文档上能看到,通过setAttribute设置属性
+			var p1 = document.getElementById('p1');
+			/* console.log(p1.getAttribute('title'));
+			console.log(p1.getAttribute('class'));
+			p1.setAttribute('class','abc');
+			p1.setAttribute('adadad','1321313'); */
+			
+			console.log(p1.className);
+			console.log(p1.title);
+			p1.abc = 123;
+			console.dir(p1);
+			p1.onclick = function(){
+				this.className = this.className +' active';
+			}
+			
+		</script>
+	</body>
+</html>

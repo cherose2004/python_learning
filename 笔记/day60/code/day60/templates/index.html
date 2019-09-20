@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+</head>
+<body>
+<a href="{% url 'app01:blog' %}">博客</a>
+<a href="{% url 'app02:home' %}">家目录</a>
+<a href="{% url 'app01:blogs' 2222  12 %}">博客s</a>
+<a href="{% url 'app01:blogs' month=12 year=2222 %}">博客s</a>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Document</title>
+        <script type="text/javascript">
+            function message() {
+                console.log('请输入姓名');
+            }
+            function message2() {
+                console.log('请正确输入您的用户名');
+            }
+        </script>
+    </head>
+    <body>
+        <form action="">
+            <p class="name">
+                <label for="username">用户名:</label>
+                <input type="text" id="username" onfocus="message();" onblur="message2();">
+            </p>
+            <p class="pwd">
+                <label for="pwd">密码:</label>
+                <input type="password" id="pwd" placeholder="请输入密码">
+            </p>
+            <input type="submit" value="注册">
+        </form>
+		<script type="text/javascript">
+// 			function fn(){
+// 				'use strict';
+// 				console.log(this);
+// 				}
+// 				fn();
+		</script>
+    </body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			ul li p.name{
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<ul id="box">
+			
+		</ul>
+		<script type="text/javascript">
+			var box = document.getElementById('box');
+			//从前端获取后端的数据
+			var data = [
+				{id:1,name:'小米8',subName:'你真好',price:98},
+				{id:2,name:'小米6',subName:'你真好2',price:948},
+				{id:3,name:'小米4',subName:'你真好3',price:100},
+				{id:4,name:'小米2',subName:'你真好4',price:928},
+				{id:5,name:'小米10',subName:'你真好5',price:918}
+				];
+			for(var i = 0; i < data.length; i++){
+				var li = document.createElement('li');
+				li.innerHTML = `<p class="name">${data[i].name}</p>
+				<p class="subName">${data[i].subName}</p>
+				<span class="price">${data[i].price}元</span>`;
+				box.appendChild(li);
+			}
+			
+		</script>
+	</body>
+</html>

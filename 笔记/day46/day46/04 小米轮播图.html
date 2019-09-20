@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            color: #fff;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        #box {
+            width: 1226px;
+            height: 100px;
+            margin: 0 auto;
+            background-color: #000;
+        }
+
+        #box ul {
+            /*overflow: hidden;*/
+            padding: 12px 0 0 30px;
+            /*width: 500px;*/
+            height: 88px;
+            /*background-color: red;*/
+        }
+
+        #box ul li {
+            float: left;
+            width: 60px;
+            height: 58px;
+            /*padding-top: 30px;*/
+        }
+
+        #box ul li.active {
+            width: 100px;
+            height: 88px;
+            background-color: green;
+            position: relative;
+        }
+
+        #box ul li.active .box {
+            position: absolute;
+            width: 234px;
+            height: 600px;
+            background-color: rgba(0, 0, 0, .5);
+            top: 88px;
+            left: -30px;
+            z-index: 80;
+        }
+
+        .clearfix:after {
+            content: '';
+            clear: both;
+            display: block;
+        }
+
+        .swiper {
+            width: 100%;
+            height: 460px;
+
+        }
+
+        .container {
+            width: 1226px;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .swiper span {
+            display: inline-block;
+            width: 41px;
+            height: 69px;
+            background: url("icon-slides.png") no-repeat 0 0;
+            position: absolute;
+            margin-top: -34px;
+            top: 50%;
+            cursor: pointer;
+
+        }
+
+        .swiper span.prev {
+            background-position: -83px 0;
+            left: 234px;
+
+
+        }
+
+        .swiper span.next {
+            background-position: -124px 0;
+            right: 0;
+        }
+        .swiper span.prev:hover{
+            background-position: 0 0;
+        }
+         .swiper span.next:hover{
+            background-position: -42px 0;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <ul class="clearfix">
+        <li class="active">
+            <div class="box"></div>
+        </li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+    </ul>
+</div>
+<div class="swiper">
+    <div class="container">
+        <img src="xmad.jpg" alt="" width="1226">
+        <span class="prev"></span>
+        <span class="next"></span>
+    </div>
+</div>
+</body>
+</html>

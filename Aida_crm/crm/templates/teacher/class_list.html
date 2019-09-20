@@ -1,0 +1,97 @@
+{% extends 'layout.html' %}
+
+
+{% block content %}
+
+    {% load my_tags %}
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">班级列表</h3>
+        </div>
+        <div class="panel-body">
+
+            <div>
+                <a href="{% url 'add_class' %}" class="btn btn-primary">新增</a>
+            </div>
+
+            <form action="" class="form-inline pull-right">
+                <input type="text" name="query" class="form-control">
+                <button class="btn btn-sm btn-success">搜索</button>
+            </form>
+
+
+                {% csrf_token %}
+                {#                <select name="action" id="" class="form-control">#}
+                {##}
+                {##}
+                {#                    {% if request.path_info == '/crm/customer_list/' %}#}
+                {#                        <option value="multi_apply">公户转私户</option>#}
+                {#                    {% else %}#}
+                {#                        <option value="multi_pub">私户转公户</option>#}
+                {#                    {% endif %}#}
+                {#                    <option value="multi_del">批量删除</option>#}
+                {##}
+                {#                </select>#}
+                {#                <button class="btn btn-sm btn-primary">应用</button>#}
+
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+
+                        <th>序号</th>
+                        <th>班级名称</th>
+                        <th>校区</th>
+                        <th>学费</th>
+                        <th>开班日期</th>
+                        <th>结业日期</th>
+                        <th>班级类型</th>
+                        <th>老师</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for class in all_class %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ class }}</td>
+                            <td>{{ class.campuses }}</td>
+                            <td>{{ class.price }}</td>
+                            <td>{{ class.start_date }}</td>
+                            <td>{{ class.graduate_date }}</td>
+                            <td>{{ class.get_class_type_display }}</td>
+                            <td>{{ class.show_teachers }}</td>
+
+                            <td>
+                                <a href="{% reverse_url request 'edit_class' class.pk %}"
+                                   class="btn btn-primary btn-sm">编辑</a>
+
+                                <a href="{% url 'course_record_list' class.pk %}"
+                                   class="btn btn-primary btn-sm">查看课程记录</a>
+                            </td>
+
+                        </tr>
+                    {% endfor %}
+
+
+                    </tbody>
+                </table>
+
+
+
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+
+                    {{ page_html }}
+
+                </ul>
+            </nav>
+
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}
