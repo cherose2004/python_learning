@@ -1,0 +1,66 @@
+[
+  {
+    "model": "app01.book",
+    "pk": 1,
+    "fields": {
+      "title": "\u6843\u82b1\u4fa0\u5927\u6218\u83ca\u82b1\u602a",
+      "price": "111.11",
+      "pub_date": "2019-01-01T10:10:10Z",
+      "pub": 1,
+      "authors": [
+        2
+      ]
+    }
+  },
+  {
+    "model": "app01.book",
+    "pk": 2,
+    "fields": {
+      "title": "\u6843\u82b1\u4fa0\u5927\u6218 MJJ",
+      "price": "9999.99",
+      "pub_date": "2019-01-01T10:10:10Z",
+      "pub": 2,
+      "authors": [
+        1,
+        2
+      ]
+    }
+  },
+  {
+    "model": "app01.book",
+    "pk": 3,
+    "fields": {
+      "title": "MJJ\u5927\u6218\u83ca\u82b1\u602a",
+      "price": "0.10",
+      "pub_date": "2019-01-01T10:10:10Z",
+      "pub": 1,
+      "authors": [
+        1
+      ]
+    }
+  }
+]
+
+{
+  "title": "桃花侠大战菊花怪1",
+  "price": "111.11",
+  "pub_date": "2019-01-01T10:10:10Z",
+  "pub": 1,
+  "authors": [
+    1,
+    2
+  ]
+}
+
+
+
+{
+  "title": "桃花侠大战菊花怪1",
+  "price": "111.11",
+  "pub_date": "2019-01-01T10:10:10Z",
+  "post_pub": 1,
+  "post_author": [
+    1,
+    2
+  ]
+}

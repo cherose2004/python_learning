@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /*后代选择器*/
+        /*#box p{*/
+            /*color:red;*/
+        /*}*/
+        /*子代选择器*/
+        /*#box>p{*/
+            /*color: yellow;*/
+        /*}*/
+        /*组合选择器*/
+        /*重置样式*/
+        p,ul,ol,body{
+            margin:0;
+            padding: 0;
+        }
+        input,textarea{
+            border:none;
+            outline: 0;
+        }
+        span{
+            color:red;
+        }
+        .active{
+            font-size: 20px;
+        }
+        span.active{
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div>
+            <div>
+                <div>
+                    <p>
+                        mjj
+                    </p>
+                </div>
+            </div>
+        </div>
+        <p>
+            wusir
+        </p>
+    </div>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+    <span class="active">女神</span>
+</body>
+</html>

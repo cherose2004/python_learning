@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //1.字面量创建方式
+    var obj = {};
+    obj.name = 'mjj';
+    obj.fav = function(){
+        //obj
+        console.log(this);
+    }
+    obj.fav();
+   //点语法 set 和get
+    console.log(obj.name);
+
+    //构造函数
+    var obj2 = new Object();
+    console.log(obj2);
+    obj2.name = 'wusir';
+
+
+    /*console.log(this);
+    function  add(x,y) {
+        console.log(this.name);
+        console.log(x);
+        console.log(y);
+    }
+
+    // console.dir(add);
+    // add();
+    // add.call(obj,1,2);
+    add.apply(obj,[1,2]);
+
+    (function () {
+        console.log(this);
+    })()*/
+
+
+
+    class Person{
+        constructor(name,age){
+            //初始化
+            this.name = name;
+            this.age = age;
+        }
+        fav(){
+            console.log(this.name);
+        }
+        showName(){
+
+        }
+    }
+    var p = new Person('mjj',18);
+    p.fav();
+</script>
+
+</body>
+</html>

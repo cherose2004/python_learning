@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>免费公开课</title>
+  <!-- animate动画库 -->
+  <link rel="stylesheet" href="https://cdn.bootcss.com/animate.css/3.7.0/animate.min.css">
+  <!-- 轮播全局样式 -->
+  <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.1/css/swiper.min.css">
+  <!-- 视频播放器样式 -->
+  <link rel="stylesheet" href="http://g.alicdn.com/de/prismplayer/2.7.4/skins/default/aliplayer-min.css" />
+  <!-- 全局样式 -->
+  <link rel="stylesheet" href="../../styles/global.css">
+  <!-- 头部html样式 -->
+  <link rel="stylesheet" href="../../styles/header.css">
+  <!-- 底部html样式 -->
+  <link rel="stylesheet" href="../../styles/footer.css">
+  <!-- 自学视频首页html样式 -->
+  <link rel="stylesheet" href="./free-open-course.css">
+</head>
+<body>
+  <!-- 头部html -->
+  <header>
+    <section class="old-slogan">
+      <div>
+        <p><img src="../../images/header/slogan1.png" alt="">帮助有志向的年轻人通过努力学习获得体面的工作和生活</p>
+        <p><img src="../../images/header/slogan2.png" alt="">全国免费咨询电话 : 400-609-2893</p>
+      </div>
+    </section>
+    <section class="head-nav">
+      <div class="nav-content">
+        <div class="nav-logo">
+          <p class="logo">
+            <a href="../home/home.html" class="logo-img1">
+              <img src="../../images/header/logo.png" alt="">
+            </a>
+            <a href="../home/home.html" class="logo-img2">
+              <img src="../../images/header/back-home.jpg" alt="">
+            </a>
+          </p>
+          <span class="pipe"></span>
+          <div class="region-toggle">
+            <p class="region-default">
+              <img src="../../images/header/beijin.png" alt="">
+              <span>北京校区</span>
+              <i></i>
+            </p>
+            <ul class="region-list">
+              <a href="../../pages/home/home.html">
+                <li><img src="../../images/header/beijin.png" alt="">北京校区</li>
+              </a>
+              <a href="../../pages/shanghai-home/shanghai-home.html">
+                <li><img src="../../images/header/head-sel-img2.jpg" alt="">上海校区</li>
+              </a>
+              <a href="../../pages/shenzhen-home/shenzhen-home.html">
+                <li><img src="../../images/header/head-sel-img3.jpg" alt="">深圳校区</li>
+              </a>
+            </ul>
+          </div>
+        </div>
+        <div class="nav-list">
+          <ul class="nav-item">
+            <li><a href="../../pages/teachers-power/teachers-power.html" target="_blank">师资力量</a></li>
+            <li class="course-center"><a>课程中心</a></li>
+            <li><a href="../../pages/video-library/video-library.html" target="_blank">自学视频</a></li>
+            <li><a href="../../pages/oldboy-books/oldboy-books.html" target="_blank">原创书籍</a></li>
+            <li><a href="https://www.luffycity.com/home" target="_blank">在线学习</a></li>
+            <li><a href="../../pages/classmate-say/classmate-say.html" target="_blank">同学说</a><span>99+</span></li>
+            <li><a href="../../pages/classmate-say/student-interview.html" target="_blank">学员专访</a></li>
+            <li><a href="../../pages/enterprise-train/enterprise-train.html" target="_blank">企业内训</a></li>
+          </ul>
+          <a href="../../pages/signin/signin.html" class="signin-btn">
+            <img src="../../images/header/signin-btn.png" alt="">
+            <span>登录</span>
+          </a>
+        </div>
+        <div class="nav-course">
+          <div class="nav-course-list">
+            <dl>
+              <a href="" target="_blank">
+                <dt><img src="../../images/header/head-course-img1.jpg" alt=""></dt>
+                <dd>Python全栈开发</dd>
+              </a>
+            </dl>
+            <dl>
+              <a href="" target="_blank">
+                <dt><img src="../../images/header/head-course-img2.jpg" alt=""></dt>
+                <dd>Linux云计算运维</dd>
+              </a>
+            </dl>
+            <dl>
+              <a href="" target="_blank">
+                <dt><img src="../../images/header/head-course-img3.jpg" alt=""></dt>
+                <dd>网络安全工程师</dd>
+              </a>
+            </dl>
+            <dl>
+              <a href="" target="_blank">
+                <dt><img src="../../images/header/head-course-img4.jpg" alt=""></dt>
+                <dd>大数据工程师</dd>
+              </a>
+            </dl>
+            <dl>
+              <a href="" target="_blank">
+                <dt><img src="../../images/header/head-course-img5.jpg" alt=""></dt>
+                <dd>新媒体运营经理</dd>
+              </a>
+            </dl>
+            <dl>
+              <a href="" target="_blank">
+                <dt><img src="../../images/header/head-course-img6.jpg" alt=""></dt>
+                <dd>JAVA EE</dd>
+              </a>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+  </header>
+
+  <!-- 自学视频html -->
+	<div class="main">
+		<div class="free-course-video">
+			<div class="free-top-box">
+				<div class="video-container">
+					<div class="video-box"></div>
+					<div class="video-item">
+						<div class="video-name">
+							<p><span>Python</span>Python全栈习题辅导班</p>
+							<a href=""><img src="../../images/free-open-course/free-open-icon1.png" alt="">下载本集项目文件</a>
+						</div>
+						<div class="video-intro">
+							<p>项目实战、练习代码、商城实战，教你如何通过最难Python项目挑战！</p>
+							<p><img src="../../images/free-open-course/free-open-icon2.png" alt="">1,200人已学习</p>
+						</div>
+					</div>
+				</div>
+				<div class="video-nav">
+					<div class="course-infor">
+						<p class="number"><span>已完结</span>本课程共 8 集，已更新至 8 集</p>
+						<p class="teacher"><img src="../../images/free-open-course/free-open-icon2.png" alt="">Linux学院  金牌讲师  李导</p>
+						<div class="communication">
+							<a href="">
+								<img src="../../images/free-open-course/free-open-icon3.png" alt="">
+								<p>与老师对话</p>
+							</a>
+							<span></span>
+							<a href="">
+								<img src="../../images/free-open-course/free-open-icon4.png" alt="">
+								<p>加入课程交流群</p>
+							</a>
+						</div>
+					</div>
+					<div class="play-list">
+						<div class="list-title">
+							<span></span>
+							<p><img src="../../images/free-open-course/free-open-icon5.png" alt="">播放列表</p>
+							<p>1 / 20</p>
+						</div>
+						<ul class="directory-list">
+							<li>
+								<img src="../../images/free-open-course/free-open-icon6.png" alt="">
+								<p>AE基础01.先认识一下ae吧的撒的可能是的扩散的卡萨</p>
+								<span>23.40</span>
+							</li>
+							<li>
+								<img src="../../images/free-open-course/free-open-icon6.png" alt="">
+								<p>AE基础01.先认识一下ae吧的撒的可能是的扩散的卡萨</p>
+								<span>23.40</span>
+							</li>
+							<li>
+								<img src="../../images/free-open-course/free-open-icon6.png" alt="">
+								<p>AE基础01.先认识一下ae吧的撒的可能是的扩散的卡萨</p>
+								<span>23.40</span>
+							</li>
+							<li>
+								<img src="../../images/free-open-course/free-open-icon6.png" alt="">
+								<p>AE基础01.先认识一下ae吧的撒的可能是的扩散的卡萨</p>
+								<span>23.40</span>
+							</li>
+							<li>
+								<img src="../../images/free-open-course/free-open-icon6.png" alt="">
+								<p>AE基础01.先认识一下ae吧的撒的可能是的扩散的卡萨</p>
+								<span>23.40</span>
+							</li>
+							<li>
+								<img src="../../images/free-open-course/free-open-icon6.png" alt="">
+								<p>AE基础01.先认识一下ae吧的撒的可能是的扩散的卡萨</p>
+								<span>23.40</span>
+							</li>
+							<li>
+								<img src="../../images/free-open-course/free-open-icon6.png" alt="">
+								<p>AE基础01.先认识一下ae吧的撒的可能是的扩散的卡萨</p>
+								<span>23.40</span>
+							</li>
+							<li>
+								<img src="../../images/free-open-course/free-open-icon6.png" alt="">
+								<p>AE基础01.先认识一下ae吧的撒的可能是的扩散的卡萨</p>
+								<span>23.40</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="course-content">
+			<div class="course-intro">
+				<p class="course-title"><img src="../../images/free-open-course/free-open-icon7.png" alt="">老男孩Linux云计算运维就业班正在火热招生，坐席有限，<a href="" target="_blank">【立即抢占报名名额】</a></p>
+				<img src="../../images/free-open-course/free-open-img1.png" alt="" class="img1">
+				<div>
+					<p class="course-s-t"><img src="../../images/free-open-course/free-open-icon8.png" alt="">课程概述：</p>
+					<article>
+							全球唯一囊括机器学习所有分支以及最新研究成果的系列课程；全球唯一涵盖机器学习领域最受欢迎的两门编程语言Python和R的系列课程；手把手解释编程代码中的每个细节；条理清晰、深入浅出的授课风格。
+							《机器学习A-Z》系列课程是英文课程“Machine Learning A-Z”的全中文翻译和再创造。原版英文课程是全球最畅销的机器学习课程，上线一年即在全球拥有15万+销量。
+							本课程将会用到系列课程第一部分 《机器学习A-Z 1-序言与数据预处理》的预备知识。我们建议您在开始本课程前，完成对第一部分免费课程的学习。
+							在这个课程里导师将会介绍回归模型。回归模型（线性或非线性）被广泛应用于商业活动中的数值预测，比如薪水，销售额等等。如果说自变量（independent variable）是时间，那么我们是在预测未来的数值；反之我们的模型在预测当前未知的数值。
+							学完本课程后，您会理解如何创建并且应用以下的核心机器学习回归模型：
+							- 简单线性回归
+							- 多元线性回归
+							- 多项式回归
+							以下课时提供免费预览：
+							- 课时35： 多项式回归 - Python 4
+					</article>
+				</div>
+				<div>
+					<p class="course-s-t"><img src="../../images/free-open-course/free-open-icon8.png" alt="">适用人群：</p>
+					<article>
+						想入门人工智能，但是缺乏系统学习+项目实战经验的学员
+					</article>
+				</div>
+				<img src="../../images/free-open-course/free-open-img1.png" alt="" class="img2">
+				<img src="../../images/free-open-course/free-open-img1.png" alt="" class="img2">
+				<img src="../../images/free-open-course/free-open-img1.png" alt="" class="img2">
+				<img src="../../images/free-open-course/free-open-img1.png" alt="" class="img2">
+			</div>
+			<div class="course-side">
+				<a href="" target="_blank">
+					<img src="../../images/free-open-course/free-open-img2.jpg" alt="">
+				</a>
+				<a href="" target="_blank">
+					<img src="../../images/free-open-course/free-open-img3.jpg" alt="">
+				</a>
+				<div class="course-teacher">
+					<div class="module-title">
+						<p><img src="../../images/free-open-course/free-open-icon9.png" alt="">课程讲师</p>
+						<a>About Instructor</a>
+					</div>
+					<div class="teacher-infor">
+						<img src="../../images/free-open-course/free-open-img1.png" alt="">
+						<p>李导</p>
+						<span>金牌讲师</span>
+						<article>老男孩IT教育创始人，国内NLP心理学运维思想创始人，Linux集群架构实战专家，17年一线IT经验及教学培训经验，著有多本Linux畅销图书，开创老男孩核心思想方法论，影响人群数十万，曾受邀做客CCTV、网易、教育在线等知名媒体。</article>
+					</div>
+        </div>
+        <!-- 暂时隐藏 -->
+				<!-- <div class="course-students">
+					<div class="module-title">
+						<p><img src="../../images/free-open-course/free-open-icon10.png" alt="">奋斗中的小伙伴</p>
+					</div>
+					<ul class="students-infor">
+						<li>
+							<img src="../../images/free-open-course/free-open-img1.png" alt="">
+							<p>孙武路</p>
+						</li>
+						<li>
+							<img src="../../images/free-open-course/free-open-img1.png" alt="">
+							<p>孙武路</p>
+						</li>
+						<li>
+							<img src="../../images/free-open-course/free-open-img1.png" alt="">
+							<p>孙武路</p>
+						</li>
+						<li>
+							<img src="../../images/free-open-course/free-open-img1.png" alt="">
+							<p>孙武路</p>
+						</li>
+						<li>
+							<img src="../../images/free-open-course/free-open-img1.png" alt="">
+							<p>孙武路</p>
+						</li>
+						<li>
+							<img src="../../images/free-open-course/free-open-img1.png" alt="">
+							<p>孙武路</p>
+						</li>
+					</ul>
+				</div> -->
+			</div>
+		</div>
+		<div class="course-recommend">
+			<div class="menu-title">
+				<img src="../../images/home/menu3.jpg" alt="">
+				<p>推荐学习课程<i></i></p>
+				<img src="../../images/home/menu1-1.jpg" alt="">
+			</div>
+			<div class="recommend-module">
+				<a href="" target="_blank">
+					<img src="../../images/free-open-course/free-open-img2.jpg" alt="">
+					<div class="recommend-name">
+						<p>Python全栈习题辅导班</p>
+						<span>Python学院</span>
+					</div>
+        </a>
+        <a href="" target="_blank">
+          <img src="../../images/free-open-course/free-open-img2.jpg" alt="">
+          <div class="recommend-name">
+            <p>Python全栈习题辅导班</p>
+            <span>Python学院</span>
+          </div>
+        </a>
+        <a href="" target="_blank">
+          <img src="../../images/free-open-course/free-open-img2.jpg" alt="">
+          <div class="recommend-name">
+            <p>Python全栈习题辅导班</p>
+            <span>Python学院</span>
+          </div>
+        </a>
+        <a href="" target="_blank">
+          <img src="../../images/free-open-course/free-open-img2.jpg" alt="">
+          <div class="recommend-name">
+            <p>Python全栈习题辅导班</p>
+            <span>Python学院</span>
+          </div>
+        </a>
+			</div>
+		</div>
+	</div>
+
+  <!-- 底部html -->
+  <footer>
+    <div class="foot-item">
+      <div class="foot-top">
+        <ul>
+          <li>
+            <p class="p1"><a>关于我们</a></p>
+            <p class="p2"><a href="../about-us/about-us.html" target="_blank">老男孩简介</a></p>
+            <p class="p3"><a href="../join-oldboy/join-oldboy.html" target="_blank">加入老男孩</a></p>
+          </li>
+          <li>
+            <p class="p1"><a>旗下品牌</a></p>
+            <p class="p2"><a href="" target="_blank">在线网校</a></p>
+            <p class="p3"><a href="" target="_blank">老男孩兄弟会</a></p>
+          </li>
+          <li>
+            <p class="p1"><a>校园攻略</a></p>
+            <p class="p2"><a href="../../pages/learn-process/learn-process.html" target="_blank">我要报名</a></p>
+            <p class="p2"><a href="../../pages/school-route/school-route.html" target="_blank">来校路线</a></p>
+            <p class="p3"><a href="" target="_blank">校园环境</a></p>
+          </li>
+          <li>
+            <p class="p1"><a>学习资源</a></p>
+            <p class="p2"><a href="../video-library/video-library.html" target="_blank">自学教程</a></p>
+            <p class="p2"><a href="../technology-blog/technology-blog.html" target="_blank">技术博客</a></p>
+            <p class="p3"><a href="../technology-blog/industry-news.html" target="_blank">行业新闻</a></p>
+          </li>
+          <li>
+            <p class="p1"><a>学习故事</a></p>
+            <p class="p2"><a href="" target="_blank">精彩访谈</a></p>
+            <p class="p2"><a href="" target="_blank">学员成果</a></p>
+          </li>
+        </ul>
+        <div class="foot-num">
+          <div class="code">
+            <p>
+              老男孩公众号<br>
+              <img src="../../images/footer/code1.png" alt="">
+            </p>
+            <p>
+              个人公众号<br>
+              <img src="../../images/footer/code2.png" alt="">
+            </p>
+          </div>
+          <div class="number">
+            <p class="phone">400-609-2893</p>
+            <p class="tip">周一至周日 9:00-19:00（仅收市话费）</p>
+            <a href=""><button></button></a>
+          </div>
+        </div>
+      </div>
+      <ul class="foot-center">
+        <span></span>
+        <li><a href="" target="_blank">友情链接</a></li>
+        <li><a href="" target="_blank">老男孩网络课堂</a></li>
+        <li><a href="" target="_blank">老男孩教育博客</a></li>
+        <li><a href="" target="_blank">老男孩Linux</a></li>
+        <li><a href="" target="_blank">培训Alex博客</a></li>
+      </ul>
+      <div class="foot-bottom">
+        <p>Copyright © , xxxxxxxxx Digital Co., Ltd. All Rights Reserved.</p>
+        <p>北京一天天教育科技有限公司</p>
+        <p>京ICP备13038099号-3</p>
+        <span></span>
+        <p>版权说明</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- jquery -->
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <!-- 轮播 -->
+  <script src="https://cdn.bootcss.com/Swiper/3.4.1/js/swiper.min.js"></script>
+  <!-- 视频播放器 -->
+  <script src="http://g.alicdn.com/de/prismplayer/2.7.4/aliplayer-min.js"></script>
+  <!-- 视频播放器 -->
+  <script src="../../plugins/tools.js"></script>
+  <!-- 头部动效 -->
+  <script src="../../components/header.js"></script>
+  <!-- 首页动效 -->
+  <script src="./free-open-course.js"></script>
+
+</body>
+</html>

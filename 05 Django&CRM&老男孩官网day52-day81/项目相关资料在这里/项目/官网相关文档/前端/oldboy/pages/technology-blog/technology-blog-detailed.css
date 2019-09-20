@@ -1,0 +1,224 @@
+.main {
+	flex: 1;
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: relative;
+}
+
+.main .banner {
+    width: 1920px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.main .blog-nav {
+	width: 1200px;
+	height: auto;
+	margin-top: 30px;
+	display: flex;
+	align-items: center;
+}
+.main .blog-nav li {
+	width: 100px;
+	text-align: center;
+	margin-right: 40px;
+	padding-bottom: 15px;
+	font-size:14px;
+	font-family: MicrosoftYaHei;
+	font-weight:400;
+	color:rgba(136,146,165,1);
+	cursor: pointer;
+}
+.main .blog-nav li:hover {
+	color: #4D7FD1 !important;
+	box-shadow: 0 2px 0 0 #588DE4;
+}
+.thisli {
+	color: #4D7FD1 !important;
+	box-shadow: 0 2px 0 0 #588DE4;
+}
+.main .blog-wrap {
+	width: 1200px;
+	height: auto;
+	margin-top: 30px;
+}
+.blog-wrap .blog-content {
+	float: left;
+	width: 860px;
+	height: auto;
+	margin-right: 20px;
+	background: #fff;
+	box-shadow:0px 0px 4px 0px rgba(66,72,85,0.2);
+	padding: 25px 30px;
+	box-sizing: border-box;
+}
+.content-module h1{
+    font-size:20px;
+    font-family:MicrosoftYaHei-Bold;
+    font-weight:bold;
+    color:rgba(102,102,102,1);
+    margin-bottom: 18px;
+}
+.content-module .type {
+    display: flex;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(221,226,237,1);
+    margin-bottom: 24px;
+}
+.content-module .type p {
+    display: flex;
+    align-items: center;
+    margin-right: 36px;
+    font-size:12px;
+    font-family:MicrosoftYaHei;
+    font-weight:400;
+    color:rgba(101,140,198,1);
+}
+.content-module .type p img {
+    margin-right: 8px;
+}
+.content-module h2 {
+    font-size:14px;
+    font-family:MicrosoftYaHei;
+    font-weight:400;
+    color:rgba(76,130,217,1);
+}
+.content-module .pipe {
+    width:60px;
+    height:4px;
+    background:rgba(112,159,235,1);
+    margin-top: 16px;
+    margin-bottom: 30px;
+}
+.content-module  .article-wrap {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    font-size:14px;
+    font-family:MicrosoftYaHei;
+    font-weight:400;
+    color:rgba(102,102,102,1);
+    line-height:28px;
+}
+.content-module .tip {
+    width: 100%;
+    height:42px;
+    background:rgba(244,248,255,1);
+    border:1px solid rgba(174,200,235,1);
+    display: flex;
+    align-items: center;
+    font-size:12px;
+    font-family:MicrosoftYaHei;
+    font-weight:400;
+    color:rgba(119,153,194,1);
+    margin-top: 20px;
+}
+.content-module .tip img {
+    margin-right: 10px;
+    margin-left: 20px;
+}
+.blog-wrap .blog-side {
+	float: right;
+	width: 320px;
+	height: auto;
+}
+.blog-side a{
+	margin-bottom: 20px;
+}
+.blog-side .news {
+	width: 100%;
+	background:rgba(255,255,255,1);
+	box-shadow:0px 0px 10px 0px rgba(93,116,157,0.14);
+}
+.title {
+	width: 100%;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	padding: 0 16px;
+	box-sizing: border-box;
+	justify-content: space-between;
+	background:linear-gradient(90deg,rgba(101,149,213,1) 0%,rgba(131,171,238,1) 100%);
+}
+.title p {
+	display: flex;
+	align-items: center;
+	font-size:16px;
+	font-family:MicrosoftYaHei;
+	font-weight:400;
+	color:rgba(255,255,255,1);
+}
+.title p img {
+	margin-right: 8px;
+}
+.title span {
+	font-size:12px;
+	font-family:MicrosoftYaHei;
+	font-weight:400;
+	font-style:italic;
+	color:rgba(255,255,255,.8);
+}
+.news-cont {
+	padding: 16px 14px;
+	box-sizing: border-box;
+}
+.news-cont section {
+	display: flex;
+}
+.news-cont a {
+	padding-bottom: 16px;
+	margin-bottom: 16px;
+	border-bottom: 1px solid rgba(221,226,237,1);
+}
+.news-cont a:last-child {
+	border: none;
+	padding-bottom: 0;
+	margin-bottom: 0;
+}
+.news-cont section img {
+	width: 100px;
+	height: 64px;
+	margin-right: 10px;
+}
+.news-cont section div article {
+	width:180px;
+	font-size:14px;
+	font-family:MicrosoftYaHei;
+	font-weight:400;
+	color:rgba(136,136,136,1);
+	overflow: hidden;  /** 隐藏超出的内容 **/
+    word-break: break-all;
+    text-overflow: ellipsis; /** 多行 **/
+    display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
+    -webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+	-webkit-line-clamp: 2; /** 显示的行数 **/
+	margin-bottom: 10px;
+}
+.news-cont section div p {
+	font-size:12px;
+	font-family:MicrosoftYaHei;
+	font-weight:400;
+	color:rgba(170,170,170,1);
+}
+.erweima {
+    margin-bottom: 20px;
+}
+.erweima .code-img {
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    box-sizing: border-box;
+    background: #fff;
+}
+.erweima .code-img img {
+    width:300px;
+    height:260px;
+}
+.erweima .title {
+    background:linear-gradient(90deg,rgba(131,128,201,1) 0%,rgba(147,153,236,1) 100%);
+}

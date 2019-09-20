@@ -1,0 +1,161 @@
+2019年8月7日
+1.CBV - RestAPI
+get post 
+
+from flask import views 
+
+class Login(views.MethodView):
+	def get(*args,**kwargs):
+		pass
+	
+
+app.add_url_rule("url",endpoint=None,view_func=Login.as_view(name="当前视图函数名,必须唯一,因为他是endpoint"))
+
+
+2.Flask 基础复习
+Flask 启动
+# pip install Flask
+from flask import Flask
+app = Flask(__name__)
+app.run("0.0.0.0",9527) # 监听地址 监听端口
+
+Flask Response
+    # return ""		返回字符串 HTTPResponse
+    # return render_template("index.html") # 默认存放路径 templates 返回模板 依赖MarkupSafe
+    # return redirect("/login")		#响应头中加入 - location:http://www.baidu.com  重定向
+	Flask的特殊 Response
+	send_file(文件名称或文件路径+文件名称) # 打开并返回文件内容 自动识别文件类型 响应头 Content-Type:文件类型
+	jsonify({k:v}) # 返回标准格式的JSON字符串 响应头中 Content-Type:application/json
+	# Flask 1.1.1 中直接返回 dict 本质上是在运行 jsonify
+
+
+Flask Request
+	from flask import request
+	
+	request.form 获取FormData中的数据 to_dict() 类似字典类型 .get() ["key"] KeyError
+	request.args 获取URL中的数据 to_dict() 类似字典类型 .get() ["key"] KeyError
+	request.json 请求头中 Content-Type:application/json 存放 字典
+	request.data 请求头中 Content-Type没有Form FormData 存放 b""
+	
+	reqeust.method 请求方式
+	request.cookies 浏览器的Cookie键值对
+	request.heards 请求头
+	request.path 路由地址,请求地址
+	request.url 请求全部地址
+	request.host 主机位
+	
+
+Flask Session
+	交由客户端保管机制 保管一串儿加密字符串
+	from flask import session
+	
+	app.config["SECRET_KEY"] = "@#$%^&*^%$#@#$%^&*^%$#@#$%^&*&^%$#@#$%^&*^%$#@$%"
+	
+	session["key"] = "value"
+	
+
+Flask 路由
+	@app.route(
+	rule, # 路由地址
+	endpoint,	# Mapping 名称对应路由地址 - url_for 反向推算路由地址 url_for(endpoint)
+	methods,	# 允许进入视图函数的 请求方式
+	redirect_to, # 永久重定向 301 308  
+	strict_slashes, # 是否严格遵循路由匹配规则 /
+	defaults, # 默认参数
+	)
+	
+	app.add_url_rule(rule,
+	view_func # 视图函数
+	)
+	
+	动态参数路由
+	/get_file/<filename>
+	def get_file(filename)
+
+Flask 初始化配置
+	Flask(__name__)
+	template_folder 模板存放目录
+	static_folder 静态文件存放目录
+	static_url_path 静态文件访问路径
+
+
+Flask Config
+	app = Flask(__name__)
+	app.config
+	
+	class DebugConfig(object):
+		DEBUG=True
+		
+	app.config.from_object(DebugConfig)
+	app.config.from_object(TesingConfig)
+
+Flask 蓝图
+	隔离app,功能隔离
+	
+	from flask import Blueprint
+	当成不能被Run的Flask实例
+	bp = Blueprint("bp",__name__,url_prefix # Url前缀)
+	
+	@bp.before_request
+	@bp.after_request
+	@bp.errorhandler(http错误码)
+	
+	@bp.route("/mybp",endpoint="666")
+	bp.add_url_rule
+	
+	url_for("蓝图标识.endpoint")
+	url_for("bp.666")
+	
+	
+	app.register_blueprint(bp)
+
+
+Flask 特殊装饰器
+@app.before_request		在请求进入视图函数之前,作出处理
+@app.after_request		在结束视图函数之后,响应客户端之前
+@app.errorhandler(Http错误码) 重定义错误信息
+def error404(errorMessage)
+
+Flask CBV
+from flask import views
+
+class Login(views.MethodView):
+	def get(self,*args,**kwargs):
+		pass
+	
+	def post
+	
+app.add_url_rule("/login",endpoint=None,view_func=Login.as_view(name="login"))
+
+
+# Flask 上下文管理
+
+
+
+Flask-Session
+
+
+
+
+
+Redis 指令集
+set key value 用来在数据库中设置一个键值对 哈希存储结构 {Key:Value}
+
+get key 返回 value 用来从数据库中取出Key响应的value
+
+keys (查询key值) 例如 keys * 查询当前数据库中所有的key 
+					  keys a* 查询当前数据库中所有 以a开头的Key
+
+select dbnum 0-15 总共16个数据库 数据库切换指令 数据隔离
+
+Python操作Redis
+
+
+
+
+
+
+
+
+
+

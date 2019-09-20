@@ -1,0 +1,260 @@
+.main {
+	flex: 1;
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: relative;
+}
+.main .banner {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.main .banner img {
+    width: 1920px;
+    height: auto;
+}
+.classmate-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width:1220px;
+    height: 56px;
+    background:rgba(255,255,255,1);
+    box-shadow:0px 1px 2px 0px rgba(38,46,56,0.1);
+    padding-left: 120px;
+    padding-right: 120px;
+    box-sizing: border-box;
+}
+.classmate-nav a {
+    height: 100%;
+}
+.classmate-nav li {
+    width: 160px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size:16px;
+    font-family:MicrosoftYaHei;
+    font-weight:400;
+    color:rgba(156,167,186,1);
+}
+.classmate-nav li img:nth-of-type(2) {
+    display: none;
+}
+.classmate-nav li img {
+    margin-right: 10px;
+}
+.classmate-nav li:hover span{
+    color: #4987D4
+}
+.classmate-nav li:hover img:nth-of-type(2) {
+    display: block;
+}
+.classmate-nav li:hover img:nth-of-type(1) {
+    display: none;
+}
+.thisli {
+    box-shadow: 0 2px 0 0 #6A9FDB;
+}
+.thisli span {
+    color: #4987D4 !important;
+}
+.thisli img:nth-of-type(2) {
+    display: block !important;
+}
+.thisli img:nth-of-type(1) {
+    display: none !important;
+}
+.thisli i {
+    color: #F6C31C
+}
+.classmate-nav li:hover span i {
+  color: #F6C31C !important;
+}
+.students-describe {
+    width: 1220px;
+    margin-top: 20px;
+}
+.students-describe .students-video{
+    display: flex;
+    flex-wrap: wrap;
+}
+.students-describe .students-video .students-module {
+    width:290px;
+    height:240px;
+    background:rgba(255,255,255,1);
+    box-shadow:0px 0px 2px 0px rgba(38,46,56,0.3);
+    margin-right: 20px;
+    margin-bottom: 30px;
+    cursor: pointer;
+    -webkit-transition: all .2s linear;
+	-o-transition: all .2s linear;
+	-moz-transition: all .2s linear;
+	transition: all .2s linear;
+}
+.students-describe .students-video .students-module:nth-of-type(4n){
+    margin-right: 0;
+}
+.students-describe .students-video .students-module:hover {
+    -webkit-transform: translate3d(0,-4px,0);
+    -moz-transform: translate3d(0,-4px,0);
+    transform: translate3d(0,-4px,0);
+    box-shadow:0px 4px 9px 1px rgba(38,46,56,0.14);
+}
+.students-describe .students-video .students-module .img-time {
+    width: 100%;
+    height: 155px;
+    position: relative;
+}
+.students-video .students-module .img-time img {
+    width: 100%;
+    height: 100%;
+}
+.students-video .students-module .img-time span {
+    padding: 4px 6px;
+    background:rgba(0,0,0,.6);
+    font-size:12px;
+    font-family:MicrosoftYaHei;
+    font-weight:400;
+    color:rgba(255,255,255,1);
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+.students-video .students-module .item {
+    padding: 10px 13px;
+    box-sizing: border-box;
+}
+.students-video .students-module .item h4 {
+    font-size:14px;
+    font-family:MicrosoftYaHei;
+    font-weight:400;
+    color: #666666;
+    margin-bottom: 10px;
+}
+.students-video .students-module .item p {
+    font-size:12px;
+    font-family:MicrosoftYaHei;
+    font-weight:400;
+    color: #AAAAAA;
+}
+.students-video .students-module:hover .item h4 {
+    color:rgba(74,117,197,1);
+}
+.students-video .students-module:hover .item p {
+    color: #AABBDA;
+}
+.loading-wrap .skeleton {
+    padding: 40px 0;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.loading-wrap .skeleton .students-cont {
+    width: 178px;
+    height: auto;
+    text-align: center;
+    border-right: 1px solid #EEEEEE;
+    padding-right: 70px;
+    padding-left: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.loading-wrap .skeleton .students-cont img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: #E8EFF7;
+}
+.loading-wrap .skeleton .students-cont h4 {
+    width:126px;
+    height:14px;
+    background:rgba(236,239,246,1);
+    margin-top: 16px;
+    margin-bottom: 14px;
+}
+.loading-wrap  .skeleton-box{
+    display: flex;
+}
+.loading-wrap  .skeleton-box section {
+    width:290px;
+    height:240px;
+    background:rgba(255,255,255,1);
+    box-shadow:0px 0px 2px 0px rgba(38,46,56,0.3);
+    margin-right: 20px;
+}
+.loading-wrap  .skeleton-box section div:nth-of-type(1) {
+    width:290px;
+    height:152px;
+    background:rgba(232,239,247,1);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.loading-wrap  .skeleton-box section div:nth-of-type(1) img {
+    width: 44px;
+    height: 40px;
+}
+.loading-wrap  .skeleton-box section div:nth-of-type(1) span {
+    padding: 4px 6px;
+    background:rgba(0,0,0,.6);
+    font-size:12px;
+    font-family:MicrosoftYaHei;
+    font-weight:400;
+    color:rgba(255,255,255,1);
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+.loading-wrap  .skeleton-box section div:nth-of-type(2) {
+    padding: 14px 15px;
+    box-sizing: border-box;
+}
+.loading-wrap  .skeleton-box section div:nth-of-type(2) p {
+    width:260px;
+    height:14px;
+    background:rgba(236,239,246,1);
+}
+.loading-wrap  .skeleton-box section div:nth-of-type(2) p:nth-of-type(2) {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.loading-wrap  .skeleton-box section div:nth-of-type(2) span {
+    width:108px;
+    height:12px;
+    background:rgba(236,239,246,1);
+}
+.loading-wrap .loading-box {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 33px;
+    font-size: 14px;
+    font-family: MicrosoftYaHei;
+    font-weight: 400;
+    color: rgba(177,191,211,1);
+    line-height: 30px;
+}
+#courseLoading {
+    display: none;
+    opacity: 0;
+}
+.loading-box img {
+    width: 19px;
+    height: 19px;
+    margin-right: 12px;
+}

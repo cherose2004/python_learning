@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="c23dfe16-9901-4054-b799-5ee392ccda0f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../Angela/BaiduAi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/Chat/Nolic.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/Config.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/Music/Nobind.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/Music/Nolic.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/Music/SendOK.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/Music/Success.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/app.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/createQR.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/my_nlp.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/nl.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/redis_msg.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/serv/Content.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/serv/Devices.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/serv/Firends.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/serv/Firends_back.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/serv/Uploader.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/serv/Users.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/testgensim.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/testjieba.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/ws.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/xiaopapa.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day88/app.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day88/s1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day88/s2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day88/s3.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day88/templates/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day88/templates/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day88/templates/my_a.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day88/templates/stu.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day89/car_users.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day89/img/1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day89/music/1.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day89/s1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day89/s2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day89/s3.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day89/setting.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day89/static/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day89/templatess/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day89/trytrysee.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day89/trytrysee2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day90/bbbb.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day90/howrun.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day90/obj.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day90/opRedis.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day90/s1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day90/s2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day90/s3.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day90/setting.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day90/偏函数.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day90/线程安全.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day91/握手原理.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day91/点对点/s2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day91/点对点/templates/ws.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day91/群聊/s1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day91/群聊/templates/ws.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day92/asr.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day92/cmd.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day92/jttqhbc.m4a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day92/jxh.m4a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day92/req.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day92/simnet.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day92/tts.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day92/tuling.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day92/wyn.m4a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day92/wyn2.m4a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day92/对话.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day93/act.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day93/app.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day93/s1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day93/setting.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day93/templates/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day93/templates/reg.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day94/app.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day94/settings.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day94/ws_app.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day94/wsclient.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day95-1/app.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day95-1/serv/file_manager.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day95-1/serv/users.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day95-1/settings.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day95-1/web.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day95-1/ws_app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../luffy_permission/luffy_permission/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/../luffy_permission/luffy_permission/settings.py" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="db" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="db" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="db" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="main: schema" type="981a47c2:SqliteImplModel$Schema" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/drfdemo/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="220">
+              <caret line="40" column="21" selection-start-line="40" selection-start-column="21" selection-end-line="40" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/drfdemo/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="177">
+              <caret line="20" column="33" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
+              <folding>
+                <element signature="e#641#673#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app01/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="219">
+              <caret line="39" selection-start-line="39" selection-end-line="39" />
+              <folding>
+                <element signature="e#0#35#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://D:/oldboy/env/Lib/site-packages/rest_framework/viewsets.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="167">
+              <caret line="198" column="58" selection-start-line="198" selection-start-column="44" selection-end-line="198" selection-end-column="58" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app01/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="66">
+              <caret line="3" column="41" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://D:/oldboy/env/Lib/site-packages/rest_framework/generics.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="326">
+              <caret line="219" column="19" selection-start-line="219" selection-start-column="6" selection-end-line="219" selection-end-column="19" />
+              <folding>
+                <element signature="e#762#817#1" />
+                <element signature="e#822#867#0" />
+                <element signature="e#1247#1317#0" />
+                <element signature="e#1708#2685#0" />
+                <element signature="e#1708#2270#1" />
+                <element signature="e#2721#3713#0" />
+                <element signature="e#3770#4082#0" />
+                <element signature="e#4128#4453#1" />
+                <element signature="e#4776#4977#0" />
+                <element signature="e#5028#5531#0" />
+                <element signature="e#5580#5899#0" />
+                <element signature="e#5952#6187#0" />
+                <element signature="e#6241#6435#0" />
+                <element signature="e#6631#6790#0" />
+                <element signature="e#6873#7022#0" />
+                <element signature="e#7117#7279#0" />
+                <element signature="e#7371#7533#0" />
+                <element signature="e#7622#7889#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://D:/oldboy/env/Lib/site-packages/rest_framework/mixins.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="142">
+              <caret line="19" column="59" selection-start-line="16" selection-start-column="8" selection-end-line="19" selection-end-column="59" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="das://0cb44dbd-3354-4fdc-889d-2cebe93946eb/schema/main/table/app01_user">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://D:/oldboy/env/Lib/site-packages/rest_framework/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="169">
+              <caret line="105" column="43" selection-start-line="105" selection-start-column="43" selection-end-line="105" selection-end-column="43" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/drfdemo/urls.py" />
+        <option value="$PROJECT_DIR$/drfdemo/settings.py" />
+        <option value="$PROJECT_DIR$/app01/models.py" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
+        <option value="$PROJECT_DIR$/app01/views.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="424" />
+    <option name="y" value="11" />
+    <option name="width" value="697" />
+    <option name="height" value="735" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="drfdemo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="drfdemo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="drfdemo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="drfdemo" type="462c0819:PsiDirectoryNode" />
+              <item name="app01" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="drfdemo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="drfdemo" type="462c0819:PsiDirectoryNode" />
+              <item name="drfdemo" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="database.console.LAST_STATE" value="true" />
+    <property name="last_opened_file_path" value="D:/Python/Python36/python3.exe" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="D:/nodejs/node" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.gutterIcons" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="drfdemo" type="Python.DjangoServer" factoryName="Django server">
+      <module name="drfdemo" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="drfdemo.settings" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c23dfe16-9901-4054-b799-5ee392ccda0f" name="Default Changelist" comment="" />
+      <created>1568079303074</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1568079303074</updated>
+      <workItem from="1568079310386" duration="4253000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="4253000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Favorites" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21104388" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Python Console" />
+      <window_info anchor="bottom" id="Terminal" weight="0.14334472" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info active="true" anchor="bottom" id="Database Console" visible="true" weight="0.051194537" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32764506" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="SciView" />
+      <window_info anchor="right" id="Database" visible="true" weight="0.19591528" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/drfdemo/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="20" column="33" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
+          <folding>
+            <element signature="e#641#673#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/drfdemo/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="40" column="21" selection-start-line="40" selection-start-column="21" selection-end-line="40" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/oldboy/env/Lib/site-packages/rest_framework/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="105" column="43" selection-start-line="105" selection-start-column="43" selection-end-line="105" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://0cb44dbd-3354-4fdc-889d-2cebe93946eb/schema/main/table/app01_user">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/oldboy/env/Lib/site-packages/rest_framework/mixins.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="19" column="59" selection-start-line="16" selection-start-column="8" selection-end-line="19" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/oldboy/env/Lib/site-packages/rest_framework/generics.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="326">
+          <caret line="219" column="19" selection-start-line="219" selection-start-column="6" selection-end-line="219" selection-end-column="19" />
+          <folding>
+            <element signature="e#762#817#1" />
+            <element signature="e#822#867#0" />
+            <element signature="e#1247#1317#0" />
+            <element signature="e#1708#2685#0" />
+            <element signature="e#1708#2270#1" />
+            <element signature="e#2721#3713#0" />
+            <element signature="e#3770#4082#0" />
+            <element signature="e#4128#4453#1" />
+            <element signature="e#4776#4977#0" />
+            <element signature="e#5028#5531#0" />
+            <element signature="e#5580#5899#0" />
+            <element signature="e#5952#6187#0" />
+            <element signature="e#6241#6435#0" />
+            <element signature="e#6631#6790#0" />
+            <element signature="e#6873#7022#0" />
+            <element signature="e#7117#7279#0" />
+            <element signature="e#7371#7533#0" />
+            <element signature="e#7622#7889#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app01/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="3" column="41" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/oldboy/env/Lib/site-packages/rest_framework/viewsets.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="198" column="58" selection-start-line="198" selection-start-column="44" selection-end-line="198" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app01/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="39" selection-start-line="39" selection-end-line="39" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

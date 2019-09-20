@@ -1,0 +1,103 @@
+
+
+回顾
+    - 爬虫文件中的属性和方法：
+        - name：爬虫文件的唯一标识
+        - start_urls:该列表中的url会被自动的进行请求发送
+            - 自动请求发送：
+                    def start_requests(self):
+                        for url in self.start_urls:
+                            yield scrapy.Request(url,callback=self.parse)
+            - 想要对start_urls列表中的url发起post请求？
+                - 必须重写父类中的start_requests(self)
+
+    - 数据解析：
+        - scrapy中封装的xpath的方式进行数据解析。
+            - scrapy中的xpath和etree中的xpath的区别是什么？
+                - scrapy的xpath进行数据解析后返回的列表元素为Selector对象，然后必须通过
+                    extract或者extract_first这两个方法将Selector对象中的对应数据取出
+    - 持久化存储：
+        - 基于终端指令
+            - 只可以将parse方法的返回值进行本地文件的持久化存储
+            - scrapy crawl spiderName -o filePath
+        - 基于管道
+            - 数据解析
+            - 对item的类进行相关属性的制定
+            - 解析的数据封装到item类型的对象中
+            - 将item提交给管道
+            - 在管道类的process_item（item）方法中进行item对象的接收且进行任意形式的持久化存储操作
+            - 在配置文件中开启管道
+
+            - 管道中需要注意的细节：
+                - 配置文件中开启管道对应的配置是一个字典，字典中的键值表示的就是某一个管道
+                - 在管道对应的源文件中其实可以定义多个管道类。一个管道类对应的是一种形式的持久化存储
+                - 在process_item方法中的return item表示的是将item提交给下一个即将被执行的管道类
+                - 爬虫文件通过yield item只可以将item提交给第一个（优先级最高）被执行的管道
+         - 手动请求发送
+         - 五大核心组件
+
+
+
+- 如果基于scrapy进行图片数据的爬取
+    - 在爬虫文件中只需要解析提取出图片地址，然后将地址提交给管道
+    - 配置文件中：IMAGES_STORE = './imgsLib'
+    - 在管道文件中进行管道类的制定：
+        - 1.from scrapy.pipelines.images import  ImagesPipeline
+        - 2.将管道类的父类修改成ImagesPipeline
+        - 3.重写父类的三个方法：
+
+
+
+- 如何提升scrapy爬取数据的效率：只需要将如下五个步骤配置在配置文件中即可
+增加并发：
+    默认scrapy开启的并发线程为32个，可以适当进行增加。在settings配置文件中修改CONCURRENT_REQUESTS = 100值为100,并发设置成了为100。
+
+降低日志级别：
+    在运行scrapy时，会有大量日志信息的输出，为了减少CPU的使用率。可以设置log输出信息为INFO或者ERROR即可。在配置文件中编写：LOG_LEVEL = ‘INFO’
+
+禁止cookie：
+    如果不是真的需要cookie，则在scrapy爬取数据时可以禁止cookie从而减少CPU的使用率，提升爬取效率。在配置文件中编写：COOKIES_ENABLED = False
+
+禁止重试：
+    对失败的HTTP进行重新请求（重试）会减慢爬取速度，因此可以禁止重试。在配置文件中编写：RETRY_ENABLED = False
+
+减少下载超时：
+    如果对一个非常慢的链接进行爬取，减少下载超时可以能让卡住的链接快速被放弃，从而提升效率。在配置文件中进行编写：DOWNLOAD_TIMEOUT = 10 超时时间为10s
+
+
+- 请求传参：
+    - 实现深度爬取：爬取多个层级对应的页面数据
+    - 使用场景：爬取的数据没有在同一张页面中
+
+    - 在手动请求的时候传递item：yield scrapy.Request(url,callback,meta={'item':item})
+        - 将meta这个字典传递给callback
+        - 在callback中接收meta：item = response.meta['item']
+
+- scrapy中的中间件的应用
+    - 爬虫中间件，下载中间件
+    - 下载中间件：
+        - 作用：批量拦截请求和响应
+        - 拦截请求：
+            - UA伪装：将所有的请求尽可能多的设定成不同的请求载体身份标识
+                - request.headers['User-Agent'] = 'xxx'
+            - 代理操作：request.meta['proxy'] = 'http://ip:port'
+        - 拦截响应：篡改响应数据或者直接替换响应对象
+
+
+    -需求： 爬取网易新闻的国内，国际，军事，航空，无人机这五个板块下对应的新闻标题和内容
+        - 分析：
+            - 1.每一个板块对应页面中的新闻数据是动态加载出来的
+    - selenium在scrapy中的应用:
+        - 实例化浏览器对象：写在爬虫类的构造方法中
+        - 关闭浏览器：爬虫类中的closed(self,spider)关闭浏览器
+        - 在中间件中执行浏览器自动化的操作
+
+    - 作业：爬取网易新闻中五个板块中的新闻标题和新闻内容，然后基于百度AI接口新闻关键字和类型进行识别，然后
+    将新闻标题，新闻内容，新闻关键字，新闻类型存储到mysql中。
+
+
+
+ - 明日内容：
+    - 基于CrawlSpider的全站数据爬取
+    - 分布式爬虫
+    - 增量式爬虫

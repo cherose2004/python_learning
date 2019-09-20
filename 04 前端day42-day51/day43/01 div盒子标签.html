@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01 div盒子标签</title>
+    <style type="text/css">
+        #top{
+            /*行高等于盒子的高度 实现垂直居中*/
+            height: 40px;
+            line-height: 40px;
+            background-color: #333;
+            /* text-align: center; */
+        }
+        a{
+            text-decoration: none;
+            color: #b0b0b0;
+            font-size: 14px;
+        }
+        /*类选择器
+        选择器作用：选中标签
+        */
+        .sep{
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+ <!--小米顶部-->
+    <div id="top">
+        <div class="top_l">
+            <a href="#">小米商城</a>
+            <span class="sep">|</span>
+            <a href="#">MIUI</a>
+            <span class="sep">|</span>
+            <a href="#">lot</a>
+            <span class="sep">|</span>
+            <a href="#">云服务</a>
+            <span class="sep">|</span>
+            <a href="#">金融</a>
+            <span class="sep">|</span>
+            <a href="#">危机</a>
+        </div>
+        <div class="shop"></div>
+        <div class="user_login"></div>
+    </div>
+    <div id="nav">
+        小米导航
+    </div>
+    <div id="content">
+        小米的主体内容
+    </div>
+    <div id="footer">
+        小米的脚
+    </div>
+</body>
+</html>

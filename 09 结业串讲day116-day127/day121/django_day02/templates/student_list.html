@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+</head>
+<body>
+
+<ul>
+    {% for student in students %}
+        <li>{{ student.name }}</li>
+    {% endfor %}
+
+    <br>
+    {{ now }}
+
+
+    <br>
+    {% load cache %}
+
+    {% cache 5 'xxx' %}
+
+        缓存
+        {{ now }}
+
+    {% endcache %}
+
+</ul>
+
+
+</body>
+</html>

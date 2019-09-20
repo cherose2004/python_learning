@@ -1,0 +1,264 @@
+Flask last day
+
+Flask Web 框架
+
+Flask 轻量级的框架
+	轻,三方支持全
+Django 
+	原生组件全,好
+
+pip install flask  # 1.1.1
+
+1.Flask 启动
+增加路由和视图
+
+2.Flask 中的 Response
+	1.HTTPResponse - return "HTTPResponse" 返回字符串
+	2.render	- 返回模板页面
+	3.redirect	- 跳转 重定向 response location: url
+	Flask特殊封装
+	4.send_file("文件路径") - 打开并返回文件内容 自动识别文件类型 Content-Type:text/plan
+	5.jsonify({k:v})	  - 返回标准的JSON字符串 Content-Type:application/json
+		return d  # == jsonify(d)
+	
+	# Sanic - Sonic 索尼克 蓝刺猬  ==== Flask Web ////// async def login()
+	
+3.Flask 中的 Request
+	from flask import request
+	request.method  # 请求方式
+    # print(request.args.get("id")) # 获取 URL 中的请求参数 /login?id=1 字典
+    # print(request.args.to_dict()) # 将获取的数据转化为字典
+    # print(request.form.get("u")) # FormData中的数据 POST 请求提交 form == args
+    # print(request.form.to_dict())
+    request.json  # 请求头中带有 Content-Type:application/json
+    request.data  # 请求头中不带有 Form or FormData 保存请求体中的原始信息 b""
+    request.url  # 自己试
+    request.path  # 自己试
+    request.host  # 自己试
+    request.host_url  # 自己试
+	
+	print(request.files) # file_storage 直接保存文件
+    file = request.files.get("my_file")
+    # file file_storage
+    filename = file.filename
+    print(filename)
+    file.save("当前文件名或者文件路径.png")
+
+4.Flask 中的原生 Session
+	Session : from flask import session
+	密钥:secret_key 用于 Session 序列化字符串
+	app.secret_key = "#$%^&*(^%$#$%^&*%$%^&*^%$%^*^TYUH^TYUGYUGHTYUG"
+	使用 session:
+	session["key"] = "value" 开启session
+	session.get("key")
+	
+	session 存在哪儿
+	交由客户端保管机制
+	
+
+5.Flask 中的路由
+	methods # 允许进入当前视图函数的请求方式 
+	** methods=["get","post","PUT","delete"] # HTTP 8 种
+	
+	** endpoint # Mapping 对应关系 视图函数 - 路由  必须保证唯一
+	defaults # 默认参数
+	redirect_to # 永久重定向 301 or 308
+	strict_slashes # 是否严格遵循路由匹配规则
+	
+	** 动态参数路由:
+	@app.route("/home/<string:username>") # 默认动态参数 为string
+	def home(username):
+		return f"123 200 Ok!{username}"
+	
+
+6.Flask 初始化配置
+	app = Flask(__name__)
+	template_folder # 模板存放路径
+	static_folder # 静态文件存放路径 默认值 static
+	static_url_path # 静态文件访问路径 f"/{static_folder}"
+	
+
+7.Flask 对象配置
+	app.config
+	app.debug = True # 自动重启 透传错误信息 Log级别较低 Debug 级别
+	app.config["DEBUG"] = True
+	app.config["SECRET_KEY"] = "%^(&^%&(*^%&*^&Y"
+	app.config["PERMANENT_SESSION_LIFETIME"] = 30
+	app.config["SESSION_COOKIE_NAME"] = "I am Not Session"
+	app.config["JSONIFY_MIMETYPE"] = "alex/DSB" # jsonify Content-Type中的值
+
+	app.config # 非常重要
+	
+
+8.Flask 的蓝图
+	蓝图 - 不能被Run的Flask 对象
+	from flask import Flask
+	app = Flask(__name__)
+	
+	from flask import Blueprint
+	user_bp = Blueprint("蓝图标识",__name__)
+	
+	@user_bp.route("/user_bp")
+	def user():
+		return "user_bp"
+		
+	app.register_blueprint("user_bp")
+	
+
+9.Flask 的特殊装饰器
+	@app.before_request # 在请求进入视图函数之前,执行
+	@app.after_request # 在请求结束视图函数之后,响应返回客户端之前
+	正常情况: be1 - be2 - be3 - vf - af3 - af2 - af1
+	异常情况: be1 - be2 - af3 - af2 - af1
+	
+	@app.errorhandler(HttpErrorCode) # 重定义错误返回信息 HttpErrorCode [4xx,5xx]
+	@app.errorhandler(404)
+	def error404(errorMessage):
+		print(errorMessage)
+		return "当前页面不存在正在跳转.....10s后自动跳转" # Flask 5种响应方式
+		# return redirect("")
+
+10.Flask 中的 CBV -- restAPI
+from flask import views
+from flask.views import MethodView
+
+class Login(MethodView):
+    def get(self):
+        return render_template("login.html")
+
+    def post(self):
+        if request.form.get("username") == "alex":
+            return redirect("/index")
+
+    def alexdsb(self): # views 中 追加 "alexdsb" 请求方式
+        pass
+
+app.add_url_rule("/login",view_func=Login.as_view(name="login"))	
+
+
+11.Flask 请求上下文
+
+
+
+
+智能亲子互动玩具 - AiToy Angela
+需求:
+	沟通 互动
+	解决亲子间亲情维系,父母与子女异地沟通问题
+	留守儿童,
+	手机屏幕蓝光 父母平时工作忙一般情况下,产生一个时间点,错过时间点就无法继续维系亲情了
+	选择做一款玩具
+Toy功能:
+	1.玩具与手机互动
+	互动方式
+		1.App 推送歌曲 
+			通过 WebSocket onmessage 监听消息
+			收取歌曲文件名 
+			利用歌曲文件名 通过 接口获取文件内容 并播放
+			
+		2.App 与 玩具之间语音消息
+			主动发起
+				1.AI指令 - 给爸爸发消息(聊天,说话)
+				2.AI模拟用户发送一条语音消息和聊天信息 - 被动发起语音消息
+				3.录制语音消息 上传服务器
+				4.服务器保存语音消息 返回文件名称
+				5.玩具将文件名发送给 app
+				
+			被动发起
+				1.通过Websocket onmessage 收到语音消息提醒
+				2.收取消息 并 播放全部当前联系人的所有消息 - 按钮
+				3.联系人信息
+				4.利用联系人信息 录制语音消息 3-5
+	
+	2.玩具与玩具之间互动
+	羊群效应
+		A - B 产生互动 
+		CDEFGHIJK 看着好玩儿 CDEFGHIJK 就会让他的父母优先选购此产品
+		
+	3.玩具与AI之间的互动
+	点播歌曲
+		1.语音指令 语音文件-百度AI ASR 将语音指令 转换成 文字指令
+		2.NLP自然语言处理 - 判断关键字
+		3.Gensim lsiModel 
+		4.稀疏矩阵相似度 判断指令中最接近的内容
+		5.返回内容信息
+		6.从内容信息中获取内容的ID 利用ID 获取内容详情
+		
+	智能对话
+		百科问答
+		成语接龙
+		讲故事
+		讲笑话
+		图灵机器人
+		
+		1.语音AI指令 语音文件-百度AI ASR 将语音指令 转换成 文字指令 语音识别
+		2.文字直接发送给 图灵机器人
+		3.图灵机器人返回结果
+		4.结果通过 百度AI TTS 文字转语音 语音合成
+		5.将内容返回给玩具
+		5-6
+
+App功能:
+	1.App推送歌曲
+		实现方式 : WebSocket 实时消息
+		app发送歌曲名称到玩具
+		玩具利用歌曲名称向服务器获取内容详情并播放
+	
+	2.扫描二维码 创建并绑定玩具
+		创建二维码 联图二维码API
+		通过app扫描设备二维码 
+		创建玩具信息
+	
+	3.app控制玩具通讯录 - 我妈不让我跟你玩儿
+		基于通讯录的IM即时通讯工具 
+		好友请求 
+		发送请求 - 被添加方 - 被添加方的绑定 App 收取请求
+		1.忽略
+		2.同意 双方添加好友
+		3.拒绝 隐藏好友请求
+	
+	4.App与玩具之间 语音消息
+		app 选择通讯的玩具 
+		app 录制语音消息
+		将语音消息上传至服务器 服务器保存语音消息 并 返回文件名
+		app 收到文件名 将文件名 发送给玩具
+		玩具利用语音消息文件名向服务器获取内容详情并播放
+	
+	5.播放歌曲
+		HTML5Plus 中的 audio 接口 createPlayer(url)
+
+亮点:
+1.MongoDB 数据存储 - 用户画像 JSON制作数据后期
+	利用玩具点播歌曲的Log分析出 使用玩具者的喜好
+	利用玩具互动频率log分析出 和哪个小伙伴关系比较亲密
+
+2.AI人工智能
+	百度大脑
+	ASR 语音识别
+	TTS 语音合成
+	NLP 自然语言处理
+	
+3.HTML5PLUS + Mui
+	HTML5PLUS 硬件驱动调用 和 系统调用
+	Mui 布局框架
+
+4.WebSocket
+	基于长连接的实时通讯
+
+5.机器学习 - 微
+	Gensim 机器学习库 很多语言模型 很多语言模型算法
+	LsiModel 语言模型 稀疏矩阵相似度
+	
+	获取内容信息 [内容1,内容2]
+	分词 Doc2Bo [[(1,1),(2,1),(3,2)],[]]
+	LsiModel训练样本数据
+	LsiModel转换用户数据
+	
+	稀疏矩阵相似度 用户数据 与 样本数据 的相似度
+	
+	
+
+
+
+
+

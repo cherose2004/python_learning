@@ -1,0 +1,196 @@
+2019年8月12日:
+NoSQL 不仅仅只是SQL
+MongoDB - NoSQLBooster4MongoDB
+MongoDB启动 - cmd - 默认27017监听端口 3306 Mysql 6379 Redis
+	mongod - 启动MongoDB服务
+		数据库存放路径 默认 C:/data/db or /data/db
+		--dbpath = "D:/data/db" 更改数据库存放路径
+		--port 更改监听端口?
+	配置文件?
+	
+MongoDB客户端连接MongoDB服务
+mongo 启动客户端
+show databases	查看当前服务器中的数据库
+use dbname	切换当前使用的数据库
+db		查看当前使用的数据库 代指当前数据库名
+show tables 查看当前数据库活动的数据表
+
+
+use 不存在的数据库名 居然切换成功了 db 查看到了当前错误的数据库名 ?
+db.users 在一个不知道存在不存在的数据库中创建了一个不知道存在不存在的users表
+
+use dbname 在内存中创建数据库空间
+show databases 查看当前磁盘中的数据库 
+
+db(内存中的).tablename 在内存中创建数据表空间
+show tables	查看在当前数据库中磁盘上的数据表
+
+当数据表中存在数据,数据库及数据表均会写入到磁盘中
+
+
+增删改查
+增:
+db.tablename.insert({})
+db.users.insert({name:"alexander.dsb.li"})
+
+官方推荐 :
+db.tablename.insertOne({name:"alexander.dsb.li"}) 增加一条数据
+db.tablename.insertMany([{name:"alexander.dsb.li"},{name:"alexander.dsb.li"}]) 增加多条数据
+
+
+简单查:
+db.tablename.find() 查找当前数据表中的所有数据
+{ "_id" : ObjectId("5d50bdd1399ab50efdf765de") }
+{ "_id" : ObjectId("5d50be7c399ab50efdf765df"), "name" : "alexander.dsb.li" }
+
+db.tablename.findOne({}) 查询符合条件的第一条数据
+db.tablename.find({}) 查询符合条件的所有数据
+
+高级查:
+db.users.find({age:999}) 查询所有age=999的数据
+查询符合条件的所有数据
+并列条件 db.users.find({age:999,name:"alex"})
+$and 并列 db.users.find({"$and":[{name:"wpq"},{age:1000}]}) 
+$or 或者 	db.users.find({"$or":[{age:1000},{name:"alex"}]})
+$in 包含或者 同一字段 或者条件 db.users.find({"age":{"$in":[999,1000]}})
+age 或者等于 999 或者等于 1000
+$all 子集或者 必须是子集 绝对不可以超集 交集是不可查询的
+db.users.find({"hobby":{"$all":[5,1,3]}})
+
+如果查询 _id 那么 数据的值必须带上 ObjectId 的数据类型
+db.Users.find({"_id":ObjectId("5d50e778b2a72712f5ee54c5")})
+
+
+Object查询时可以直接使用 对象.属性 的方式作为Key
+** 当Array中出现了Object 会自动遍历 Object中的属性 
+
+改: $修改器
+	db.users.update({name:"alexander.dsb.li"},{"$set":{name:"DSB"}})
+	db.tablename.update({查询符合条件的数据},{$修改器:{修改的内容}})
+	修改符合查询条件的第一条数据
+	
+	单个字段 进行修改
+	$set 强制将谋值修改覆盖
+	db.users.update({name:"DSB"},{"$set":{age:73,gender:1}})
+	
+	$unset 强制删除一个字段
+	db.users.update({age:73},{"$unset":{gender:0}})
+	
+	$inc 引用增加
+	db.users.update({name:"DSB"},{"$inc":{age:1}})
+	db.users.update({name:"DSB"},{"$inc":{age:-2}})
+	
+	针对$array的修改器 以及 $关键字的用法和特殊性
+	Array是list 列表类型 
+	list -> append remove pop extends
+	Array -> $push $pull  $pop $pushAll $pullAll
+	$push 在array中追加数据 
+	db.users.update({name:"MJJ"},{"$push":{"hobby":"抽烟"}})
+	
+	$pushAll 在Array中批量增加数据 [] == list.extends
+	db.users.update({name:"MJJ"},{"$pushAll":{"hobby":["喝酒","烫头"]}})
+	
+	$pull 删除符合条件的所有元素
+	db.users.update({name:"MJJ"},{"$pull":{"hobby":"烫头"}})
+	
+	$pop 删除array中第一条或最后一条数据
+	db.users.update({name:"MJJ"},{"$pop":{"hobby":1}}) 正整数为 删除最后一条数据
+	db.users.update({name:"MJJ"},{"$pop":{"hobby":-1}}) 负整数为 删除第一条数据
+	
+	$pullAll 批量删除符合条件的元素 []
+	db.users.update({name:"MJJ"},{"$pullAll":{"hobby":[3,4,5]}})
+	
+	$关键字 的特殊用法
+	储存符合条件的元素下标索引 - 只能存储一层遍历的索引位置
+	$ = 9
+	db.users.update({"hobby":10},{"$set":{"hobby.$":0}})
+	
+	官方推荐:
+	db.tablename.updateOne({},{}) # 修改符合条件的第一条数据
+	db.tablename.updateMany({},{}) # 修改符合条件的所有数据
+	
+
+删:
+	db.Tables.remove({}) 删除所有符合条件的数据
+	
+	db.tablename.deleteOne({查询条件})	删除符合条件的第一条数据
+	db.tablename.deleteMany({查询条件}) 删除所有符合条件的数据
+	
+
+
+
+数学比较符:
+$gt		大于
+$lt		小于
+$gte	大于等于
+$lte	小于等于
+$eq		等于 : 是用在 "并列" "或者" 等条件中
+$ne		不等于 不存在和不等于 都是 不等于
+
+
+
+
+
+
+数据类型:
+	ObjectID ：Documents 自生成的 _id # 自增ID 全世界唯一的计数ID
+	String： 字符串，必须是utf-8
+	Boolean：布尔值，true 或者false (这里有坑哦~在我们大Python中 True False 首字母大写)
+	Integer：整数 (Int32 Int64 你们就知道有个Int就行了,一般我们用Int32)
+	Double：浮点数 (没有float类型,所有小数都是Double)
+	Arrays：数组或者列表，多个值存储到一个键 (list哦,大Python中的List哦)
+	Object：如果你学过Python的话,那么这个概念特别好理解,就是Python中的字典,这个数据类型就是字典
+	Null：空数据类型 , 一个特殊的概念,None Null
+	Timestamp：时间戳
+	Date：存储当前日期或时间unix时间格式 (我们一般不用这个Date类型,时间戳可以秒杀一切时间类型)
+	看着挺多的,但是真要是用的话,没那么复杂,很简单的哦
+
+
+MongoDB中的概念:
+	使用了不存在的对象即创建该对象
+	JSON结构存储
+	Mysql 					MongoDB
+	database				database
+	Tables					Collections
+	Colum					Field
+	Row						Documents
+
+
+高级函数:
+	排序 筛选   跳过
+	sort limit  skip
+	
+	排序:
+	db.users.find({}).sort({age:-1}) 依照age字段进行倒序
+	db.users.find({}).sort({age:1}) 依照age字段进行正序
+	
+	筛选:
+	db.users.find({}).limit(4) 筛选前4条数据
+	
+	跳过:
+	db.users.find({}).skip(3) 跳过前3条数据 显示之后的所有数据
+	
+	分页
+	1.排序 2.跳过 3.筛选
+	
+	page = 页码 = 1
+	count = 条目 = 2
+	
+	db.users.find({}).limit(2).skip(2).sort({ age:-1 })
+	
+	limit = count
+	skip = (page-1) * count
+	
+	db.users.find({}).limit(count).skip((page-1)*count).sort({ age:-1 })
+	
+	
+
+pymongo
+
+
+
+
+
+SQL 关系型数据库
+
+

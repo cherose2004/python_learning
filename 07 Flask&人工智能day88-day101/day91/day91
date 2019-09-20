@@ -1,0 +1,168 @@
+2019年8月8日:
+Web - Socket - TCP/UDP
+HTTP - 无状态的短连接
+
+需求:
+	类似web微信的一个即时通讯工具 
+	
+1.先做前端
+2.建立WebServer Django or Flask
+3.制作聊天功能
+
+	- A to B Message
+	- A to server to B Message  ~Http Find B
+	A:{to:B,chat:"come on baby",from:A} 
+	- A Http B Http
+	- server MessageBox save B Message
+	server : [{to:B,chat:"come on baby",from:A}]
+	- B Http server MessageBox
+	B -> MessageBox -> Key=to=B -> chat
+	- B recv Message
+	
+	轮询:
+		不能保证数据实时性
+		AB Client -> 无限循环和Server对话 有xx的消息吗
+	
+	长轮询:
+		AB Client -> Client发起请求至Server 有xx的消息吗 -> 等待消息时间 1x/s 
+		-> 主动断开连接  
+		-> 收到消息主动返回
+	
+	长连接:
+		AB Client -> Server 建立连接 并保持不断开 ->
+		A to B -> Server 消息转发 -> B 建立连接的情况下 -> 可以及时准确的收到消息
+	
+	
+4.断开连接
+
+
+
+寝室 - 传达室
+轮询 Http
+二大爷 收到快递 小二 
+小二跑到传达室问 : 二大爷有我快递吗?
+二大爷打量了一下小二问 : 你丫谁呀?
+小二 : 大爷,我是大一的小二
+大爷 : 我知道了,你找我什么事儿
+小二 : 有我快递吗?
+大爷 : 你等会我给你找找
+小二 : 不着急
+大爷 : 回去吧,没有
+
+长轮询
+学校扩大传达室,可以摆一间茶室
+小二跑到传达室问 : 二大爷有我快递吗?
+二大爷打量了一下小二问 : 你丫谁呀?
+小二 : 大爷,我是大一的小二
+大爷 : 我知道了,你找我什么事儿
+小二 : 有我快递吗?
+大爷 : 你等会我给你找找,进屋喝杯茶,目前没有,不代表一会儿没有
+1------
+小二 : 我去方便一下(超时)
+小二完事儿之后: 哎?刚才我干嘛去了
+
+2------
+大爷 : 一杯5块,前3杯免费
+小二 : 喝完3杯,被大爷赶出去了
+
+3------
+大爷 : 小二你快递~
+小二 : 好嘞谢谢大爷
+
+
+
+长连接
+大三:
+又装修传达室 按电话了 程控交换机
+小二跑到传达室告诉大爷他是谁
+大爷给小二一张带有电话号码的纸条
+小二打电话过去 
+大爷接起电话,问你是谁
+小二:我是小二,你刚才让我打的电话
+大爷:我知道了,电话别挂,开免提,有快递我告诉你
+
+- 当收到快递时,大爷开启通话,通知小二有快递的事情
+- 小二做出响应 
+
+客户端 和 服务器 保持永久性的连接 
+除非有一方主动发起断开
+
+付费服务 消息转发
+
+
+2.WebSocket 长连接
+需求:
+	类似web微信的一个即时通讯工具 
+	
+Web + Socket
+Flask + WebSocket模块 + Gevent-WebSocket
+
+# HTTP 请求
+{'GATEWAY_INTERFACE': 'CGI/1.1', 'SERVER_SOFTWARE': 'gevent/1.4 Python/3.6', 'SCRIPT_NAME': '', 'wsgi.version': (1, 0), 'wsgi.multithread': False, 'wsgi.multiprocess': False, 'wsgi.run_once': False, 'wsgi.url_scheme': 'http', 'wsgi.errors': <_io.TextIOWrapper name='<stderr>' mode='w' encoding='UTF-8'>, 'SERVER_NAME': 'DESKTOP-649CJ1L', 'SERVER_PORT': '9527', 'REQUEST_METHOD': 'GET', 'PATH_INFO': '/ws', 'QUERY_STRING': '', 'SERVER_PROTOCOL': 'HTTP/1.1', 'REMOTE_ADDR': '127.0.0.1', 'REMOTE_PORT': '59994', 'HTTP_HOST': '127.0.0.1:9527', 'HTTP_CONNECTION': 'keep-alive', 'HTTP_PRAGMA': 'no-cache', 'HTTP_CACHE_CONTROL': 'no-cache', 'HTTP_UPGRADE_INSECURE_REQUESTS': '1', 'HTTP_USER_AGENT': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'HTTP_ACCEPT': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3', 'HTTP_ACCEPT_ENCODING': 'gzip, deflate, br', 'HTTP_ACCEPT_LANGUAGE': 'zh-CN,zh;q=0.9', 'HTTP_COOKIE': 'session=9b38767b-63ea-4e94-9b4d-5bb274856fe9', 'wsgi.input': <gevent.pywsgi.Input object at 0x000001FEFD4E7528>, 'wsgi.input_terminated': True, 'werkzeug.request': <Request 'http://127.0.0.1:9527/ws' [GET]>}
+{'GATEWAY_INTERFACE': 'CGI/1.1', 'SERVER_SOFTWARE': 'gevent/1.4 Python/3.6', 'SCRIPT_NAME': '', 'wsgi.version': (1, 0), 'wsgi.multithread': False, 'wsgi.multiprocess': False, 'wsgi.run_once': False, 'wsgi.url_scheme': 'http', 'wsgi.errors': <_io.TextIOWrapper name='<stderr>' mode='w' encoding='UTF-8'>, 'SERVER_NAME': 'DESKTOP-649CJ1L', 'SERVER_PORT': '9527', 'REQUEST_METHOD': 'GET', 'PATH_INFO': '/ws', 'QUERY_STRING': '', 'SERVER_PROTOCOL': 'HTTP/1.1', 'REMOTE_ADDR': '127.0.0.1', 'REMOTE_PORT': '60393', 'HTTP_HOST': '127.0.0.1:9527', 'HTTP_CONNECTION': 'Upgrade', 'HTTP_PRAGMA': 'no-cache', 'HTTP_CACHE_CONTROL': 'no-cache', 'HTTP_UPGRADE': 'websocket', 'HTTP_ORIGIN': 'file://', 'HTTP_SEC_WEBSOCKET_VERSION': '13', 'HTTP_USER_AGENT': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'HTTP_ACCEPT_ENCODING': 'gzip, deflate, br', 'HTTP_ACCEPT_LANGUAGE': 'zh-CN,zh;q=0.9', 'HTTP_COOKIE': 'session=9b38767b-63ea-4e94-9b4d-5bb274856fe9', 'HTTP_SEC_WEBSOCKET_KEY': '+XlqBnhqwEekZTYcz4I+tg==', 'HTTP_SEC_WEBSOCKET_EXTENSIONS': 'permessage-deflate; client_max_window_bits', 'wsgi.input': <gevent.pywsgi.Input object at 0x00000120281075E8>, 'wsgi.input_terminated': True, 'wsgi.websocket_version': '13', 'wsgi.websocket': <geventwebsocket.websocket.WebSocket object at 0x00000120280E54C0>, 'werkzeug.request': <Request 'http://127.0.0.1:9527/ws' [GET]>}
+
+
+'HTTP_CONNECTION': 'Upgrade,keep-alive'
+
+'HTTP_CONNECTION': 'Upgrade',
+'HTTP_UPGRADE': 'websocket',
+'HTTP_SEC_WEBSOCKET_VERSION': '13'
+'HTTP_SEC_WEBSOCKET_KEY': '+XlqBnhqwEekZTYcz4I+tg=='
+'HTTP_SEC_WEBSOCKET_EXTENSIONS': 'permessage-deflate; client_max_window_bits'
+'wsgi.websocket_version': '13'
+'wsgi.websocket': <geventwebsocket.websocket.WebSocket object at 0x00000120280E54C0>
+
+1.当前连接处于可用状态
+3.由服务器主动发起断开
+0.正在建立连接或连接建立失败
+2.客户端主动发起断开
+
+
+基于 websocket 实现群聊
+1.建立websocket 服务 + Flask web框架 + Gevent-WebSocket
+2.request.environ.get("wsgi.websocket") 获取连接
+2.5 - 将获取到的连接保持在服务器中 socket_list = []
+3.基于长连接socket 接收用户传递的消息
+4.将消息转发给其他用户
+
+基于 JavaScript 实现 Websocket 客户端
+var ws = new WebSocket("ws://") # ws 的路由地址
+ws.onmessage = func(MessageEvent){实现逻辑}
+
+ws.onmessage 当ws客户端收到消息时执行回调函数
+ws.onopen 当ws客户端建立完成连接时 status == 1 时执行的回调函数
+ws.onclose 当ws客户端关闭中或关闭时 执行的回调函数 status == 2,3
+ws.onerror 当ws客户端出现错误时
+
+
+
+收发快递模型
+
+萧帮主的气筒
+sender : 商家
+receiver: 萧帮主
+data : 气筒
+
+退换气筒
+sender: 萧帮主
+receiver: 商家
+data : 气筒
+
+Websocket单点聊天时的转发
+服务器中保存的连接方式发生变化 以字典形式储存
+存储结构 : {用户的唯一标识:Websocket连接,user1:Websocket}
+单点消息发送时 receive data = {sender:发送方,receiver:接收方,data:数据}
+从data中找到接收方的"名字"Key
+拿着名字key 去存储结构中 找到 名字Key所对应的websocket连接
+websocket连接.send(data) # socket 传输 bytes
+
+
+
+
+
+
+
+
+
+
+

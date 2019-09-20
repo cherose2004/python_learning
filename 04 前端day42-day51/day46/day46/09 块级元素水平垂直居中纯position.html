@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .father{
+            width: 500px;
+            height: 300px;
+            background-color: red;
+            position: relative;
+        }
+        .child{
+            /*如何让一个绝对定位的垂直居中： top设置50%，margin-top设置当前盒子的一半，并且是负*/
+            position: absolute;
+            width: 100px;
+            height: 140px;
+            background-color: green;
+            left: 50%;
+            margin-left: -50px;
+            top: 50%;
+            margin-top: -70px;
+
+            /*top: 50px;*/
+        }
+    </style>
+</head>
+<body>
+    <div class="father">
+        <div class="child">我是个居中的盒子</div>
+    </div>
+</body>
+</html>

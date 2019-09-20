@@ -1,0 +1,113 @@
+﻿
+
+
+2019年8月5日：15-16天
+Flask Web 框架 轻量
+
+websocket 全双工通讯 socket TCP 通讯
+
+MongoDB 数据库 文件型数据库 {} 没有限制 和 约束
+
+Mui + HTML5 Plus 调用移动操作系统的封装 IOS Android 
+
+人工智能技术应用 BaiduAI
+ASR 语音识别 声音转换成文字
+TTS 语音合成 文字转换成声音
+NLP 自然语言处理 你的名字叫什么 你的名字是什么 文本相似度
+paddle paddle 百度
+Ai studio
+
+智能玩具 真实的 6个月以上 25万 300万
+
+
+2019年8月5日：
+Flask 入门第一讲
+1.框架对比
+Django				Flask
+Admin - Model		原生无
+Model				原生无
+Form				原生无
+Session				有 - 颠覆认知操作
+
+教科书式框架		以简单为基准 开发 一切从简 能省则省
+
+Django的优势：
+	组件全，功能全，教科书
+	
+Django的劣势：
+	占用资源，创建复杂度较高
+
+
+Flask的优势：
+	轻,快
+	
+Flask的劣势:
+	先天不足，第三方组件稳定性较差
+
+
+2.入门Flask 
+pip3 install Flask
+**Ps：不要使用工具中的插件创建Flask项目
+
+三行代码启动 Flask 项目
+
+
+3.Flask 中的 Response 
+1.HTTPResponse("hello") 	"" str
+2.render 响应模板			render_template("html") str
+3.redirect("/")				redirect("/")	str
+以上是Web框架的 Response 三剑客
+4.send_file()	 instance     返回文件内容，自动识别文件类型，Content-type中添加文件类型，Content-type:文件类型
+** 浏览器特性 可识别的Content-type 自动渲染 不可识别的Content-type 会自动下载
+
+5.jsonify() str # 返回标准格式的JSON字符串 先序列化JSON的字典，Content-type中加入 Application/json
+** Flask 1.1.1 版本中 可以直接返回字典格式，无需jsonify
+
+
+4.Flask 中的 请求 Request
+request.method 获取请求方式 
+request.form 获取FormData中的数据 也就是所谓的Form标签 to_dict()
+request.args 获取URL中的数据 to_dict()
+
+request.json  	请求中 Content-Type：application/json 请求体中的数据 被序列化到 request.json 中 以字典的形式存放
+request.data	请求中 Content-Type 中不包含 Form 或 FormData 保留请求体中的原始数据 b""
+request.files 	获取Form中的文件
+
+request.path	请求路径 路由地址
+request.url		访问请求的完整路径包括 url参数
+request.host	主机位 127.0.0.1:5000 
+request.cookies 字典获取浏览器请求时带上的Cookie
+
+** request.values 获取 url 和 FormData 中的数据 敏感地带
+
+5.Jinja2 ---- template语言
+{{ }} 引用 或 执行
+{% %} 逻辑引用
+
+
+6.Flask中的Session
+基于请求上下文管理机制
+from falsk import session
+app.secret_key = "#$%&*"
+session["user"] = "123"
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			/* $(document).ready(function(){
+				console.log($('p'));
+			}) */
+			//文档加载完成之后 调用回调函数中代码
+			$(function(){
+				//添加一个或者多个属性
+				$('p').attr('title','mjj');
+				$('p').attr({'a':1,'b':2});
+				console.log($('p').attr('id'));
+				
+				//移除
+				$('p').removeAttr('title id a');
+				
+			})
+// 			$(function(){
+// 				console.log('2');
+// 			})
+			
+// 			window.onload = function(){
+// 				var op = document.getElementsByTagName('p');
+// 				console.log(op);
+// 			}
+
+			
+// 			window.onload = function(){
+// 				alert(111);
+// 			}
+
+
+			$(function(){
+				console.log($('input[type=radio]').eq(0).attr('checked'));
+				console.log($('input[type=radio]').eq(0));
+				console.log($('input[type=radio]').eq(0).prop('checked'));
+				console.log($('input[type=radio]').eq(0).prop('formAction'));
+				console.log($('input[type=radio]').eq(0).attr('type'));
+				$('input[type=radio]').eq(0).attr('a',1);
+				console.log($('input[type=radio]').eq(0));
+
+			})
+
+
+
+
+
+
+
+
+
+
+		</script>
+	</head>
+	<body>
+		<p id="box">mjj</p>
+		<input type="radio" name='sex' checked='checked'>男
+		<input type="radio" name='sex'>女
+		
+	</body>
+</html>

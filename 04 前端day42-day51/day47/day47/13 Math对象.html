@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var obj = {name:'mjj'};
+    function add() {
+        console.log(this.name);
+    }
+    // add();
+    // add.call(obj);
+    // add.apply(obj,[]);
+
+    //求最大值和最小值
+    var values = [1,2,36,23,43,3,41];
+    var max = Math.max.apply(null,values);
+    console.log(max);
+
+    var a = 1.49999999;
+    console.log(Math.ceil(a));//天花板函数
+    console.log(Math.floor(a))//地板函数
+    console.log(Math.round(a))//四舍五入
+
+//    随机数
+    console.log(Math.random());
+
+//    min~  max
+    //0.113131313
+    function random(min,max) {
+       return min+Math.floor(Math.random()*(max-min))
+    }
+
+    console.log(random(100, 400));
+
+//    rgb(237,100,10)
+
+
+</script>
+</body>
+</html>

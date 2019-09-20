@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .father{
+            width: 800px;
+            margin: 100px auto;
+            border: 1px solid #000;
+        }
+        .child1{
+            /*width: 200px;*/
+            height: 400px;
+            background-color: red;
+            float: left;
+        }
+        .child2{
+            /*width: 300px;*/
+            height: 200px;
+            background-color: green;
+            float: right;
+        }
+        .clear{
+            clear: both;
+        }
+        .clearfix::after{
+            content:'';
+            display: block;
+            clear: both;
+            /*visibility: hidden;*/
+            /*height: 0;*/
+        }
+
+    </style>
+</head>
+<body>
+<!--内墙法：给最后一个浮动元素的后面添加一个空的块级标签，并且设置该标签的属性为clear:both;-->
+    <div class="father clearfix">
+        <div class="child1">mjj</div>
+        <div class="child2">wusir</div>
+        <!--<div class="clear"></div>-->
+
+    </div>
+
+
+
+</body>
+</html>

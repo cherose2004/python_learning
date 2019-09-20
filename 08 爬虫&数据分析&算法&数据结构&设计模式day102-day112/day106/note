@@ -1,0 +1,81 @@
+- 移动端数据的爬取
+    - 基于某一款抓包工具,fiddler,青花瓷,miteproxy
+    - fillder进行一个基本的配置:tools->options->connection->allow remote ...
+    - http://fillder所在pc机的ip:58083/:访问到一张提供了证书下载功能的页面
+    - fiddler所在的机器和手机在同一网段下:在手机浏览器中访问http://fillder所在pc机的ip:58083/
+        获取子页面进行证书的下载和安装(证书信任的操作)
+    - 配置你的手机的代理:将手机的代理配置成fiddler所对应pc机的ip和fillder自己的端口
+    - 就可以让fiddler捕获手机发起的http和https的请求
+
+- scrapy,pyspider
+- 什么是框架?如何学习框架?
+    - 就是一个集成了各种功能且具有很强通用性(可以被应用在各种不同的需求中)的一个项目模板.
+    - 我们只需要学习框架中封装好的相关功能的使用即可.
+
+
+- scrapy集成了哪些功能:
+    - 高性能的数据解析操作,持久化存储操作,高性能的数据下载的操作.....
+- 环境的安装:
+      a. pip3 install wheel
+
+      b. 下载twisted http://www.lfd.uci.edu/~gohlke/pythonlibs/#twisted
+
+      c. 进入下载目录，执行 pip3 install Twisted‑17.1.0‑cp35‑cp35m‑win_amd64.whl
+
+      d. pip3 install pywin32
+
+      e. pip3 install scrapy
+
+
+- scrapy的基本使用
+    - 创建一个工程:scrapy startproject firstBlood
+    - 必须在spiders这个目录下创建一个爬虫文件
+        - cd proName
+        - scrapy genspider spiderName www.xxx.com
+    - 执行工程:scrapy crawl spiderName
+- settings.py:
+    - 不遵从robots协议
+    - 进行UA伪装
+    - 进行日志等级设定:LOG_LEVEL = 'ERROR'
+
+- 持久化存储:
+    - 基于终端指令:
+        - 特性:只可以将parse方法的返回值存储到本地的磁盘文件中
+        - 指令:scrapy crawl spiderName -o filePath
+
+    - 基于管道:实现流程
+        1.数据解析
+        2.在item类中定义相关的属性
+        3.将解析的数据存储或者封装到一个item类型的对象(items文件中对应类的对象)
+        4.向管道提交item
+        5.在管道文件的process_item方法中接收item进行持久化存储
+        6.在配置文件中开启管道
+
+    - 将同一份数据持久化到不同的平台中?
+        - 分析:
+            - 1.管道文件中的一个管道类负责数据的一种形式的持久化存储
+            - 2.爬虫文件向管道提交的item只会提交给优先级最高的那一个管道类
+            - 3.在管道类的process_item中的return item表示的是将当前管道接收的item返回/提交给
+                下一个即将被执行的管道类
+
+
+- 在scrapy中如何进行手动请求发送(GET)
+    - 使用场景:爬取多个页码对应的页面源码数据
+    - yield scrapy.Request(url,callback)
+- 在scrapy中如何进行手动请求发送(POST)
+    data = { #post请求的请求参数
+        'kw':'aaa'
+    }
+    yield scrapy.FormRequest(url,formdata=data,callback)
+
+- scrapy五大核心组件的工作流程:
+引擎(Scrapy)
+    用来处理整个系统的数据流处理, 触发事务(框架核心)
+调度器(Scheduler)
+    用来接受引擎发过来的请求, 压入队列中, 并在引擎再次请求的时候返回. 可以想像成一个URL（抓取网页的网址或者说是链接）的优先队列, 由它来决定下一个要抓取的网址是什么, 同时去除重复的网址
+下载器(Downloader)
+    用于下载网页内容, 并将网页内容返回给蜘蛛(Scrapy下载器是建立在twisted这个高效的异步模型上的)
+爬虫(Spiders)
+    爬虫是主要干活的, 用于从特定的网页中提取自己需要的信息, 即所谓的实体(Item)。用户也可以从中提取出链接,让Scrapy继续抓取下一个页面
+项目管道(Pipeline)
+    负责处理爬虫从网页中抽取的实体，主要的功能是持久化实体、验证实体的有效性、清除不需要的信息。当页面被爬虫解析后，将被发送到项目管道，并经过几个特定的次序处理数据。

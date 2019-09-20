@@ -1,0 +1,218 @@
+.main {
+	flex: 1;
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: relative;
+}
+.main .banner {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.main .banner img {
+    width: 1920px;
+    height: auto;
+}
+.oldboy-books {
+    width: 1220px;
+    height: auto;
+}
+.oldboy-books .title {
+    display: flex;
+    align-items: center;
+}
+.oldboy-books .title span {
+    font-size:16px;
+    font-family:MicrosoftYaHei;
+    font-weight:400;
+    color:rgba(102,102,102,1);
+    position: relative;
+    text-align: center;
+    margin-left: 12px;
+    margin-right: 10px;
+}
+.oldboy-books .title span i {
+    width:100%;
+    height:10px;
+    display: block;
+    background:rgba(214,223,244,.5);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+}
+.books-module {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 24px;
+}
+.books-module section {
+    width:398px;
+    height:222px;
+    background:rgba(255,255,255,1);
+    padding: 24px 20px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    -webkit-transition: all .2s linear;
+    -o-transition: all .2s linear;
+    -moz-transition: all .2s linear;
+    transition: all .2s linear;
+}
+.books-module a {
+    margin-right: 13px;
+    margin-bottom: 24px;
+}
+.books-module a:nth-of-type(3n) {
+    margin-right: 0;
+}
+.books-module section:hover {
+    -webkit-transform: translate3d(0,-4px,0);
+	-moz-transform: translate3d(0,-4px,0);
+    transform: translate3d(0,-4px,0);
+    box-shadow:0px 6px 12px 0px rgba(133,141,154,0.24) !important;
+}
+.books-module section img {
+    width:130px;
+    height:172px;
+    box-shadow:0px 6px 12px 0px rgba(133,141,154,0.24);
+    margin-right: 17px;
+}
+.books-module section div {
+    flex: 1;
+}
+.books-module section div h2 {
+    width:210px;
+    height: 47px;
+    font-size:16px;
+    font-family:MicrosoftYaHei-Bold;
+    font-weight:bold;
+    color:rgba(102,102,102,1);
+    line-height: 26px;
+    margin-bottom: 15px;
+    overflow: hidden;  /** 隐藏超出的内容 **/
+    word-break: break-all;
+    text-overflow: ellipsis; /** 多行 **/
+    display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
+    -webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+	-webkit-line-clamp: 2; /** 显示的行数 **/
+}
+
+.books-module section div ul li {
+    font-size:12px;
+    font-family:MicrosoftYaHei;
+    font-weight:400;
+    color:rgba(127,137,161,1);
+    margin-bottom: 10px;
+}
+.books-module section div ul li span {
+    width: 65px;
+    color:rgba(172,178,194,1);
+}
+.books-module section div p span:nth-of-type(1){
+    font-size:20px;
+    font-family:MicrosoftYaHei-Bold;
+    font-weight:bold;
+    color:rgba(240,151,56,1);
+    line-height:28px;
+}
+.books-module section div p span:nth-of-type(2){
+    font-size:14px;
+    font-family:MicrosoftYaHei;
+    font-weight:400;
+    text-decoration:line-through;
+    color:rgba(170,170,170,1);
+    line-height:28px;
+    margin-left: 8px;
+}
+
+.course-recommend {
+    width: 1200px;
+}
+.course-recommend .menu-title {
+    display: flex;
+    align-items: center;
+}
+.course-recommend .menu-title p {
+	font-size: 18px;
+	font-weight: 400;
+	color:rgba(102,102,102,1);
+	margin-left: 10px;
+	margin-right: 10px;
+	font-family: MicrosoftYaHei;
+	position: relative;
+}
+.course-recommend .menu-title p i{ 
+	width: 100%;
+    height: 10px;
+    background: rgba(214,223,244,.5);
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	z-index: -1;
+}
+.course-recommend .menu-title img:nth-of-type(1) {
+	height: 20px;
+}
+.course-recommend .menu-title img:nth-of-type(2) {
+	margin-top: 3px;
+}
+.recommend-module a:hover .recommend-name p{
+    color:rgba(74,117,197,1) !important;
+}
+.recommend-module a:hover .recommend-name span {
+    color: #AABBDA !important;
+}
+.recommend-module {
+    display: flex;
+    flex-wrap: wrap;
+}
+.recommend-module a {
+    width: 285px;
+    height: 236px;
+    margin-right: 20px;
+    margin-top: 20px;
+    background: #fff;
+    -webkit-transition: all .2s linear;
+	-o-transition: all .2s linear;
+	-moz-transition: all .2s linear;
+	transition: all .2s linear;
+}
+.recommend-module a:hover {
+    -webkit-transform: translate3d(0,-4px,0);
+	-moz-transform: translate3d(0,-4px,0);
+    transform: translate3d(0,-4px,0);
+    box-shadow:0px 6px 12px 0px rgba(133,141,154,0.24) !important;
+}
+.recommend-module a:last-child {
+    margin-right: 0;
+}
+.recommend-module a img {
+    width: 100%;
+    height: 160px;
+}
+.recommend-name {
+    padding: 14px;
+    padding-top: 12px;
+    box-sizing: border-box;
+}
+.recommend-name p {
+    font-size: 16px;
+    padding-bottom: 10px;
+    font-family:MicrosoftYaHei;
+    font-weight:400;
+    color:rgba(102,102,102,1);
+}
+.recommend-name span {
+    font-size:12px;
+    font-family:MicrosoftYaHei;
+    font-weight:400;
+    color:rgba(170,170,170,1);
+}

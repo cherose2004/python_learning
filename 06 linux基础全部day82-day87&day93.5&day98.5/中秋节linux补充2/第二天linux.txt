@@ -1,0 +1,152 @@
+今日任务:
+1.综合练习linux命令敲打,上传自己的crm项目到linux服务器
+使用nginx+uwsgi+django+mariadb部署
+
+端口规划:
+nginx  ---- 80 
+uwsgi+django  ----- 8000
+mariadb 3306
+
+2.综合练习2,完成路飞学城,前后端分离项目部署
+使用vue+nginx+uwsgi+django+mariadb+redis
+端口规划:
+vue+nginx虚拟主机1 ----81
+nginx反向代理,虚拟主机2---- 9000
+uwsgi+django ---- 9500
+redis ----6379
+mariadb---3306
+
+3.要求展示crm可以登录,查看到数据页面   
+路飞学城能够看到课程信息,能够添加购物车,查看购物车信息(账户密码  alex alex3714)
+
+4.咱们linux内容下周还会再加课,力求大家得到锻炼,学得会
+
+5.redis基础,发布订阅,主从复制,redis安全,redis哨兵高可用,redis集群
+
+
+
+
+
+crm部署
+
+
+1.纯后端项目部署
+nginx + uwsgi + django + mariadb 
+
+2.上传crm代码到服务器
+
+3.准备启动后端 ,准备虚拟环境
+
+4.用虚拟环境启动后端django
+
+5.启动mariadb数据库
+如果你是yum安装的数据库
+
+systemctl start mariadb 
+
+
+
+
+6.配置nginx,反向代理crm项目
+
+
+
+#核心配置
+http {
+
+	server {
+		listen  80;
+		server_name www.xiyangyang.com;
+		#静态文件服务器的配置
+		#location  / {
+		#	root  /opt/html/;
+		#	index index.hmtl; 
+		#}
+		
+		location  /  {
+		#请求转发给 192.168.1.1这台机器去处理 
+			proxy_pass   http://192.168.1.1:9000;
+		}
+		
+		#转发给python的uwsgi协议的参数
+		uwsgi_pass  192.168.1.2:8000;
+
+	}
+
+
+}
+
+
+
+
+2.路飞部署
+
+
+1.前端vue编译生成dist
+
+
+
+
+
+2.后端启动 drf 即可
+
+
+#没意义的操作 
+
+用户请求 ->    192.168.182.130:80  此时这个是nginx     -> 192.168.182.130:8888 这个操作可以,但是没必要,没意义,看到drf后台你想干嘛?给你一丢json数据你有什么用??
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#drf的后台端口 是  8888
+
+# nginx+vue,路飞的欢迎页面端口是?   80
+
+# vue向后台发数据,这个后台 是 drf还是 nginx ??    
+
+
+ 
+
+
+#正确的操作是 ↓↓↓
+
+用户请求 ->  192.168.182.130:80  ,这个作用是 返回vue的页面
+
+通过nginx的虚拟主机实现,第一个server{}虚拟主机 
+
+->  
+
+
+ 当我点击 课程列表的动作 ,请求发给nginx  ,发给了nginx的第二个虚拟主机server{},这里的server{}是请求转发的一个配置
+
+
+7777
+
+
+ -> 
+ 
+
+转发给8888  ,drf开始响应请求
+ 
+ 
+ 
+
+
+
+
+
+
+
+

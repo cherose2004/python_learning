@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f773b608-0c19-4af0-a45c-399a928a479e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../Angela/BaiduAi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/Chat/Nolic.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/Config.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/Music/Nobind.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/Music/Nolic.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/Music/SendOK.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/Music/Success.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/app.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/createQR.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/my_nlp.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/nl.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/redis_msg.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/serv/Content.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/serv/Devices.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/serv/Firends.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/serv/Firends_back.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/serv/Uploader.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/serv/Users.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/testgensim.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/testjieba.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/ws.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angela/xiaopapa.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day88/app.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day88/s1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day88/s2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day88/s3.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day88/templates/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day88/templates/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day88/templates/my_a.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day88/templates/stu.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day89/car_users.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day89/img/1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day89/music/1.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day89/s1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day89/s2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day89/s3.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day89/setting.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day89/static/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day89/templatess/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day89/trytrysee.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day89/trytrysee2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day90/bbbb.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day90/howrun.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day90/obj.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day90/opRedis.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day90/s1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day90/s2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day90/s3.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day90/setting.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day90/偏函数.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day90/线程安全.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day91/握手原理.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day91/点对点/s2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day91/点对点/templates/ws.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day91/群聊/s1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day91/群聊/templates/ws.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day92/asr.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day92/cmd.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day92/jttqhbc.m4a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day92/jxh.m4a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day92/req.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day92/simnet.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day92/tts.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day92/tuling.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day92/wyn.m4a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day92/wyn2.m4a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day92/对话.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day93/act.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day93/app.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day93/s1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day93/setting.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day93/templates/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day93/templates/reg.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day94/app.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day94/settings.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day94/ws_app.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day94/wsclient.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day95-1/app.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day95-1/serv/file_manager.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day95-1/serv/users.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day95-1/settings.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day95-1/web.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../day95-1/ws_app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../luffy_permission/luffy_permission/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/../luffy_permission/luffy_permission/settings.py" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/proj1$a.coverage" NAME="a Coverage Results" MODIFIED="1568086112275" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/a.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="33">
+              <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/a1.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="104">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.flake8">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="22">
+              <caret line="1" column="18" lean-forward="true" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/requirements.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="66">
+              <caret line="3" column="16" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/a.py" />
+        <option value="$PROJECT_DIR$/a1.py" />
+        <option value="$PROJECT_DIR$/.flake8" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="424" />
+    <option name="y" value="11" />
+    <option name="width" value="697" />
+    <option name="height" value="735" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="proj1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="proj1" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="D:/Python/Python36/python3.exe" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="D:/nodejs/node" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.gutterIcons" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="a" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="proj1" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/a.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.a" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f773b608-0c19-4af0-a45c-399a928a479e" name="Default Changelist" comment="" />
+      <created>1568084565683</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1568084565683</updated>
+      <workItem from="1568084567404" duration="3353000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="3353000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Favorites" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15582451" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Python Console" />
+      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.49317408" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.43686005" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="SciView" />
+      <window_info anchor="right" id="Database" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="3" column="16" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/a1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/a.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="33">
+          <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.flake8">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="1" column="18" lean-forward="true" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

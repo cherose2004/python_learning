@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>老男孩教育</title>
+  <!-- animate动画库 -->
+  <link rel="stylesheet" href="https://cdn.bootcss.com/animate.css/3.7.0/animate.min.css">
+  <!-- 轮播全局样式 -->
+  <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.1/css/swiper.min.css">
+  <!-- 视频播放器样式 -->
+  <link rel="stylesheet" href="http://g.alicdn.com/de/prismplayer/2.7.4/skins/default/aliplayer-min.css" />
+  <!-- 全局样式 -->
+  <link rel="stylesheet" href="../../styles/global.css">
+  <!-- 头部html样式 -->
+  <link rel="stylesheet" href="../../styles/header.css">
+  <!-- 底部html样式 -->
+  <link rel="stylesheet" href="../../styles/footer.css">
+  <!-- 首页html样式 -->
+  <link rel="stylesheet" href="./shanghai-home.css">
+  <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=您的密匙"></script>
+</head>
+<body>
+  <!-- 头部html -->
+  <header>
+    <section class="old-slogan">
+      <div>
+        <p><img src="../../images/header/slogan1.png" alt="">帮助有志向的年轻人通过努力学习获得体面的工作和生活</p>
+        <p><img src="../../images/header/slogan2.png" alt="">全国免费咨询电话 : 400-609-2893</p>
+      </div>
+    </section>
+    <section class="head-nav">
+      <div class="nav-content">
+        <div class="nav-logo">
+          <p class="logo">
+            <a href="../home/home.html" class="logo-img1">
+              <img src="../../images/header/logo.png" alt="">
+            </a>
+            <a href="../home/home.html" class="logo-img2">
+              <img src="../../images/header/back-home.jpg" alt="">
+            </a>
+          </p>
+          <span class="pipe"></span>
+          <div class="region-toggle">
+            <p class="region-default">
+              <img src="../../images/header/head-sel-img2.jpg" alt="">
+              <span>上海校区</span>
+              <i></i>
+            </p>
+            <ul class="region-list">
+              <a href="../../pages/home/home.html">
+                <li><img src="../../images/header/beijin.png" alt="">北京校区</li>
+              </a>
+              <a href="../../pages/shanghai-home/shanghai-home.html">
+                <li><img src="../../images/header/head-sel-img2.jpg" alt="">上海校区</li>
+              </a>
+              <a href="../../pages/shenzhen-home/shenzhen-home.html">
+                <li><img src="../../images/header/head-sel-img3.jpg" alt="">深圳校区</li>
+              </a>
+            </ul>
+          </div>
+        </div>
+        <div class="nav-list">
+          <ul class="nav-item">
+            <li><a href="../../pages/teachers-power/teachers-power.html" target="_blank">师资力量</a></li>
+            <li class="course-center"><a>课程中心</a></li>
+            <li><a href="../../pages/video-library/video-library.html" target="_blank">自学视频</a></li>
+            <li><a href="../../pages/oldboy-books/oldboy-books.html" target="_blank">原创书籍</a></li>
+            <li><a href="https://www.luffycity.com/home" target="_blank">在线学习</a></li>
+            <li><a href="../../pages/classmate-say/classmate-say.html" target="_blank">同学说</a><span>99+</span></li>
+            <li><a href="../../pages/classmate-say/student-interview.html" target="_blank">学员专访</a></li>
+            <li><a href="../../pages/enterprise-train/enterprise-train.html" target="_blank">企业内训</a></li>
+          </ul>
+          <a href="../../pages/signin/signin.html" class="signin-btn">
+            <img src="../../images/header/signin-btn.png" alt="">
+            <span>登录</span>
+          </a>
+        </div>
+        <div class="nav-course">
+          <div class="nav-course-list">
+            <dl>
+              <a href="" target="_blank">
+                <dt><img src="../../images/header/head-course-img1.jpg" alt=""></dt>
+                <dd>Python全栈开发</dd>
+              </a>
+            </dl>
+            <dl>
+              <a href="" target="_blank">
+                <dt><img src="../../images/header/head-course-img2.jpg" alt=""></dt>
+                <dd>Linux云计算运维</dd>
+              </a>
+            </dl>
+            <dl>
+              <a href="" target="_blank">
+                <dt><img src="../../images/header/head-course-img3.jpg" alt=""></dt>
+                <dd>网络安全工程师</dd>
+              </a>
+            </dl>
+            <dl>
+              <a href="" target="_blank">
+                <dt><img src="../../images/header/head-course-img4.jpg" alt=""></dt>
+                <dd>大数据工程师</dd>
+              </a>
+            </dl>
+            <dl>
+              <a href="" target="_blank">
+                <dt><img src="../../images/header/head-course-img5.jpg" alt=""></dt>
+                <dd>新媒体运营经理</dd>
+              </a>
+            </dl>
+            <dl>
+              <a href="" target="_blank">
+                <dt><img src="../../images/header/head-course-img6.jpg" alt=""></dt>
+                <dd>JAVA EE</dd>
+              </a>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+  </header>
+
+  <!-- 首页内容html -->
+	<div class="main">
+    <div class="banner-box">
+      <div class="banner-content">
+        <div class="swiper-container swiper-no-swiping" id="shanghaiSwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><a href="" target="_blank"><img src="../../images/shanghai-home/banner.jpg" alt=""></a></div>
+            <div class="swiper-slide"><a href="" target="_blank"><img src="../../images/shanghai-home/banner.jpg" alt=""></a></div>
+          </div>
+          <div class="swiper-pagination" id="shanghaiPagination"></div>
+        </div>
+      </div>
+    </div>
+    <article></article>
+		<div class="home-item">
+      <div class="consulting">
+        <div class="menu-box">
+          <div class="menu-title">
+            <img src="../../images/shanghai-home/title-icon1.jpg" alt="">
+            <p>上海热门资讯</p>
+            <img src="../../images/shanghai-home/title-icon18.jpg" alt="">
+          </div>
+          <a href="" target="_blank" class="menu-title-right">查看更多&nbsp;›</a>
+        </div>
+        <div class="consulting-content">
+          <div class="consulting-module1">
+            <a href="">
+              <div class="module-title">
+                <img src="../../images/shanghai-home/sh-img1.jpg" alt="">
+                <p>【上海】国之重器，匠心独运，航天二院来我校诚国之重器，匠心独运，航天二院来我校诚</p>
+              </div>
+            </a>
+            <ul>
+              <a href="">
+                <li><span class="top">置顶</span><p>5月风云榜新鲜出炉！全国均薪达1134全国均薪达1134</p></li>
+              </a>
+              <a href="">
+                <li><span class="top">置顶</span><p>5月风云榜新鲜出炉！全国均薪达1134全国均薪达1134</p></li>
+              </a>
+              <a href="">
+                <li><span class="headlines">头条</span><p>5月风云榜新鲜出炉！全国均薪达1134全国均薪达1134</p></li>
+              </a>
+              <a href="">
+                <li><span class="headlines">头条</span><p>5月风云榜新鲜出炉！全国均薪达1134全国均薪达1134</p></li>
+              </a>
+            </ul>
+          </div>
+          <div class="consulting-module2">
+            <div class="module-title2">
+              <p><i></i>学院动态</p>
+              <a href="">更多&nbsp;››</a>
+            </div>
+            <a href="" class="graphic">
+              <dl>
+                <dt><img src="../../images/shanghai-home/sh-img2.jpg" alt=""></dt>
+                <dd>
+                  <h3>老男孩教育携手百度智能云，共推共推共推共推共推共推共推共推共推</h3>
+                  <article>近日，老男孩教育携手百度达成战略合作，被授予《百度人工智能认证证书》被授予《百度人工智能认证证书》</article>
+                </dd>
+              </dl>
+            </a>
+            <ul>
+              <a href="">
+                <li><i></i>5月风云榜新鲜出炉！全国均薪达11317元，让理想成为…</li>
+              </a>
+              <a href="">
+                <li><i></i>5月风云榜新鲜出炉！全国均薪达11317元，让理想成为…</li>
+              </a>
+              <a href="">
+                <li><i></i>5月风云榜新鲜出炉！全国均薪达11317元，让理想成为…</li>
+              </a>
+              <a href="">
+                <li><i></i>5月风云榜新鲜出炉！全国均薪达11317元，让理想成为…</li>
+              </a>
+              <a href="">
+                <li><i></i>5月风云榜新鲜出炉！全国均薪达11317元，让理想成为…</li>
+              </a>
+            </ul>
+          </div>
+          <div class="consulting-module2">
+            <div class="module-title2">
+              <p><i></i>常见问题</p>
+              <a href="">更多&nbsp;››</a>
+            </div>
+            <a href="" class="graphic">
+              <dl>
+                <dt><img src="../../images/shanghai-home/sh-img2.jpg" alt=""></dt>
+                <dd>
+                  <h3>老男孩教育携手百度智能云，共推共推共推共推共推共推共推共推共推</h3>
+                  <article>近日，老男孩教育携手百度达成战略合作，被授予《百度人工智能认证证书》被授予《百度人工智能认证证书》</article>
+                </dd>
+              </dl>
+            </a>
+            <ul>
+              <a href="">
+                <li><i></i>5月风云榜新鲜出炉！全国均薪达11317元，让理想成为…</li>
+              </a>
+              <a href="">
+                <li><i></i>5月风云榜新鲜出炉！全国均薪达11317元，让理想成为…</li>
+              </a>
+              <a href="">
+                <li><i></i>5月风云榜新鲜出炉！全国均薪达11317元，让理想成为…</li>
+              </a>
+              <a href="">
+                <li><i></i>5月风云榜新鲜出炉！全国均薪达11317元，让理想成为…</li>
+              </a>
+              <a href="">
+                <li><i></i>5月风云榜新鲜出炉！全国均薪达11317元，让理想成为…</li>
+              </a>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="broadcast">
+        <div class="menu-box">
+          <div class="menu-title">
+            <img src="../../images/shanghai-home/title-icon2.jpg" alt="">
+            <p>上海开班播报</p>
+            <img src="../../images/shanghai-home/title-icon18.jpg" alt="">
+          </div>
+        </div>
+        <div class="broadcast-content">
+          <div class="content-left">
+            <section>
+              <div class="content-title">
+                <p><i></i><img src="../../images/shanghai-home/sh-icon.png" alt="">Python+人工智能 课程开班日期</p>
+                <a href="">查看课程详情 ›</a>
+              </div>
+              <div class="content-item">
+                <ul class="content-list">
+                  <li class="bao"><img src="../../images/home/hot.png" alt="">10期  脱产就业班  2019-01-03  报名中</li>
+                  <li class="bao"><img src="../../images/home/hot.png" alt="">10期  脱产就业班  2019-01-03  报名中</li>
+                  <li class="bao"><img src="../../images/home/hot.png" alt="">10期  脱产就业班  2019-01-03  报名中</li>
+                  <li class="kai"><img src="../../images/shanghai-home/sh-icon2.jpg" alt="">07期  脱产就业班  2019-01-03  已开班</li>
+                  <li class="kai"><img src="../../images/shanghai-home/sh-icon2.jpg" alt="">07期  脱产就业班  2019-01-03  已开班</li>
+                </ul>
+                <div class="content-infor">
+                  <div>
+                    <p><img src="../../images/shanghai-home/sh-icon3.jpg" alt="">学习周期</p>
+                    <span>176天 线下全日制培训学习</span>
+                  </div>
+                  <div>
+                    <p><img src="../../images/shanghai-home/sh-icon4.jpg" alt="">平均薪资</p>
+                    <span>￥20,000 ~ ￥40,000</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="content-title">
+                <p><i></i><img src="../../images/shanghai-home/sh-icon.png" alt="">Linux云计算运维 课程开班日期</p>
+                <a href="">查看课程详情 ›</a>
+              </div>
+              <div class="content-item">
+                <ul class="content-list">
+                  <li class="bao"><img src="../../images/home/hot.png" alt="">10期  脱产就业班  2019-01-03  报名中</li>
+                  <li class="bao"><img src="../../images/home/hot.png" alt="">10期  脱产就业班  2019-01-03  报名中</li>
+                  <li class="bao"><img src="../../images/home/hot.png" alt="">10期  脱产就业班  2019-01-03  报名中</li>
+                  <li class="kai"><img src="../../images/shanghai-home/sh-icon2.jpg" alt="">07期  脱产就业班  2019-01-03  已开班</li>
+                  <li class="kai"><img src="../../images/shanghai-home/sh-icon2.jpg" alt="">07期  脱产就业班  2019-01-03  已开班</li>
+                </ul>
+                <div class="content-infor">
+                  <div>
+                    <p><img src="../../images/shanghai-home/sh-icon3.jpg" alt="">学习周期</p>
+                    <span>176天 线下全日制培训学习</span>
+                  </div>
+                  <div>
+                    <p><img src="../../images/shanghai-home/sh-icon4.jpg" alt="">平均薪资</p>
+                    <span>￥20,000 ~ ￥40,000</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="content-title">
+                <p><i></i><img src="../../images/shanghai-home/sh-icon.png" alt="">网络安全信息 课程开班日期</p>
+                <a href="">查看课程详情 ›</a>
+              </div>
+              <div class="content-item">
+                <ul class="content-list">
+                  <li class="bao"><img src="../../images/home/hot.png" alt="">10期  脱产就业班  2019-01-03  报名中</li>
+                  <li class="bao"><img src="../../images/home/hot.png" alt="">10期  脱产就业班  2019-01-03  报名中</li>
+                  <li class="bao"><img src="../../images/home/hot.png" alt="">10期  脱产就业班  2019-01-03  报名中</li>
+                  <li class="kai"><img src="../../images/shanghai-home/sh-icon2.jpg" alt="">07期  脱产就业班  2019-01-03  已开班</li>
+                  <li class="kai"><img src="../../images/shanghai-home/sh-icon2.jpg" alt="">07期  脱产就业班  2019-01-03  已开班</li>
+                </ul>
+                <div class="content-infor">
+                  <div>
+                    <p><img src="../../images/shanghai-home/sh-icon3.jpg" alt="">学习周期</p>
+                    <span>176天 线下全日制培训学习</span>
+                  </div>
+                  <div>
+                    <p><img src="../../images/shanghai-home/sh-icon4.jpg" alt="">平均薪资</p>
+                    <span>￥20,000 ~ ￥40,000</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="content-title">
+                <p><i></i><img src="../../images/shanghai-home/sh-icon.png" alt="">大数据开发 课程开班日期</p>
+                <a href="">查看课程详情 ›</a>
+              </div>
+              <div class="content-item">
+                <ul class="content-list">
+                  <li class="bao"><img src="../../images/home/hot.png" alt="">10期  脱产就业班  2019-01-03  报名中</li>
+                  <li class="bao"><img src="../../images/home/hot.png" alt="">10期  脱产就业班  2019-01-03  报名中</li>
+                  <li class="bao"><img src="../../images/home/hot.png" alt="">10期  脱产就业班  2019-01-03  报名中</li>
+                  <li class="kai"><img src="../../images/shanghai-home/sh-icon2.jpg" alt="">07期  脱产就业班  2019-01-03  已开班</li>
+                  <li class="kai"><img src="../../images/shanghai-home/sh-icon2.jpg" alt="">07期  脱产就业班  2019-01-03  已开班</li>
+                </ul>
+                <div class="content-infor">
+                  <div>
+                    <p><img src="../../images/shanghai-home/sh-icon3.jpg" alt="">学习周期</p>
+                    <span>176天 线下全日制培训学习</span>
+                  </div>
+                  <div>
+                    <p><img src="../../images/shanghai-home/sh-icon4.jpg" alt="">平均薪资</p>
+                    <span>￥20,000 ~ ￥40,000</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="content-title">
+                <p><i></i><img src="../../images/shanghai-home/sh-icon.png" alt="">新媒体运营经理 课程开班日期</p>
+                <a href="">查看课程详情 ›</a>
+              </div>
+              <div class="content-item">
+                <ul class="content-list">
+                  <li class="bao"><img src="../../images/home/hot.png" alt="">10期  脱产就业班  2019-01-03  报名中</li>
+                  <li class="bao"><img src="../../images/home/hot.png" alt="">10期  脱产就业班  2019-01-03  报名中</li>
+                  <li class="bao"><img src="../../images/home/hot.png" alt="">10期  脱产就业班  2019-01-03  报名中</li>
+                  <li class="kai"><img src="../../images/shanghai-home/sh-icon2.jpg" alt="">07期  脱产就业班  2019-01-03  已开班</li>
+                  <li class="kai"><img src="../../images/shanghai-home/sh-icon2.jpg" alt="">07期  脱产就业班  2019-01-03  已开班</li>
+                </ul>
+                <div class="content-infor">
+                  <div>
+                    <p><img src="../../images/shanghai-home/sh-icon3.jpg" alt="">学习周期</p>
+                    <span>176天 线下全日制培训学习</span>
+                  </div>
+                  <div>
+                    <p><img src="../../images/shanghai-home/sh-icon4.jpg" alt="">平均薪资</p>
+                    <span>￥20,000 ~ ￥40,000</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="content-title">
+                <p><i></i><img src="../../images/shanghai-home/sh-icon.png" alt="">软件测试 课程开班日期</p>
+                <a href="">查看课程详情 ›</a>
+              </div>
+              <div class="content-item">
+                <ul class="content-list">
+                  <li class="bao"><img src="../../images/home/hot.png" alt="">10期  脱产就业班  2019-01-03  报名中</li>
+                  <li class="bao"><img src="../../images/home/hot.png" alt="">10期  脱产就业班  2019-01-03  报名中</li>
+                  <li class="bao"><img src="../../images/home/hot.png" alt="">10期  脱产就业班  2019-01-03  报名中</li>
+                  <li class="kai"><img src="../../images/shanghai-home/sh-icon2.jpg" alt="">07期  脱产就业班  2019-01-03  已开班</li>
+                  <li class="kai"><img src="../../images/shanghai-home/sh-icon2.jpg" alt="">07期  脱产就业班  2019-01-03  已开班</li>
+                </ul>
+                <div class="content-infor">
+                  <div>
+                    <p><img src="../../images/shanghai-home/sh-icon3.jpg" alt="">学习周期</p>
+                    <span>176天 线下全日制培训学习</span>
+                  </div>
+                  <div>
+                    <p><img src="../../images/shanghai-home/sh-icon4.jpg" alt="">平均薪资</p>
+                    <span>￥20,000 ~ ￥40,000</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+          <ul class="content-right">
+            <li class="aftertop this">
+              <img src="../../images/shanghai-home/sh-icon5.jpg" alt="">
+              <p>Python+人工智能</p>
+            </li>
+            <li>
+              <img src="../../images/shanghai-home/sh-icon6.jpg" alt="">
+              <p>Linux云计算运维</p>
+            </li>
+            <li>
+              <img src="../../images/shanghai-home/sh-icon7.jpg" alt="">
+              <p>网络安全信息</p>
+            </li>
+            <li>
+              <img src="../../images/shanghai-home/sh-icon8.jpg" alt="">
+              <p>大数据开发</p>
+            </li>
+            <li>
+              <img src="../../images/shanghai-home/sh-icon9.jpg" alt="">
+              <p>新媒体运营经理</p>
+            </li>
+            <li>
+              <img src="../../images/shanghai-home/sh-icon10.jpg" alt="">
+              <p>软件测试</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="speech">
+        <div class="menu-box">
+          <div class="menu-title">
+            <img src="../../images/shanghai-home/title-icon3.jpg" alt="">
+            <p>上海学员感言</p>
+            <img src="../../images/shanghai-home/title-icon18.jpg" alt="">
+          </div>
+          <a href="" target="_blank" class="menu-title-right">查看更多&nbsp;›</a>
+        </div>
+        <ul>
+          <li>
+            <div><img src="../../images/shanghai-home/sh-img3.jpg" alt=""><img src="../../images/shanghai-home/sh-icon11.png" alt=""></div>
+            <p>前方不是演习 有月入2W的嵌入式大神出没有月入2W的嵌入式大神出没</p>
+          </li>
+          <li>
+            <div><img src="../../images/shanghai-home/sh-img3.jpg" alt=""><img src="../../images/shanghai-home/sh-icon11.png" alt=""></div>
+            <p>前方不是演习 有月入2W的嵌入式大神出没有月入2W的嵌入式大神出没</p>
+          </li>
+          <li>
+            <div><img src="../../images/shanghai-home/sh-img3.jpg" alt=""><img src="../../images/shanghai-home/sh-icon11.png" alt=""></div>
+            <p>前方不是演习 有月入2W的嵌入式大神出没有月入2W的嵌入式大神出没</p>
+          </li>
+          <li>
+            <div><img src="../../images/shanghai-home/sh-img3.jpg" alt=""><img src="../../images/shanghai-home/sh-icon11.png" alt=""></div>
+            <p>前方不是演习 有月入2W的嵌入式大神出没有月入2W的嵌入式大神出没</p>
+          </li>
+        </ul>
+        <div class="swiper-container shanghai-container" id="shanghai2Container">
+          <div class="swiper-wrapper shanghai-wrapper">
+            <div class="swiper-slide">
+              <div class="slide-top">
+                <img src="../../images/shanghai-home/sh-icon12.jpg" alt="" class="symbol">
+                <article>1</article>
+              </div>
+              <div class="slide-bottom">
+                <img src="../../images/shanghai-home/sh-img4.png" alt="">
+                <div>
+                  <p>孙悟空<i>Python学员</i></p>
+                  <span>入职公司：深圳市新纶科技股份有限公司</span>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="slide-top">
+                <img src="../../images/shanghai-home/sh-icon12.jpg" alt="" class="symbol">
+                <article>2</article>
+              </div>
+              <div class="slide-bottom">
+                <img src="../../images/shanghai-home/sh-img4.png" alt="">
+                <div>
+                  <p>孙悟空<i>Python学员</i></p>
+                  <span>入职公司：深圳市新纶科技股份有限公司</span>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="slide-top">
+                <img src="../../images/shanghai-home/sh-icon12.jpg" alt="" class="symbol">
+                <article>3</article>
+              </div>
+              <div class="slide-bottom">
+                <img src="../../images/shanghai-home/sh-img4.png" alt="">
+                <div>
+                  <p>孙悟空<i>Python学员</i></p>
+                  <span>入职公司：深圳市新纶科技股份有限公司</span>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="slide-top">
+                <img src="../../images/shanghai-home/sh-icon12.jpg" alt="" class="symbol">
+                <article>4</article>
+              </div>
+              <div class="slide-bottom">
+                <img src="../../images/shanghai-home/sh-img4.png" alt="">
+                <div>
+                  <p>孙悟空<i>Python学员</i></p>
+                  <span>入职公司：深圳市新纶科技股份有限公司</span>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="slide-top">
+                <img src="../../images/shanghai-home/sh-icon12.jpg" alt="" class="symbol">
+                <article>5</article>
+              </div>
+              <div class="slide-bottom">
+                <img src="../../images/shanghai-home/sh-img4.png" alt="">
+                <div>
+                  <p>孙悟空<i>Python学员</i></p>
+                  <span>入职公司：深圳市新纶科技股份有限公司</span>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="slide-top">
+                <img src="../../images/shanghai-home/sh-icon12.jpg" alt="" class="symbol">
+                <article>6</article>
+              </div>
+              <div class="slide-bottom">
+                <img src="../../images/shanghai-home/sh-img4.png" alt="">
+                <div>
+                  <p>孙悟空<i>Python学员</i></p>
+                  <span>入职公司：深圳市新纶科技股份有限公司</span>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="slide-top">
+                <img src="../../images/shanghai-home/sh-icon12.jpg" alt="" class="symbol">
+                <article>7</article>
+              </div>
+              <div class="slide-bottom">
+                <img src="../../images/shanghai-home/sh-img4.png" alt="">
+                <div>
+                  <p>孙悟空<i>Python学员</i></p>
+                  <span>入职公司：深圳市新纶科技股份有限公司</span>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="slide-top">
+                <img src="../../images/shanghai-home/sh-icon12.jpg" alt="" class="symbol">
+                <article>8</article>
+              </div>
+              <div class="slide-bottom">
+                <img src="../../images/shanghai-home/sh-img4.png" alt="">
+                <div>
+                  <p>孙悟空<i>Python学员</i></p>
+                  <span>入职公司：深圳市新纶科技股份有限公司</span>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="slide-top">
+                <img src="../../images/shanghai-home/sh-icon12.jpg" alt="" class="symbol">
+                <article>9</article>
+              </div>
+              <div class="slide-bottom">
+                <img src="../../images/shanghai-home/sh-img4.png" alt="">
+                <div>
+                  <p>孙悟空<i>Python学员</i></p>
+                  <span>入职公司：深圳市新纶科技股份有限公司</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Add Pagination -->
+          <div class="swiper-pagination shanghai-pagination" id="shanghai2Pagination"></div>
+        </div>
+      </div>
+      <div class="teacher">
+        <div class="menu-box">
+          <div class="menu-title">
+            <img src="../../images/shanghai-home/title-icon4.jpg" alt="">
+            <p>上海校区师资</p>
+            <img src="../../images/shanghai-home/title-icon18.jpg" alt="">
+          </div>
+          <a href="" target="_blank" class="menu-title-right">查看更多&nbsp;›</a>
+        </div>
+        <div class="teacher-list">
+          <div class="swiper-container teacher-container" id="teacherContainer">
+            <div class="swiper-wrapper teacher-wrapper">
+              <div class="swiper-slide">
+                <img src="../../images/shanghai-home/sh-img5.png" alt="">
+                <p>老男孩</p>
+                <span>CEO讲师</span>
+                <article>老男孩IT教育创始人，国内NLP心理学运维思想体系创始人，资深的Linux集群架构实战专家，17年一线IT经验及教学培训经验，著有多本Linux畅销图书，开创老男孩核心思想方法论，曾受邀做客CCTV、网易、教育在线等知名媒体。</article>
+              </div>
+              <div class="swiper-slide">
+                <img src="../../images/shanghai-home/sh-img5.png" alt="">
+                <p>老男孩</p>
+                <span>CEO讲师</span>
+                <article>老男孩IT教育创始人，国内NLP心理学运维思想体系创始人，资深的Linux集群架构实战专家，17年一线IT经验及教学培训经验，著有多本Linux畅销图书，开创老男孩核心思想方法论，曾受邀做客CCTV、网易、教育在线等知名媒体。</article>
+              </div>
+              <div class="swiper-slide">
+                <img src="../../images/shanghai-home/sh-img5.png" alt="">
+                <p>老男孩</p>
+                <span>CEO讲师</span>
+                <article>老男孩IT教育创始人，国内NLP心理学运维思想体系创始人，资深的Linux集群架构实战专家，17年一线IT经验及教学培训经验，著有多本Linux畅销图书，开创老男孩核心思想方法论，曾受邀做客CCTV、网易、教育在线等知名媒体。</article>
+              </div>
+              <div class="swiper-slide">
+                <img src="../../images/shanghai-home/sh-img5.png" alt="">
+                <p>老男孩</p>
+                <span>CEO讲师</span>
+                <article>老男孩IT教育创始人，国内NLP心理学运维思想体系创始人，资深的Linux集群架构实战专家，17年一线IT经验及教学培训经验，著有多本Linux畅销图书，开创老男孩核心思想方法论，曾受邀做客CCTV、网易、教育在线等知名媒体。</article>
+              </div>
+              <div class="swiper-slide">
+                <img src="../../images/shanghai-home/sh-img5.png" alt="">
+                <p>老男孩</p>
+                <span>CEO讲师</span>
+                <article>老男孩IT教育创始人，国内NLP心理学运维思想体系创始人，资深的Linux集群架构实战专家，17年一线IT经验及教学培训经验，著有多本Linux畅销图书，开创老男孩核心思想方法论，曾受邀做客CCTV、网易、教育在线等知名媒体。</article>
+              </div>
+              <div class="swiper-slide">
+                <img src="../../images/shanghai-home/sh-img5.png" alt="">
+                <p>老男孩</p>
+                <span>CEO讲师</span>
+                <article>老男孩IT教育创始人，国内NLP心理学运维思想体系创始人，资深的Linux集群架构实战专家，17年一线IT经验及教学培训经验，著有多本Linux畅销图书，开创老男孩核心思想方法论，曾受邀做客CCTV、网易、教育在线等知名媒体。</article>
+              </div>
+              <div class="swiper-slide">
+                <img src="../../images/shanghai-home/sh-img5.png" alt="">
+                <p>老男孩</p>
+                <span>CEO讲师</span>
+                <article>老男孩IT教育创始人，国内NLP心理学运维思想体系创始人，资深的Linux集群架构实战专家，17年一线IT经验及教学培训经验，著有多本Linux畅销图书，开创老男孩核心思想方法论，曾受邀做客CCTV、网易、教育在线等知名媒体。</article>
+              </div>
+              <div class="swiper-slide">
+                <img src="../../images/shanghai-home/sh-img5.png" alt="">
+                <p>老男孩</p>
+                <span>CEO讲师</span>
+                <article>老男孩IT教育创始人，国内NLP心理学运维思想体系创始人，资深的Linux集群架构实战专家，17年一线IT经验及教学培训经验，著有多本Linux畅销图书，开创老男孩核心思想方法论，曾受邀做客CCTV、网易、教育在线等知名媒体。</article>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-button-next" id="teacherNext"></div>
+          <div class="swiper-button-prev" id="teacherPrev"></div>
+        </div>
+      </div>
+      <div class="consulting">
+        <div class="menu-box">
+          <div class="menu-title">
+            <img src="../../images/shanghai-home/title-icon5.jpg" alt="">
+            <p>上海校区资讯</p>
+            <img src="../../images/shanghai-home/title-icon18.jpg" alt="">
+          </div>
+          <a href="" target="_blank" class="menu-title-right">查看更多&nbsp;›</a>
+        </div>
+        <div class="consulting-list">
+          <section>
+            <a href="">
+              <div class="img-box">
+                <img src="../../images/shanghai-home/sh-img1.jpg" alt="">
+              </div>
+              <div class="wen">
+                <p>【上海】Linux运维49期 盛大开班</p>
+                <span>凝聚你我，梦想起航！</span>
+              </div>
+            </a>
+          </section>
+          <section>
+            <a href="">
+              <div class="img-box">
+                <img src="../../images/shanghai-home/sh-img1.jpg" alt="">
+              </div>
+              <div class="wen">
+                <p>【上海】Linux运维49期 盛大开班</p>
+                <span>凝聚你我，梦想起航！</span>
+              </div>
+            </a>
+          </section>
+          <section>
+            <a href="">
+              <div class="img-box">
+                <img src="../../images/shanghai-home/sh-img1.jpg" alt="">
+              </div>
+              <div class="wen">
+                <p>【上海】Linux运维49期 盛大开班</p>
+                <span>凝聚你我，梦想起航！</span>
+              </div>
+            </a>
+          </section>
+          <section>
+            <a href="">
+              <div class="img-box">
+                <img src="../../images/shanghai-home/sh-img1.jpg" alt="">
+              </div>
+              <div class="wen">
+                <p>【上海】Linux运维49期 盛大开班</p>
+                <span>凝聚你我，梦想起航！</span>
+              </div>
+            </a>
+          </section>
+        </div>
+      </div>
+      <div class="consulting">
+        <div class="menu-box">
+          <div class="menu-title">
+            <img src="../../images/shanghai-home/title-icon6.jpg" alt="">
+            <p>上海团建活动</p>
+            <img src="../../images/shanghai-home/title-icon18.jpg" alt="">
+          </div>
+          <a href="" target="_blank" class="menu-title-right">查看更多&nbsp;›</a>
+        </div>
+        <div class="consulting-list">
+          <section>
+            <a href="">
+              <div class="img-box">
+                <img src="../../images/shanghai-home/sh-img1.jpg" alt="">
+              </div>
+              <div class="wen">
+                <p>享月饼美味，老男孩学员提前欢度中秋</p>
+                <span>凝聚你我，梦想起航！</span>
+              </div>
+            </a>
+          </section>
+          <section>
+            <a href="">
+              <div class="img-box">
+                <img src="../../images/shanghai-home/sh-img1.jpg" alt="">
+              </div>
+              <div class="wen">
+                <p>享月饼美味，老男孩学员提前欢度中秋</p>
+                <span>凝聚你我，梦想起航！</span>
+              </div>
+            </a>
+          </section>
+          <section>
+            <a href="">
+              <div class="img-box">
+                <img src="../../images/shanghai-home/sh-img1.jpg" alt="">
+              </div>
+              <div class="wen">
+                <p>享月饼美味，老男孩学员提前欢度中秋</p>
+                <span>凝聚你我，梦想起航！</span>
+              </div>
+            </a>
+          </section>
+          <section>
+            <a href="">
+              <div class="img-box">
+                <img src="../../images/shanghai-home/sh-img1.jpg" alt="">
+              </div>
+              <div class="wen">
+                <p>享月饼美味，老男孩学员提前欢度中秋</p>
+                <span>凝聚你我，梦想起航！</span>
+              </div>
+            </a>
+          </section>
+        </div>
+      </div>
+      <div class="environment">
+        <div class="menu-box">
+          <div class="menu-title">
+            <img src="../../images/shanghai-home/title-icon7.jpg" alt="">
+            <p>上海校区环境</p>
+            <img src="../../images/shanghai-home/title-icon18.jpg" alt="">
+          </div>
+        </div>
+        <div class="environment-imgs">
+          <div class="environment-left">
+            <img src="../../images/shanghai-home/sh-img6.jpg" alt="" class="picture">
+            <p class="p1">校区教室环境</p>
+          </div>
+          <div class="environment-right">
+            <ul class="ul1">
+              <li>
+                <img src="../../images/shanghai-home/sh-img7.jpg" alt="" class="picture">
+                <p class="p1">校区教室环境</p>
+              </li>
+              <li>
+                <img src="../../images/shanghai-home/sh-img8.jpg" alt="" class="picture">
+                <p class="p1">校区教室环境</p>
+              </li>
+              <li>
+                <img src="../../images/shanghai-home/sh-img9.jpg" alt="" class="picture">
+                <p class="p1">校区教室环境</p>
+              </li>
+            </ul>
+            <ul class="ul2">
+              <li>
+                <img src="../../images/shanghai-home/sh-img10.jpg" alt="" class="picture">
+                <p class="p1">校区教室环境</p>
+              </li>
+              <li>
+                <img src="../../images/shanghai-home/sh-img11.jpg" alt="" class="picture">
+                <p class="p1">学员宿舍环境</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="route">
+        <div class="menu-box">
+          <div class="menu-title">
+            <img src="../../images/shanghai-home/title-icon8.jpg" alt="">
+            <p>上海校区路线</p>
+            <img src="../../images/shanghai-home/title-icon18.jpg" alt="">
+          </div>
+        </div>
+        <div class="route-content">
+          <div class="route-left">
+            <img src="../../images/shanghai-home/sh-img12.jpg" alt="">
+            <ul>
+              <li>
+                <p><img src="../../images/shanghai-home/sh-icon15.jpg" alt="">上海校区地址：</p>
+                <span>上海市浦东新区航头镇航都路18号万香创新港</span>
+              </li>
+              <li>
+                <p><img src="../../images/shanghai-home/sh-icon16.jpg" alt="">全国统一咨询电话：</p>
+                <span>400 - 609 - 2893</span>
+                <a href="">点击查看详细来校路线</a>
+              </li>
+            </ul>
+          </div>
+          <div class="route-right">
+            <div style="width:814px;height:400px;border:#ccc solid 1px;font-size:12px" id="map"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部html -->
+  <footer>
+    <div class="foot-item">
+      <div class="foot-top">
+        <ul>
+          <li>
+            <p class="p1"><a>关于我们</a></p>
+            <p class="p2"><a href="../about-us/about-us.html" target="_blank">老男孩简介</a></p>
+            <p class="p3"><a href="../join-oldboy/join-oldboy.html" target="_blank">加入老男孩</a></p>
+          </li>
+          <li>
+            <p class="p1"><a>旗下品牌</a></p>
+            <p class="p2"><a href="" target="_blank">在线网校</a></p>
+            <p class="p3"><a href="" target="_blank">老男孩兄弟会</a></p>
+          </li>
+          <li>
+            <p class="p1"><a>校园攻略</a></p>
+            <p class="p2"><a href="../../pages/learn-process/learn-process.html" target="_blank">我要报名</a></p>
+            <p class="p2"><a href="../../pages/school-route/school-route.html" target="_blank">来校路线</a></p>
+            <p class="p3"><a href="" target="_blank">校园环境</a></p>
+          </li>
+          <li>
+            <p class="p1"><a>学习资源</a></p>
+            <p class="p2"><a href="../video-library/video-library.html" target="_blank">自学教程</a></p>
+            <p class="p2"><a href="../technology-blog/technology-blog.html" target="_blank">技术博客</a></p>
+            <p class="p3"><a href="../technology-blog/industry-news.html" target="_blank">行业新闻</a></p>
+          </li>
+          <li>
+            <p class="p1"><a>学习故事</a></p>
+            <p class="p2"><a href="" target="_blank">精彩访谈</a></p>
+            <p class="p2"><a href="" target="_blank">学员成果</a></p>
+          </li>
+        </ul>
+        <div class="foot-num">
+          <div class="code">
+            <p>
+              老男孩公众号<br>
+              <img src="../../images/footer/code1.png" alt="">
+            </p>
+            <p>
+              个人公众号<br>
+              <img src="../../images/footer/code2.png" alt="">
+            </p>
+          </div>
+          <div class="number">
+            <p class="phone">400-609-2893</p>
+            <p class="tip">周一至周日 9:00-19:00（仅收市话费）</p>
+            <a href=""><button></button></a>
+          </div>
+        </div>
+      </div>
+      <ul class="foot-center">
+        <span></span>
+        <li><a href="" target="_blank">友情链接</a></li>
+        <li><a href="" target="_blank">老男孩网络课堂</a></li>
+        <li><a href="" target="_blank">老男孩教育博客</a></li>
+        <li><a href="" target="_blank">老男孩Linux</a></li>
+        <li><a href="" target="_blank">培训Alex博客</a></li>
+      </ul>
+      <div class="foot-bottom">
+        <p>Copyright © , xxxxxxxxx Digital Co., Ltd. All Rights Reserved.</p>
+        <p>北京一天天教育科技有限公司</p>
+        <p>京ICP备13038099号-3</p>
+        <span></span>
+        <p>版权说明</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- jquery -->
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <!-- 轮播 -->
+  <script src="https://cdn.bootcss.com/Swiper/3.4.1/js/swiper.min.js"></script>
+  <!-- 视频播放器 -->
+  <script src="http://g.alicdn.com/de/prismplayer/2.7.4/aliplayer-min.js"></script>
+  <!-- 视频播放器 -->
+  <script src="../../plugins/tools.js"></script>
+  <!-- 头部动效 -->
+  <script src="../../components/header.js"></script>
+  <!-- 首页动效 -->
+  <script src="./shanghai-home.js"></script>
+
+</body>
+</html>

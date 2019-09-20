@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>用户注册</title>
+	<!-- animate动画库 -->
+	<link rel="stylesheet" href="https://cdn.bootcss.com/animate.css/3.7.0/animate.min.css">
+	<!-- 全局样式 -->
+	<link rel="stylesheet" href="../../styles/global.css">
+	<!-- html样式 -->
+	<link rel="stylesheet" href="./signup.css">
+</head>
+<body>
+	<div class="main">
+		<header>
+			<section class="head-nav">
+				<div class="nav-content">
+					<div class="nav-logo">
+						<p class="logo">
+							<a href="../home/home.html" class="logo-img1">
+								<img src="../../images/header/logo.png" alt="">
+							</a>
+							<a href="../home/home.html" class="logo-img2">
+								<img src="../../images/header/back-home.jpg" alt="">
+							</a>
+						</p>
+						<span class="pipe"></span>
+						<div class="region-toggle">注册学员系统</div>
+					</div>
+					<div class="nav-num">
+						<img src="../../images/signin/singin-img1.jpg" alt="">
+						<div>
+							<h2>400-609-2893</h2>
+							<p>周一至周日 09:00 - 18:00</p>
+						</div>
+					</div>
+				</div>
+			</section>
+		</header>
+		<div class="clearfix">
+			<div class="card">
+				<div class="server">
+					<img src="../../images/header/logo.png" alt="" class="logo-img">
+					<ul>
+						<li>
+							<img src="../../images/signin/singin-img2.jpg" alt="">
+							<article>
+								<h4>免费</h4>
+								<p>全站课程免费学</p>
+							</article>
+						</li>
+						<li>
+							<img src="../../images/signin/singin-img3.jpg" alt="">
+							<article>
+								<h4>前沿</h4>
+								<p>热门技术全覆盖 </p>
+							</article>
+						</li>
+						<li>
+							<img src="../../images/signin/singin-img4.jpg" alt="">
+							<article>
+								<h4>口碑</h4>
+								<p>万千学子强烈推荐 </p>
+							</article>
+						</li>
+					</ul>
+				</div>
+				<div class="login-wrap">
+					<div class="auxiliary">
+						<p class="error-wrap">
+							<img src="../../images/signin/singin-icon8.jpg" alt="">
+							<span class="error-text">请输入正确的手机号并获取验证码</span>
+						</p>
+						<div class="first-step">
+							<div class="i-box phone">
+								<img src="../../images/signin/singin-icon2.jpg" alt="" class="icon1">
+								<img src="../../images/signin/singin-icon3-1.jpg" alt="" class="icon2">
+								<img src="../../images/signin/singin-icon3-2.jpg" alt="" class="you">
+								<input type="text" placeholder="请输入手机号">
+              </div>
+              <div class="sliding">
+                <div id="embed-captcha"></div>
+                <p id="wait" class="show">验证码加载中...</p>
+                <p id="notice" class="hide">请先拖动验证码到相应位置</p>
+              </div>
+							<div class="i-box validate">
+								<img src="../../images/signin/singin-icon5.jpg" alt="" class="icon1">
+								<img src="../../images/signin/singin-icon5-1.jpg" alt="" class="icon2">
+								<img src="../../images/signin/singin-icon5-2.jpg" alt="" class="you">
+								<input type="text" placeholder="请输入验证码">
+								<button class="getcode">获取验证码</button>
+								<button class="countdown" id="countdown"><span>60</span>后重新发送...</button>
+							</div>
+              <button class="btn next-step">下一步</button>
+              <button class="wx"><img src="../../images/signin/singin-icon10.png" alt="">微信登录</button>
+            </div>
+            <div class="last-step">
+							<div class="i-box name">
+								<img src="../../images/signin/singin-icon2.jpg" alt="" class="icon1">
+								<img src="../../images/signin/singin-icon3-1.jpg" alt="" class="icon2">
+								<img src="../../images/signin/singin-icon3-2.jpg" alt="" class="you">
+								<input type="text" placeholder="请输入手机号">
+							</div>
+							<div class="i-box pwd1">
+								<img src="../../images/signin/singin-icon3.jpg" alt="" class="icon1">
+								<img src="../../images/signin/singin-icon2-1.jpg" alt="" class="icon2">
+								<img src="../../images/signin/singin-icon2-2.jpg" alt="" class="you">
+								<input type="password" placeholder="请设置您的密码">
+								<div class="toggle">
+									<img src="../../images/signin/singin-icon4.png" alt="" class="icon3">
+									<img src="../../images/signin/singin-icon4-1.jpg" alt="" class="icon4">
+								</div>
+              </div>
+              <div class="i-box pwd2">
+                <img src="../../images/signin/singin-icon3.jpg" alt="" class="icon1">
+				<img src="../../images/signin/singin-icon2-1.jpg" alt="" class="icon2">
+				<img src="../../images/signin/singin-icon2-2.jpg" alt="" class="you">
+                <input type="password" placeholder="请重新输入您的密码">
+                <div class="toggle">
+                  <img src="../../images/signin/singin-icon4.png" alt="" class="icon3">
+                  <img src="../../images/signin/singin-icon4-1.jpg" alt="" class="icon4">
+                </div>
+              </div>
+							<button class="btn complete">完成注册</button>
+						</div>
+						<div class="bottom">
+							<p><img src="../../images/signin/singin-icon7.jpg" alt="">我已同意<span>《用户注册协议》</span></p>
+							<a href="../../pages/signin/signin.html" class="signin">已有学员账号？<span>立即登录</span></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- jquery -->
+	<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+	<!-- 动效 -->
+	<script src="./signup.js"></script>
+	<!-- 滑动验证码 -->
+	<script src="../../plugins/gt.js"></script>
+</body>
+</html>

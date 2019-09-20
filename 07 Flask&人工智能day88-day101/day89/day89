@@ -1,0 +1,63 @@
+2019年8月6日：
+1.Flask中的路由：
+@app.route()
+rule				"/login" 路由地址
+methods				允许进入视图函数的请求方式
+endpoint			Mapping 路由地址和endpoint - 路由地址和视图函数Mapping endpoint在同一个app中不能出现重复,默认值是视图函数名
+defaults			默认路由参数 
+strict_slashes		是否严格遵循路由匹配规则
+redirect_to			永久重定向 308 301
+动态参数路由		"/get_muisc/<filename>" def get_muisc(filename) 可以分页,获取文件,解决分类,解决正则路由问题
+
+2.Flask初始化配置
+app = Flask(__name__,template_folder="templatess")
+
+template_folder="templatess" 	模板文件存放路径
+static_folder					静态文件存放目录 默认值 是 static
+static_url_path					静态文件访问路径 默认值 是 / + static_folder
+
+3.Flask实例配置 -> app的配置
+app.config
+
+class TestConfig(object):
+    TESTING = True
+    SECRET_KEY = hashlib.md5(f"{time.time()}#$%^&*($#$%^&*%$#$%^&*^%$#$%{time.time()}".encode("utf8")).hexdigest()
+    PERMANENT_SESSION_LIFETIME = 360000
+    SESSION_COOKIE_NAME = "#$%^&*($#$%^&*%$#$%^&*^%$#$%"
+
+
+app.config.from_object(TestConfig)
+
+4.Flask 中的 蓝图 Blueprint (app01)
+不能被run的Flask实例 不存在Config
+
+
+
+
+5.特殊装饰器
+@app.before_request
+在请求进入视图函数之前 做出处理
+
+@app.after_request
+在响应返回客户端之前,结束视图函数之后
+
+be+af 请求生命周期:
+正常 be1 - be2 - vf - af2 - af1
+异常 be1 - af2 - af1
+只要有响应返回 , af全部执行
+
+
+@app.errorhandler(404)
+def error404(errorMessage):
+	
+
+
+
+
+
+
+
+
+
+
+

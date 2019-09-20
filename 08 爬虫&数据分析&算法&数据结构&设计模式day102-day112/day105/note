@@ -1,0 +1,65 @@
+1.单线程+多任务异步协程
+2.selenium
+    - 12306的模拟登录
+3.空气质量案例
+
+- 单线程+多任务异步协程(推荐)
+    - 协程:对象.可以把协程当做是一个特殊的函数.如果一个函数的定义被async关键字所修饰.该特殊的函数被调用
+后函数内部的程序语句不会被立即执行,而是会返回一个协程对象.
+    - 任务对象(task):所谓的任务对象就是对协程对象的进一步封装.在任务对象中可以实现显示协程对象的运行状况.
+        任务对象最终是需要被注册到事件循环对象中.
+        - 绑定回调:回调函数是绑定给任务对象,只有当任务对象对应的特殊函数被执行完毕后,回调函数才会被执行
+
+    - 事件循环对象:无限循环的对象.也可以把其当成是某一种容器.该容器中需要放置多个任务对象(就是一组待执行的代码块).
+        - 异步的体现:当事件循环开启后,该对象会安装顺序执行每一个任务对象,
+            当一个任务对象发生了阻塞事件循环是不会等待,而是直接执行下一个任务对象
+    - await:挂起的操作.交出cpu的使用权
+
+ - 多任务的异步协程
+    - 注意事项:
+        - 1.将多个任务对象存储到一个列表中,然后将该列表注册到事件循环中.在注册的过程中,该列表需要被
+            wait方法进行处理.
+        - 2.在任务对象对应的特殊函数内部的实现中,不可以出现不支持异步模块的代码,否则就会中断整个的
+            异步效果.并且,在该函数内部每一组阻塞的操作都必须使用await关键字进行修饰.
+        - 3.requests模块对应的代码不可以出现在特殊函数内部,因为requests是一个不支持异步的模块
+
+- aiohttp:支持异步操作的网络请求的模块
+    - 环境安装:pip install aiohttp
+
+    - 初步的架构:
+    async def req(url):
+        with aiohttp.ClientSessio() as s:
+            with  s.get(url) as response:
+                #response.read():byte
+                page_text =  response.text()
+                return page_text
+
+    - 补充细节:在每一个with前面加上async,在每一步的阻塞操作前加上await
+    async def req(url):
+    async with aiohttp.ClientSessio() as s:
+        async with await s.get(url) as response:
+            #response.read():byte
+            page_text = await response.text()
+            return page_text
+
+
+
+- selenium
+    - 概念:基于浏览器自动化的一个模块.
+    - 环境的安装:下载selenium模块
+    - selenium和爬虫之间的关联是什么?
+        - 便捷的获取页面中动态加载的数据
+            - requests模块进行数据爬取:可见非可得
+            - selenium:可见即可得
+        - 实现模拟登录
+    - 基本操作:
+        - 谷歌浏览器驱动程序下载地址:http://chromedriver.storage.googleapis.com/index.html
+        - 驱动程序和谷歌版本的映射关系表:https://blog.csdn.net/huilan_same/article/details/51896672
+        - 1.实例化某一款浏览器对象(驱动程序的路径)
+        - 2.find系列的函数用作于标签定位
+    - 动作链:一系列的行为动作
+    - 无头浏览器:无可视化界面的浏览器.
+        - phantomJS
+
+
+

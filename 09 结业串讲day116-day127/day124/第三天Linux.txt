@@ -1,0 +1,604 @@
+
+https://www.cnblogs.com/pyyu/p/9843950.html  redis博客地址
+
+
+物理服务器的linux界面,默认有7个终端
+
+1.如果你发现云服务器被矿机攻击,有一个进程占用100%cpu资源
+
+2.kill -9 杀死进程 
+
+3.检查定时任务 
+crontab -l  检查 
+crontab -e   编辑定时任务文件,可以删除 定时任务
+
+4.全局搜索病毒文件,删除它(注意恶意病毒,篡改了文件名,了解即可)
+	find / -name  病毒文件    
+	找到后 rm -rf 删除 
+	
+5.如果删不掉,很有可能文件被加锁了
+
+lsattr filename.txt 
+
+chattr -a  -i  filename.txt  去掉文件的锁,即可删除
+
+
+
+
+
+
+
+
+ctrl+ alt + f1~f7 切换  ,f1是图形化
+
+
+Linux第三天
+redis学习
+
+redis是内存型数据库
+	数据默认写入到内存,如果断电,服务器宕机,redis进程挂掉,数据会丢失
+	selenium操作浏览器时,要注意浏览器资源释放,方式内存泄漏,崩溃
+	with open() 默认close关闭文件句柄
+
+	word 工具 ,没保存前,数据都放在内存里,保存后,持久化到磁盘上,永久存在
+mysql是文件型数据库,默认持久化到磁盘上
+
+
+
+1.redis安装学习
+	1.yum安装 ,最简单,配置yum源,yum仓库才可以
+	2.源码编译安装, 指定安装路径,自定制第三方扩展模块功能(nginx http  web 80,  443 https, openssl功能扩展 )
+	3.rpm软件包手动安装,很垃圾,手动解决依赖关系,不适用
+	
+	
+2.编译安装redis,三部曲
+	#解决编译安装所需的依赖环境
+yum install gcc patch libffi-devel python-devel  zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel openssl openssl-devel -y
+
+	1.第一曲,下载源代码包
+		wget http://download.redis.io/releases/redis-4.0.10.tar.gz
+	
+	2.解压缩
+		tar -zxvf redis-4.0.10.tar.gz
+	3. 
+	
+	./configure --prefix=/opt/redis/   #释放makefile,告诉gcc编译器,redis的安装路径 
+	
+	如果默认没有configure脚本,出现了makefile,直接make&&make install 安装即可
+	
+	4.编译且安装
+	make && make install  
+
+
+3.编译完成后,即可使用redis
+启动redis服务端
+
+redis-server  直接执行,即可启动服务端,但是,这样很不安全,容易被攻击
+
+
+
+4.指定配置文件,安全的启动redis服务端
+	-更改启动端口
+	-添加redis密码
+	-开启redis安全模式
+
+
+redis的默认配置文件是 redis.conf
+
+	#过滤出配置文件的有益信息(去除空白行和注释行)
+
+	grep -v "^#" redis.conf  |grep -v "^$"
+ 
+5.指定配置文件启动
+
+	bind 192.168.182.130  #绑定服务端地址 
+	protected-mode yes	#安全模式 
+	port 6800		#端口 
+	requirepass  haohaio            	#密码                                                                       
+	daemonize yes	#后台运行 
+	pidfile /var/run/redis_6379.pid	#进程id文件
+	loglevel notice		#日志等级
+	logfile ""
+	
+
+redis基础数据类型
+redis是一种高级的key：value存储系统，其中value支持五种数据类型
+	字符串（strings）
+	散列（hashes）
+	列表（lists）
+	集合（sets）
+	有序集合（sorted sets）
+
+
+
+
+keys *         查看所有key
+type key      查看key类型
+expire key seconds    过期时间
+ttl key     查看key过期剩余时间        -2表示key已经不存在了
+persist     取消key的过期时间   -1表示key存在，没有过期时间
+
+exists key     判断key存在    存在返回1    否则0
+del keys     删除key    可以删除多个
+dbsize         计算key的数量
+flushdb  #清除redis所有key,慎用
+flushdb  #清除redis所有key,慎用
+flushdb  #清除redis所有key,慎用
+
+
+redis数据类型1,字符串类型,通过set命令,设置字符串类型的key
+	strings类型
+	set 　　设置key
+	get   获取key
+	append  追加string
+	mset   设置多个键值对
+	mget   获取多个键值对
+	del  删除key
+	incr  递增+1
+	decr  递减-1
+
+
+
+
+list类型,双向队列 
+	lpush         从列表左边插
+	rpush         从列表右边插
+	lrange          获取一定长度的元素  lrange key  start stop
+	ltrim               截取一定长度列表
+	lpop                 删除最左边一个元素
+	rpop                     删除最右边一个元素
+	lpushx/rpushx                key存在则添加值，不存在不处理
+
+
+redis的集合，是一种无序的集合，集合中的元素没有先后顺序。
+
+集合相关的操作也很丰富，如添加新元素、删除已有元素、取交集、取并集、取差集等。我们来看例子：
+
+sadd/srem   添加/删除 元素
+sismember   判断是否为set的一个元素
+smembers    返回集合所有的成员
+sdiff             返回一个集合和其他集合的差异
+sinter           返回几个集合的交集
+sunion          返回几个集合的并集
+
+
+
+
+
+
+
+
+
+
+
+
+
+sets集合类型
+	redis的集合，是一种无序的集合，集合中的元素没有先后顺序。
+
+	集合相关的操作也很丰富，如添加新元素、删除已有元素、取交集、取并集、取差集等。我们来看例子：
+
+	sadd/srem   添加/删除 元素
+	sismember   判断是否为set的一个元素
+	smembers    返回集合所有的成员
+	sdiff             返回一个集合和其他集合的差异
+	sinter           返回几个集合的交集
+	sunion          返回几个集合的并集
+
+
+.哈希数据结构
+
+hashes即哈希。哈希是从redis-2.0.0版本之后才有的数据结构。
+
+hashes存的是字符串和字符串值之间的映射，比如一个用户要存储其全名、姓氏、年龄等等，就很适合使用哈希。
+
+hset 设置散列值
+hget  获取散列值
+hmset  设置多对散列值
+hmget  获取多对散列值
+hsetnx   如果散列已经存在，则不设置（防止覆盖key）
+hkeys     返回所有fileds
+hvals     返回所有values
+hlen      返回散列包含域（field）的数量
+hdel     删除散列指定的域（field）
+hexists    判断是否存在
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+redis发布订阅
+
+
+
+
+
+redis持久化
+	防止数据丢失,持久化到本地,以文件形式保存
+	
+持久化的方式 ,两种  aof和 rdb模式
+
+
+1.触发机制,
+	-	手动执行save命令
+	-	或者配置触发条件  save  200   10   #在200秒中内,超过10个修改类的操作
+
+2.建立redis配置文件,开启rdb功能
+
+配置文件  s21_rdb.conf 内容如下 ,有关rdb的配置参数是 	dbfilename  dbmp.rdb  ,一个是 save 900 1   
+
+	daemonize yes
+	port 6379
+	logfile /data/6379/redis.log
+	dir /data/6379            		  #定义持久化文件存储位置
+	dbfilename  s21redis.rdb        		#rdb持久化文件
+	bind  127.0.0.1   		 #redis绑定地址
+	requirepass redhat          		  #
+	save 900 1                  		  #
+	save 300 10                  	 	#
+	save  60  10000               		 #
+
+	save  20  2  #在20秒内,超过2个修改类的操作
+	
+	
+3.第二个机制 aof机制 ,将你的修改类的操作命令,追加到日志文件中
+
+修改aof配置文件,添加如下参数,核心功能参数是 
+
+appendonly yes
+appendfsync  always    总是修改类的操作
+             everysec   每秒做一次持久化
+             no     依赖于系统自带的缓存大小机制
+
+
+
+创建aof配置文件s21aof.conf   ,内容如下
+
+
+
+
+4.rdb模式下的redis持久化,不重启切换为 aof模式
+
+	环境准备
+	1.准备一个有数据的rdb模式的redis数据库
+		准备rdb配置文件
+			daemonize yes
+			port 6379
+			logfile /data/6379/redis.log
+			dir /data/6379            		  #定义持久化文件存储位置
+			dbfilename  s21redis.rdb        		#rdb持久化文件
+			bind  127.0.0.1   		 #redis绑定地址
+			requirepass redhat          		  #
+			save 900 1                  		  #
+			save 300 10                  	 	#
+			save  60  10000               		 #
+
+			save  20  2  #在20秒内,超过2个修改类的操作
+
+		#详细看博客https://www.cnblogs.com/pyyu/p/10061526.html
+
+	2.注意想要永久切换为aof,还得修改配置文件方可
+	
+
+
+	
+	
+	
+
+redis主从复制
+
+
+1.redis支持多实例的功能,一台机器上,可以运行多个单个的redis数据库
+
+
+环境准备,运行3个redis数据库,达到  1主 2从的配置
+
+主库  6379.conf 
+	port 6379
+	daemonize yes
+	pidfile /data/6379/redis.pid
+	loglevel notice
+	logfile "/data/6379/redis.log"
+	dbfilename dump.rdb
+	dir /data/6379
+
+从库 6380
+	port 6380
+	daemonize yes
+	pidfile /data/6380/redis.pid
+	loglevel notice
+	logfile "/data/6380/redis.log"
+	dbfilename dump.rdb
+	dir /data/6380
+	slaveof  127.0.0.1  6379 
+	
+	
+	
+从库 6381  
+	port 6381
+	daemonize yes
+	pidfile /data/6381/redis.pid
+	loglevel notice
+	logfile "/data/6381/redis.log"
+	dbfilename dump.rdb
+	dir /data/6381
+	slaveof  127.0.0.1  6379 
+	
+	
+	
+2.开启主从复制功能
+
+redis-cli info   #查看数据库信息
+redis-cli info replication  
+
+在6380 和6381数据库上 ,配置主从信息,通过参数形式修改配置,临时生效,注意要写入配置文件 
+
+	redis-cli -p 6380 slaveof 127.0.0.1 6379
+	redis-cli -p 6381 slaveof 127.0.0.1 6379
+
+
+此时检查6379的复制信息,以及6380 6381的复制信息
+
+redis-cli -p 6380 info replication  
+redis-cli -p 6381 info replication  
+
+
+主从复制是 读写分离的,master可写,  slave只读
+
+
+
+3.模拟主从复制故障,手动切换master-slave身份
+
+
+	1.杀死6379进程 ,干掉主库 
+	
+	2.手动切换 6381为新的主库,需要先关闭它的从库身份
+	redis-cli -p 6381  slaveof no one 
+	
+	3.修改6380的新主库是 6381
+	redis-cli -p 6380 slaveof  127.0.0.1 6381
+	
+
+
+
+
+redis哨兵高可用
+
+redis-sentinel功能
+
+环境准备 
+
+三个redis数据库实例 ,配置好 1主 2从的配置
+
+	6379.conf
+		port 6379
+		daemonize yes
+		logfile "6379.log"
+		dbfilename "dump-6379.rdb"
+		dir "/var/redis/data/"
+
+	6380.conf 
+		port 6380
+		daemonize yes
+		logfile "6380.log"
+		dbfilename "dump-6380.rdb"
+		dir "/var/redis/data/"
+		slaveof 127.0.0.1 6379
+
+	6381.conf 
+		port 6381
+		daemonize yes
+		logfile "6381.log"
+		dbfilename "dump-6381.rdb"
+		dir "/var/redis/data/"
+		slaveof 127.0.0.1 6379
+
+
+
+
+
+	三个redis哨兵进程,指定好,检测着谁
+	也是准备三个配置文件,内容如下
+
+	sentinel-26379.conf  
+	port 26379  
+	dir /var/redis/data/
+	logfile "26379.log"
+
+	// 当前Sentinel节点监控 192.168.182.130:6379 这个主节点
+	// 2代表判断主节点失败至少需要2个Sentinel节点节点同意
+	// mymaster是主节点的别名
+	sentinel monitor s21ms  0.0.0.0 6379 2
+
+	//每个Sentinel节点都要定期PING命令来判断Redis数据节点和其余Sentinel节点是否可达，如果超过30000毫秒30s且没有回复，则判定不可达
+	sentinel down-after-milliseconds s21ms  20000
+
+	//当Sentinel节点集合对主节点故障判定达成一致时，Sentinel领导者节点会做故障转移操作，选出新的主节点，
+	原来的从节点会向新的主节点发起复制操作，限制每次向新的主节点发起复制操作的从节点个数为1
+	sentinel parallel-syncs mymaster 1
+
+	//故障转移超时时间为180000毫秒
+	sentinel failover-timeout mymaster 180000
+
+
+	#三个哨兵的配置文件,一模一样,仅仅是端口的区别  
+	#三个哨兵的配置文件,一模一样,仅仅是端口的区别  
+	#三个哨兵的配置文件,一模一样,仅仅是端口的区别  
+	#三个哨兵的配置文件,一模一样,仅仅是端口的区别  
+	sentinel-26380.conf  
+
+
+	sentinel-26381.conf  
+
+
+
+2.分别启动 三个redis数据库,  以及三个 哨兵进程 ,注意 ,哨兵第一次启动后,会修改配置文件,如果错了,得删除配置文件,重新写
+2.分别启动 三个redis数据库,  以及三个 哨兵进程 ,注意 ,哨兵第一次启动后,会修改配置文件,如果错了,得删除配置文件,重新写
+2.分别启动 三个redis数据库,  以及三个 哨兵进程 ,注意 ,哨兵第一次启动后,会修改配置文件,如果错了,得删除配置文件,重新写
+2.分别启动 三个redis数据库,  以及三个 哨兵进程 ,注意 ,哨兵第一次启动后,会修改配置文件,如果错了,得删除配置文件,重新写
+
+
+	配置文件在这里
+	sentinel-26379.conf 
+	port 26379  
+	dir /var/redis/data/
+	logfile "26379.log"
+	sentinel monitor s21ms  127.0.0.1  6379 2
+	sentinel down-after-milliseconds s21ms  20000
+	sentinel parallel-syncs s21ms 1
+	sentinel failover-timeout s21ms 180000
+	#加一个后台运行
+	daemonize yes 
+		
+		#仅仅是端口的不同
+	sentinel-26380.conf 
+
+
+
+
+	sentinel-26381.conf 
+
+
+	#启动
+	 1244  redis-sentinel sentinel-26379.conf 
+	 1245  redis-sentinel sentinel-26380.conf 
+	 1246  redis-sentinel sentinel-26381.conf 
+
+
+
+
+3.验证哨兵是否正常
+
+
+redis-cli -p 26379 info sentinel
+
+master0:name=s21ms,status=ok,address=127.0.0.1:6379,slaves=2,sentinels=3
+
+
+4.干掉主库 ,检查主从切换状态
+
+ 1253  kill -9 12749
+ 1254  ps -ef|grep redis
+ 1255  redis-cli -p 6380 info replication
+ 1256  redis-cli -p 6381 info replication
+ 1257  redis-cli -p 6380 info replication
+ 1258  redis-cli -p 6381 info replication
+
+
+
+
+
+
+
+redis-cluster搭建
+
+环境准备 
+
+1.准备好 6匹马儿,,6个redis节点 
+
+redis-7000.conf 
+port 7000
+daemonize yes
+dir "/opt/redis/data"
+logfile "7000.log"
+dbfilename "dump-7000.rdb
+
+cluster-enabled yes   #开启集群模式
+cluster-config-file nodes-7000.conf　　#集群内部的配置文件
+cluster-require-full-coverage no　　	
+	#redis cluster需要16384个slot都正常的时候才能对外提供服务，换句话说，只要任何一个slot异常那么整个cluster不对外提供服务。 因此生产环境一般为no
+
+
+
+#6个配置文件,仅仅是端口的区别
+redis-7000.conf
+	port 7000
+	daemonize yes
+	dir "/opt/redis/data"
+	logfile "7000.log"
+	dbfilename "dump-7000.rdb
+	cluster-enabled yes
+	cluster-config-file nodes-7000.conf
+	cluster-require-full-coverage no
+	
+redis-7001.conf 
+redis-7002.conf 
+redis-7003.conf 
+redis-7004.conf 
+redis-7005.conf 
+
+7.启动6个节点,6个马儿 
+
+ 1288  redis-server 7000.conf 
+ 1290  redis-server 7001.conf 
+ 1291  redis-server 7002.conf 
+ 1292  redis-server 7003.conf 
+ 1293  redis-server 7004.conf 
+ 1294  redis-server 7005.conf 
+
+
+8.分配redis slot 槽位
+	-	手动写c语言 分配  
+	-   使用ruby大神 写的一个redis模块,自动分配 
+	
+	
+9.配置ruby脚本环境 
+
+	1.yum安装最简单 
+		yum install  ruby  
+	
+	2.自动配置好 PATH环境变量
+		ruby和gem的环境变量
+	
+	3.下载ruby操作redis的模块
+		wget http://rubygems.org/downloads/redis-3.3.0.gem   
+		
+	4.用ruby的包管理工具 gem 安装这个模块
+	
+		gem install -l redis-3.3.0.gem
+
+
+	5.通过ruby一键分配redis-cluster集群的槽位
+	找到机器上的redis-trib.rb命令,用绝对命令创建 
+开启集群,分配槽位
+/opt/redis-4.0.10/src/redis-trib.rb  create --replicas 1 127.0.0.1:7000 127.0.0.1:7001 127.0.0.1:7002 127.0.0.1:7003 127.0.0.1:7004 127.0.0.1:7005
+
+
+	6.分配好集群后,可以向集群内写入数据了
+	redis-cle -c  指定集群模式,登录数据库
+	
+	登录redis写入数据,发现槽位分配,且重定向之后,集群搭建成功 
+	
+
+1.今日作业 
+
+练习五大redis基础数据类型string  list  set  zset 	hash 
+redis持久化 
+redis主从复制
+redis哨兵
+redis集群搭建 
+
+
+2. 明日内容
+
+https://www.cnblogs.com/pyyu/p/9485268.html#  docker容器学习
+
+https://www.cnblogs.com/pyyu/p/10318053.html 消息队列
+
+https://www.cnblogs.com/pyyu/p/9465608.html  salt运维软件
+	
+
+
+
+

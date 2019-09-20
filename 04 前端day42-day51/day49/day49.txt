@@ -1,0 +1,123 @@
+一.默认+内容回顾
+	1.列出至少5个以上数组的常用方法，并说明它们的含义
+	2.列出数学对象Math常用的三个方法，并说明它们的含义
+		Math.ceil() 向上取整
+		Math.floor() 向下取整
+		Math.random()
+		Math.round()
+	3.函数对象中，可以通过哪两个方法改变函数内部this的指向？
+		function fn(){
+			console.log(this);//this指向了window
+		}
+		fn.call(obj);
+		fn.apply(obj)
+	4.javascript的基本数据类型和引用数据类型有哪些？
+		基本数据类型：number,string,boolean,undefined,null
+		引用数据类型：Array,Object,Function,Date
+	5.对DOM的理解
+		D:document 文档
+		O:object 对象
+		M:model 模型
+	6.获取节点对象的三种方式
+	  var b = document.getElementById()
+	  document.getElementsByTagName()
+	  var a = document.getElementsByClassName('active')
+	  b.setAttribute();
+	7.如何设置节点对象的样式，属性，类？
+		设置样式
+		obj.style
+		设置属性
+		obj.setAttribute(name,value);
+		obj.getAttribute(name);
+		obj.className
+		obj.title
+	8.节点对象的创建，添加，删除分别用什么方法？
+	  var op =  document.createElement('p');
+	  box.appendChild(op);
+	  box.insertBefore(newNode,oldNode)
+	  box.removeChild(op);
+	9.列出你所知道的js中的事件？
+	 onclick
+	 onmouseover
+	 onmouseout
+	 
+	 onchange
+	 onselect
+	 onsubmit
+	 onload
+	10.定时方法有哪两个？写出对应的方法，并说明它们的含义
+	setTimeout(callback,毫秒) 一次性任务，延迟操作，异步
+	setInterval(callback,毫秒) 周期性循环任务  动画 css  transtion tranform
+	
+	11.设置值的操作
+	   innerText 只设置文本
+	   innerHTML 即设置文本，又渲染标签
+	   
+	   针对与表单控件
+	   inputText.value = '123';
+	丽志刚
+	张锶达
+	杨凯
+	丛浩
+	王塘焜
+	蒋长城
+	李林云
+	许艳婷
+	何明明
+	段占军
+	薛奎
+	杨杉
+	吴兴普
+二.今日内容
+	1.jquery介绍
+		jQuery是一个快速，小巧，功能丰富的JavaScript库。
+		它通过易于使用的API在大量浏览器中运行，
+		使得HTML文档遍历和操作，事件处理，动画和Ajax变得更加简单。通过多功能性和可扩展性的结合，jQuery改变了数百万人编写JavaScript的方式。
+		操作: 获取节点元素对象，属性操作，样式操作，类名，节点的创建，删除，添加，替换
+		jquery核心：write less,do more
+		1.1 jquery对象转换js对象
+			$('button')[0]
+		1.2 js对象转换jquery对象
+			$(js对象)
+	2.jquery的选择器
+		- 基础选择器
+		- 高级选择器
+		- 属性选择器
+		- 基本过滤选择器
+			:eq() 选择一个 索引从0开始
+			:first 获取第一个
+			:last 获取最后一个
+			:odd  获取奇数
+			:even 获取偶数
+		- 过滤的方法
+			.eq() 选择一个 索引从0开始
+			.children() 获取亲儿子
+			.find() 获取的后代
+			.parent() 获取父级对象
+			.siblings() 获取除它之外的兄弟元素
+	3.动画
+		- 普通动画
+			show()
+			hide()
+			toggle()
+		- 卷帘门动画
+			slideDown()
+			slideUp()
+			slideToggle()
+		- 淡入淡出效果
+			fadeIn()
+			fadeOut()
+			fadeToggle()
+		- 自定义动画
+			.animate({params},speed,callback)
+	  4.样式操作
+		通过调用.css()方法
+		如果传入一个参数，看一下这个参数如果是一个字符串表示获取值，如果是对象，表示设置多少属性值，如果是两个参数，设置单个属性值
+	  5.类操作
+		addClass()
+		removeClass()
+		toggleClass()
+	  6.对属性操作
+		attr(name,value);//设置属性
+		removeAttr(name);//删除属性
+

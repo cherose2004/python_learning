@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+</head>
+<body>
+
+
+
+<input type="file" id="f1">
+<button id="b1">上传</button>
+
+<script src="/static/jquery.js"></script>
+
+<script>
+
+    $('#b1').click(function () {
+        var  formobj =  new FormData();
+
+        formobj.append('file',$('#f1')[0].files[0]);
+        formobj.append('name','alex');
+
+        $.ajax({
+            url: '/upload/',
+            type: 'post',
+            data:formobj ,
+            processData:false,
+            contentType:false,
+            success: function (res) {
+                $("[name='i3']").val(res)
+            },
+        })
+    })
+
+</script>
+
+
+</body>
+</html>

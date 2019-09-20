@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+</head>
+<body>
+
+{##}
+{#{{ string }}#}
+{#{{ age }}#}
+{#{{ hobby.1 }}#}
+{#{{ dic.keys }}#}
+{#{{ dic.values }}#}
+{#{{ dic.items }}#}
+{##}
+{#<br>#}
+{#{{ person_obj }}#}
+{#{{ person_obj.name }}#}
+{#{{ person_obj.age }}#}
+{#{{ person_obj.talk }}#}
+{##}
+{#<br>#}
+{#{{ dic.keys }}#}
+{##}
+{#<br>#}
+{#{{ kong }}#}
+{#<br>#}
+{#{{ kong|default:'nothing' }}#}
+{#<br>#}
+{#{{ filesize|filesizeformat }}#}
+{#<br>#}
+{#{{ hobby|add:hobby }}#}
+{##}
+{##}
+{#<br>#}
+{#{{ long_str }}#}
+{#<br>#}
+{#{{ long_str|truncatewords:4 }}#}
+{#<br>#}
+{#{{ long }}#}
+{##}
+{#<br>#}
+{#{{ now|date:'Y-m-d H:i:s' }}#}
+{#{{ now }}#}
+{#<br>#}
+{#{{ a_html|safe }}#}
+{##}
+{##}
+{#{{ js|safe }}#}
+{##}
+{#<br>#}
+
+{% load my_tags %}
+{{ 'alex'|add_xx:'dasb' }}
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<ul>
+			<li class="a">
+				<a href="#">
+					mjj
+				</a>
+			</li>
+			<li class="b">wusir</li>
+			<li class="c">alex</li>
+			<li class="d">sb</li>
+		</ul>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+		/* 	console.log($('ul li:eq(1)'));
+			console.log($('ul li:lt(1)'));
+			console.log($('ul li:first'));
+			console.log($('ul li:last')); */
+			
+			// 筛选方法
+			// 即选择儿子又选择孙子....
+			console.log($('ul').find('li a'));
+			// 只选择亲儿子
+			console.log($('ul').children());
+			
+			console.log($('a').parent().parent().parent().parent().parent().parent());
+			
+			
+			
+			
+			
+			//补充：获取文档,body和html
+			console.log(document);
+			console.log(document.body);
+			console.log(document.documentElement);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        //1,判断当前数组是否为数组，返回值是true,则证明是数组
+
+        var num = 123;
+        var arr = ['red','green','yellow'];
+        console.log(Array.isArray(arr));
+        console.log(arr.toString());//red,green,yellow
+        console.log(num.toString());
+        console.log(typeof num.toString());
+        console.log(arr.join('^'));
+
+        console.log(arr.push('purple')); //返回了数组的最新的长度
+        console.log(arr);
+        console.log(arr.pop());//返回删除的内容
+        console.log(arr);
+
+        //往数组的第一项上添加内容
+        console.log(arr.unshift('gray','black'));
+        console.log(arr);
+        console.log(arr.shift());
+        console.log(arr);
+
+        var names = ['女神','wusir','太白'];
+        // names.splice() //对数组进行添加，删除，替换操作
+        //name.slice(1) //对数组进行分割
+
+
+        // for(var i = 0; i < names.length; i++){
+        //     names[i]
+        // }
+        names.forEach(function (index,item) {
+            console.log(index);
+            console.log(item);
+        });
+        function  fn(a,b) {
+            //arguments.length 代指的实参的个数
+            //arguments它不是一个数组，它被称为叫伪数组
+            console.log(arguments);
+            for(var i = 0; i < arguments.length; i++){
+                console.log(arguments[i]);
+            }
+        }
+        fn(2,3,4);
+        console.log(fn.length);//形参的个数
+
+        var  str = '            mjj          '
+
+
+    </script>
+</body>
+</html>

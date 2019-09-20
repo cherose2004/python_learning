@@ -1,0 +1,59 @@
+格式化:
+	v = f'你好{"嘻嘻嘻"}'
+
+	name = 'eric'
+	v = f'hello{name}'
+
+
+什么是断言
+	assert 条件
+
+什么是虚拟环境？
+	1. 安装virtualenv
+	2. virtualenv crmenv,创建目录（类似于安装python）
+	3. 激活虚拟环境：activate
+	4. 写代码
+			import re 
+	5. 安装 
+			pip install requests
+	6. 推出 
+		deactivate
+			
+环境依赖 requirements.txt 文件
+	1. 生成文件
+		进入目录
+		pip freeze > requirements.txt # 找到当前环境中的所有模块
+		
+	2. 安装 
+		pip install -r requirements.txt
+
+排序：
+	1 > 2
+	(8,1) < (8,2)
+	
+	sorted([(11,'alex'),(22,'eric')],key=lambda x:x[0])
+	
+	sorted([(11,'alex'),(22,'eric')],key=lambda x:x[0])
+
+如何判断是方法还是函数？
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

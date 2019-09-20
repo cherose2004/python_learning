@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .father{
+            width: 800px;
+            margin: 100px auto;
+            border: 1px solid #000;
+            /*一旦设置一个Box盒子 除了overflow：visible；它会形成一个BFC,BFC它有布局规则： 它会让内部浮动元素计算高度*/
+            overflow: hidden;
+        }
+        .child1{
+            /*width: 200px;*/
+            height: 400px;
+            background-color: red;
+            float: left;
+        }
+        .child2{
+            /*width: 300px;*/
+            height: 200px;
+            background-color: green;
+            /*float: right;*/
+            /*overflow: hidden;*/
+            float: left;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="father ">
+        <div class="child1">mjj</div>
+        <div class="child2">wusir</div>
+    </div>
+
+
+
+</body>
+</html>

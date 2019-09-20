@@ -1,0 +1,87 @@
+- 基于CrawlSpider的全站数据爬取
+    - CrawlSpider就是爬虫类中Spider的一个子类
+    - 使用流程：
+        - 创建一个基于CrawlSpider的一个爬虫文件：scrapy genspider -t crawl spiderName www.xxxx.com
+        - 构造链接提取器和规则解析器
+            - 链接提取器：
+                - 作用：可以根据指定的规则进行指定链接的提取
+                - 提取的规则：allow =‘正则表达式’
+            - 规则解析器：
+                - 作用：获取连接提取器提取到的链接，然后对其进行请求发送，根据指定规则对请求到的页面
+                    源码数据进行数据解析
+                - fllow=True：将链接提取器 继续作用到 连接提取器提取出的页码链接 所对应的页面中
+            - 注意：连接提取器和规则解析器也是一对一的关系
+- 分布式
+    - 什么是分布式爬虫？
+        - 基于多台电脑组建一个分布式机群，然后让机群中的每一台电脑执行同一组程序，然后让它们对同一个
+            网站的数据进行分布爬取
+    - 为要使用分布式爬虫？
+        - 提升爬取数据的效率
+    - 如何实现分布式爬虫？
+        - 基于scrapy+redis的形式实现分布式
+            - scrapy结合这scrapy-redis组建实现的分布式
+    - 原生的scrapy框架是无法实现分布式？
+        - 调度器无法被分布式机群共享
+        - 管道无法被共享
+    - scrapy-redis组件的作用：
+        - 提供可以被共享的调度器和管道
+    - 环境安装：
+        - redis
+        - pip Install scrapy-redis
+    - 编码流程：
+        - 创建一个工程
+        - 创建一个爬虫文件：基于CrawlSpider的爬虫文件
+            - 修改当前的爬虫文件：
+                - 导包：from scrapy_redis.spiders import RedisCrawlSpider
+                - 将当前爬虫类的父类修改成RedisCrawlSpider
+                - 将start_urls替换成redis_key = ‘xxx’#表示的是可被共享调度器中队列的名称
+                - 编写爬虫类爬取数据的操作
+        - 对settings进行配置：
+            - 指定管道：
+                #开启可以被共享的管道
+                ITEM_PIPELINES = {
+                    'scrapy_redis.pipelines.RedisPipeline': 400
+                }
+            - 指定调度器：
+                # 增加了一个去重容器类的配置, 作用使用Redis的set集合来存储请求的指纹数据, 从而实现请求去重的持久化
+                DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
+                # 使用scrapy-redis组件自己的调度器
+                SCHEDULER = "scrapy_redis.scheduler.Scheduler"
+                # 配置调度器是否要持久化, 也就是当爬虫结束了, 要不要清空Redis中请求队列和去重指纹的set。如果是True, 就表示要持久化存储, 就不清空数据, 否则清空数据
+                SCHEDULER_PERSIST = True
+            - 指定redis的服务：
+                REDIS_HOST = 'redis服务的ip地址'
+                REDIS_PORT = 6379
+        - redis的配置文件进行配置：redis.windows.conf
+            - 56行：#bind 127.0.0.1
+            - 75行：protected-mode no
+        - 携带配置文件启动redis服务
+            - ./redis-server redis.windows.conf
+        - 启动redis的客户端
+            - redis-cli
+        - 执行当前的工程：
+                - 进入到爬虫文件对应的目录中：scrapy runspider xxx.py
+        - 向调度器队列中仍入一个起始的url：
+            - 队列在哪里呢？答：队列在redis中
+                - lpush fbsQueue www.xxx.com
+
+
+- 增量式爬虫
+    - 概念：监测网站数据更新的情况。
+    - 核心：去重！！！
+    - 深度爬取类型的网站中需要对详情页的url进行记录和检测
+        - 记录:将爬取过的详情页的url进行记录保存
+            - url存储到redis的set中
+        - 检测：如果对某一个详情页的url发起请求之前先要取记录表中进行查看，该url是否存在，存在的话以为
+            着这个url已经被爬取过了。
+     - 非深度爬取类型的网站：
+        - 名词：数据指纹
+            - 一组数据的唯一标识
+
+
+
+
+
+
+
+

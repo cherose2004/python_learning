@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="box" class="box">
+			<p class="active">mjj1</p>
+			<p class="active">mjj2</p>
+			<input type="text">
+		</div>
+		<!-- 1.导入模块 -->
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+			// console.dir($);
+			// 选择器 基础选择器
+			console.log($('.box'));//jquery对象 伪数组
+			// jquery对象转换js节点对象
+			console.log($('#box')[0]);
+			// js节点对象转换jq对象
+			var box = document.getElementById('box');
+			console.log($(box),box);
+			console.log($('#box>p'));			
+			console.log($('input[type=submit]'));
+			
+			$('#box .active').click(function(){
+				// 样式操作
+				console.log(this);
+				// this.style
+				// 设置单个样式属性
+				// $(this).css('color','red');
+				// $(this).css('fontSize','20px');
+				// 设置多个属性
+				 $(this).css({
+					 'color':'red',
+					 "font-size":40
+				 })
+				 console.log($(this).css('color'));
+			})
+		</script>
+	</body>
+</html>
